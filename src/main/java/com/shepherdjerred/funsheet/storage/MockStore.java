@@ -4,10 +4,7 @@ import com.shepherdjerred.funsheet.objects.Activity;
 import com.shepherdjerred.funsheet.objects.Category;
 import com.shepherdjerred.funsheet.objects.Type;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MockStore implements Store {
@@ -33,9 +30,10 @@ public class MockStore implements Store {
             Activity activity = new Activity(
                     "ActivityName",
                     UUID.randomUUID(),
-                    new Category(
+                    new Type(
                             "ActivityCategoryName",
-                            UUID.randomUUID()
+                            UUID.randomUUID(),
+                            new ArrayList<>()
                     ),
                     ThreadLocalRandom.current().nextInt(0, 5 + 1)
             );

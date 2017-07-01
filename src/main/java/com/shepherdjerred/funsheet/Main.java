@@ -28,7 +28,7 @@ public class Main {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        get("/", (request, response) -> "funsheet");
+        staticFileLocation("/");
 
         get("/api/activities", (request, response) -> {
             response.type("application/json");

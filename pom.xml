@@ -32,6 +32,15 @@
     </developers>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/funsheet-vue/public</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
