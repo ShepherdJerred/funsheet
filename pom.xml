@@ -34,7 +34,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources/funsheet-vue/public</directory>
+                <directory>src/main/resources/funsheet-vue/dist</directory>
                 <includes>
                     <include>**</include>
                 </includes>
