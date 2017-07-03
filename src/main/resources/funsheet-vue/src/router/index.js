@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Activities from '@/components/Activities';
+import ActivityList from '../components/activity-list.vue';
 
 Vue.use(Router);
 
@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'Activities',
-      component: Activities
+      component: ActivityList
     }
   ]
 });

@@ -1,4 +1,4 @@
 package com.shepherdjerred.funsheet.payloads;
 
-public class NewCategoryPayload {
+public class NewTagPayload {
 }

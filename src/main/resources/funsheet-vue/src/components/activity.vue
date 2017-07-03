@@ -1,8 +1,7 @@
 <template>
     <div>
-        {{ name }}
-        {{ type }}
-        {{ rating }}
+        <h2>{{ name }} <small>Rating: {{ rating }}</small></h2>
+        <p>{{ type.name }}</p>
     </div>
 </template>
 
@@ -14,7 +13,7 @@
         required: true
       },
       type: {
-        type: String,
+        type: Object,
         required: true
       },
       rating: {

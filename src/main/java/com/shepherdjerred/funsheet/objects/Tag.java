@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @ToString
 @EqualsAndHashCode
-public class Category {
+public class Tag {
 
     @Getter
     @Setter
@@ -17,7 +17,7 @@ public class Category {
     @Getter
     private final UUID uuid;
 
-    public Category(String name, UUID uuid) {
+    public Tag(String name, UUID uuid) {
         this.name = name;
         this.uuid = uuid;
     }

@@ -19,12 +19,12 @@ public class Type {
     private final UUID uuid;
     @Getter
     @Setter
-    private final List<Category> categories;
+    private final List<Tag> tags;
 
-    public Type(String name, UUID uuid, List<Category> categories) {
+    public Type(String name, UUID uuid, List<Tag> tags) {
         this.name = name;
         this.uuid = uuid;
-        this.categories = categories;
+        this.tags = tags;
     }
 
 }

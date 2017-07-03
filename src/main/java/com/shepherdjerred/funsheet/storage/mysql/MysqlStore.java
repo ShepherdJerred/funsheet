@@ -1,7 +1,8 @@
 package com.shepherdjerred.funsheet.storage.mysql;
 
 import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.objects.Category;
+import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
 import com.shepherdjerred.funsheet.storage.Store;
 
@@ -9,6 +10,13 @@ import java.util.Collection;
 import java.util.UUID;
 
 public class MysqlStore implements Store {
+
+    private Database database;
+
+    public MysqlStore(Database database) {
+        this.database = database;
+    }
+
     @Override
     public Activity getActivity(UUID uuid) {
         return null;
@@ -20,12 +28,12 @@ public class MysqlStore implements Store {
     }
 
     @Override
-    public Category getCategory(UUID uuid) {
+    public Tag getTag(UUID uuid) {
         return null;
     }
 
     @Override
-    public Collection<Category> getCategories() {
+    public Collection<Tag> getTags() {
         return null;
     }
 
@@ -38,4 +46,15 @@ public class MysqlStore implements Store {
     public Collection<Type> getTypes() {
         return null;
     }
+
+    @Override
+    public Location getLocation(UUID uuid) {
+        return null;
+    }
+
+    @Override
+    public Collection<Location> getLocations() {
+        return null;
+    }
+
 }
