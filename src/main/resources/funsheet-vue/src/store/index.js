@@ -19,7 +19,7 @@ export default new Vuex.Store({
       Vue.http.get('/api/activities').then(response => {
         context.commit('setActivities', response.body);
       }, response => {
-        console.log('Error');
+        console.log(response.body);
       });
     }
   }

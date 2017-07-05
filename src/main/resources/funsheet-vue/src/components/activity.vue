@@ -1,7 +1,11 @@
 <template>
     <div>
-        <h2>{{ name }} <small>Rating: {{ rating }}</small></h2>
-        <p>{{ type.name }}</p>
+        <h2>{{ name }}
+            <small>Rating: {{ rating }}</small>
+        </h2>
+        <template v-if="type">
+            <p>{{ type.name }}</p>
+        </template>
     </div>
 </template>
 

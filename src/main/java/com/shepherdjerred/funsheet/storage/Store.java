@@ -10,15 +10,19 @@ import java.util.UUID;
 
 public interface Store {
 
+    void addActivity(Activity activity);
     Activity getActivity(UUID uuid);
     Collection<Activity> getActivities();
 
+    void addTag(Tag tag);
     Tag getTag(UUID uuid);
     Collection<Tag> getTags();
 
+    void addType(Type type);
     Type getType(UUID uuid);
     Collection<Type> getTypes();
 
+    void addLocation(Location location);
     Location getLocation(UUID uuid);
     Collection<Location> getLocations();
 

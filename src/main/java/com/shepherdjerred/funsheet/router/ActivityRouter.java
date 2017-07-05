@@ -53,6 +53,8 @@ public class ActivityRouter {
                     activityPayload.getRating()
             );
 
+            store.addActivity(activity);
+
             return objectMapper.writeValueAsString(activity);
         });
 
