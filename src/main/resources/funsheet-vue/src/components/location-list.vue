@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Locations</h1>
+        <h3 class="title is-3">Locations</h3>
         <create-location></create-location>
         <template v-for="location in locations">
             <location :name="location.name"

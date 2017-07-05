@@ -1,21 +1,29 @@
 <template>
     <div>
-        <h2>Create Type</h2>
+        <h4 class="subtitle is-4">Create Type</h4>
+        <div class=" field">
         <form v-on:submit.prevent="onSubmit">
-            <label>
+            <label class="label">
                 Name
-                <input type="text" v-model="name" required>
+                <span class="control">
+                        <input class="input" type="text" v-model="name" required>
+                    </span>
             </label>
-            <label>
+            <label class="label">
                 Tags
-                <select v-model="tags" multiple>
-                    <option v-for="tag in allTags" v-bind:value="tag.uuid">
-                        {{ tag.name }}
-                    </option>
-                </select>
+                <span class="control select">
+                        <select v-model="tags" multiple>
+                            <option v-for="tag in allTags" v-bind:value="tag.uuid">
+                                {{ tag.name }}
+                            </option>
+                        </select>
+                    </span>
             </label>
-            <button>Submit</button>
+            <span class="control">
+                    <button class="button is-primary">Submit</button>
+                </span>
         </form>
+    </div>
     </div>
 </template>
 

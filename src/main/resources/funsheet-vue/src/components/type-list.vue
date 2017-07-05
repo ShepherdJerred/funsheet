@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Types</h1>
+        <h3 class="title is-3">Types</h3>
         <create-type></create-type>
         <template v-for="type in types">
             <type :name="type.name"

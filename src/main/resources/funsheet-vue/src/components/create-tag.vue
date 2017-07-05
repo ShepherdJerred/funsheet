@@ -1,13 +1,19 @@
 <template>
     <div>
-        <h2>Create Tag</h2>
-        <form v-on:submit.prevent="onSubmit">
-            <label>
-                Name
-                <input type="text" v-model="name" required>
-            </label>
-            <button>Submit</button>
-        </form>
+        <h4 class="subtitle is-4">Create Tag</h4>
+        <div class="field">
+            <form v-on:submit.prevent="onSubmit">
+                <label class="label">
+                    Name
+                    <span class="control">
+                        <input class="input" type="text" v-model="name" required>
+                    </span>
+                </label>
+                <span class="control">
+                    <button class="button is-primary">Submit</button>
+                </span>
+            </form>
+        </div>
     </div>
 </template>
 

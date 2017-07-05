@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Activites</h1>
+        <h3 class="title is-3">Activites</h3>
         <create-activity></create-activity>
         <template v-for="activity in activities">
             <activity :name="activity.name"
