@@ -1,13 +1,8 @@
 <template>
     <div>
-        <h2>Create Type</h2>
+        <h2>Create Tag</h2>
         <form v-on:submit.prevent="onSubmit">
             <input type="text" v-model="name" required>
-            <select v-model="tags" multiple>
-                <option v-for="tag in allTags" v-bind:value="tag.uuid">
-                    {{ tag.name }}
-                </option>
-            </select>
             <button>Submit</button>
         </form>
     </div>
@@ -17,23 +12,16 @@
   export default {
     data: function () {
       return {
-        name: '',
-        tags: []
+        name: ''
       };
-    },
-    computed: {
-      allTags: function () {
-        return this.$store.state.tags;
-      }
     },
     methods: {
       onSubmit: function () {
-        this.$http.post('/api/types', {
-          'name': this.name,
-          'tags': this.tags
+        this.$http.post('/api/tags', {
+          'name': this.name
         }).then(response => {
           console.log(response.body);
-          this.$store.dispatch('getTypes');
+          this.$store.dispatch('getTags');
         }, response => {
           console.log(response.body);
         });

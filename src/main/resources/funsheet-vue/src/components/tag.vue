@@ -1,11 +1,6 @@
 <template>
     <div>
         <h2>{{ name }}</h2>
-        <ul>
-            <template v-for="tag in tags">
-                <li>{{ tag.name }}</li>
-            </template>
-        </ul>
     </div>
 </template>
 
@@ -14,10 +9,6 @@
     props: {
       name: {
         type: String,
-        required: true
-      },
-      tags: {
-        type: Array,
         required: true
       }
     }
