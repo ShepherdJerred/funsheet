@@ -34,11 +34,20 @@ public class Main {
 
     private static void setupRoutes() {
 
-        port(8080);
+        int port = getPort();
+        port(port);
         staticFileLocation("/funsheet-vue/dist");
 
         new ActivityRouter(store).setupRoutes();
 
+    }
+
+    private static int getPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 8080;
     }
 
 }
