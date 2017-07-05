@@ -5,7 +5,8 @@
         <template v-for="activity in activities">
             <activity :name="activity.name"
                       :type="activity.type"
-                      :rating="activity.rating">
+                      :rating="activity.rating"
+                      :location="activity.location">
             </activity>
         </template>
     </div>

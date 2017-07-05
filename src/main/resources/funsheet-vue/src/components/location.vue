@@ -1,11 +1,9 @@
 <template>
     <div>
         <h2>{{ name }}</h2>
-        <h3>Tags</h3>
         <ul>
-            <template v-for="tag in tags">
-                <li>{{ tag.name }}</li>
-            </template>
+            <li>Latitude: {{ coordinate.latitude }}</li>
+            <li>Longitude: {{ coordinate.longitude }}</li>
         </ul>
     </div>
 </template>
@@ -17,8 +15,8 @@
         type: String,
         required: true
       },
-      tags: {
-        type: Array,
+      coordinate: {
+        type: Object,
         required: true
       }
     }

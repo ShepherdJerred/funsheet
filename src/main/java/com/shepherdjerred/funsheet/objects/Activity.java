@@ -19,12 +19,16 @@ public class Activity {
     @Getter
     @Setter
     private int rating;
+    @Getter
+    @Setter
+    private Location location;
 
-    public Activity(String name, UUID uuid, Type type, int rating) {
+    public Activity(String name, UUID uuid, Type type, int rating, Location location) {
         this.name = name;
         this.uuid = uuid;
         this.type = type;
         this.rating = rating;
+        this.location = location;
     }
 
 }

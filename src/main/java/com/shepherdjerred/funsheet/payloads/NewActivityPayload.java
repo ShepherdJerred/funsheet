@@ -16,10 +16,13 @@ public class NewActivityPayload implements Payload {
     private String name;
     @Getter
     @Setter
-    private UUID typeUuid;
+    private UUID type;
     @Getter
     @Setter
     private int rating;
+    @Getter
+    @Setter
+    private UUID location;
 
     @Override
     public boolean isValid() {

@@ -1,4 +1,4 @@
-package com.shepherdjerred.funsheet.payloads;
+package com.shepherdjerred.funsheet.objects;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -7,11 +7,8 @@ import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode
-public class NewLocationPayload implements Payload {
+public class Coordinate {
 
-    @Getter
-    @Setter
-    private String name;
     @Getter
     @Setter
     private double latitude;
@@ -19,8 +16,8 @@ public class NewLocationPayload implements Payload {
     @Setter
     private double longitude;
 
-    @Override
-    public boolean isValid() {
-        return false;
+    public Coordinate(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }

@@ -2,12 +2,18 @@
     <div>
         <h2>Create Type</h2>
         <form v-on:submit.prevent="onSubmit">
-            <input type="text" v-model="name" required>
-            <select v-model="tags" multiple>
-                <option v-for="tag in allTags" v-bind:value="tag.uuid">
-                    {{ tag.name }}
-                </option>
-            </select>
+            <label>
+                Name
+                <input type="text" v-model="name" required>
+            </label>
+            <label>
+                Tags
+                <select v-model="tags" multiple>
+                    <option v-for="tag in allTags" v-bind:value="tag.uuid">
+                        {{ tag.name }}
+                    </option>
+                </select>
+            </label>
             <button>Submit</button>
         </form>
     </div>

@@ -1,6 +1,7 @@
 package com.shepherdjerred.funsheet;
 
 import com.shepherdjerred.funsheet.router.ActivityRouter;
+import com.shepherdjerred.funsheet.router.LocationRouter;
 import com.shepherdjerred.funsheet.router.TagRouter;
 import com.shepherdjerred.funsheet.router.TypeRouter;
 import com.shepherdjerred.funsheet.storage.InMemoryStore;
@@ -43,6 +44,7 @@ public class Main {
         new ActivityRouter(store).setupRoutes();
         new TypeRouter(store).setupRoutes();
         new TagRouter(store).setupRoutes();
+        new LocationRouter(store).setupRoutes();
 
     }
 

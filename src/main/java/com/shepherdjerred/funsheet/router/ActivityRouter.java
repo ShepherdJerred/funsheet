@@ -53,8 +53,9 @@ public class ActivityRouter implements Router {
             Activity activity = new Activity(
                     activityPayload.getName(),
                     UUID.randomUUID(),
-                    store.getType(activityPayload.getTypeUuid()),
-                    activityPayload.getRating()
+                    store.getType(activityPayload.getType()),
+                    activityPayload.getRating(),
+                    store.getLocation(activityPayload.getLocation())
             );
 
             store.addActivity(activity);
