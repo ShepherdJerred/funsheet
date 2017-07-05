@@ -1,6 +1,8 @@
 package com.shepherdjerred.funsheet;
 
 import com.shepherdjerred.funsheet.router.ActivityRouter;
+import com.shepherdjerred.funsheet.router.TagRouter;
+import com.shepherdjerred.funsheet.router.TypeRouter;
 import com.shepherdjerred.funsheet.storage.InMemoryStore;
 import com.shepherdjerred.funsheet.storage.Store;
 import com.shepherdjerred.funsheet.storage.mysql.Database;
@@ -39,6 +41,8 @@ public class Main {
         staticFileLocation("/funsheet-vue/dist");
 
         new ActivityRouter(store).setupRoutes();
+        new TypeRouter(store).setupRoutes();
+        new TagRouter(store).setupRoutes();
 
     }
 
