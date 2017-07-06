@@ -28,6 +28,7 @@
     .navbar {
         color: #fff;
         background: $background;
+        margin-bottom: 10px;
     }
 
     .navbar__items {

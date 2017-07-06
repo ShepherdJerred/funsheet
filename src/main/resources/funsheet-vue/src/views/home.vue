@@ -3,25 +3,19 @@
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
             <app-search :searchOptions="searchOptions"></app-search>
+            <activity-table></activity-table>
         </div>
     </div>
 </template>
 
 <script>
-  import AppSearch from './activity-search.vue';
-
-  import LocationList from '../components/location-list.vue';
-  import TagList from '../components/tag-list.vue';
-  import TypeList from '../components/type-list.vue';
-  import ActivityList from '../components/activity-list.vue';
+  import AppSearch from '../components/activity-search.vue';
+  import ActivityTable from '../components/activity-table.vue';
 
   export default {
     components: {
       AppSearch,
-      LocationList,
-      TagList,
-      TypeList,
-      ActivityList
+      ActivityTable
     },
     data: function () {
       return {
@@ -33,7 +27,10 @@
           maxPatternLength: 32,
           minMatchCharLength: 1,
           keys: [
-            'name'
+            'name',
+            'location.name',
+            'type.name',
+            'tags'
           ]
         }
       };

@@ -1,7 +1,6 @@
 <template>
     <div>
         <h3>Types</h3>
-        <create-type></create-type>
         <template v-for="type in types">
             <type :name="type.name"
                   :tags="type.tags">

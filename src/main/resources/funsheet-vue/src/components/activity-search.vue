@@ -1,16 +1,25 @@
 <template>
     <div>
-        <input v-model="query" type="text" placeholder="Search for an activity">
+        <input v-model="query" @input="search" type="search" placeholder="Search for an activity">
         <template v-for="result in topResults">
-            {{ result.name }}
+            <activity :name="result.name"
+                      :type="result.type.name"
+                      :rating="result.rating"
+                      :location="result.location.name">
+            </activity>
         </template>
     </div>
 </template>
 
 <script>
+  import Activity from '../components/activity.vue';
+
   import Fuse from 'fuse.js';
 
   export default {
+    components: {
+      Activity
+    },
     props: {
       searchOptions: {
         type: Object,

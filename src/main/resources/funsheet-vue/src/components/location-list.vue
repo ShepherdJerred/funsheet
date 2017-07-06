@@ -1,7 +1,6 @@
 <template>
     <div>
         <h3>Locations</h3>
-        <create-location></create-location>
         <template v-for="location in locations">
             <location :name="location.name"
                       :coordinate="location.coordinate">

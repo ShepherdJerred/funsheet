@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '../components/home.vue';
+import Home from '../views/home.vue';
 import CreateActivity from '../components/create-activity.vue';
 import CreateLocation from '../components/create-location.vue';
 import CreateTag from '../components/create-tag.vue';

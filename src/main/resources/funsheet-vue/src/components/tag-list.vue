@@ -1,7 +1,6 @@
 <template>
     <div>
         <h3>Tags</h3>
-        <create-tag></create-tag>
         <template v-for="tag in tags">
             <tag :name="tag.name">
             </tag>
