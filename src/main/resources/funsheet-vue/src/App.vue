@@ -1,17 +1,31 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <app-navbar></app-navbar>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-};
+  import AppNavbar from './components/app-navbar.vue';
+
+  export default {
+    components: {
+      AppNavbar
+    },
+    name: 'app'
+  };
 </script>
 
 <style>
-  #app {
-    min-height: 100vh;
-  }
+    #app {
+        min-height: 100vh;
+    }
 </style>

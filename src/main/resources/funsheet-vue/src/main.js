@@ -2,8 +2,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import '../node_modules/skeleton-css/css/skeleton.css';
-import '../node_modules/font-awesome/css/font-awesome.css';
+import '../node_modules/purecss/build/pure-min.css';
 
 Vue.config.productionTip = false;
 

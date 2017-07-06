@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h2>{{ name }}</h2>
-        <h3>Tags</h3>
+        <h4>{{ name }}</h4>
+        <h5>Tags</h5>
         <ul>
             <template v-for="tag in tags">
                 <li>{{ tag.name }}</li>

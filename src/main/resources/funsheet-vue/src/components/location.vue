@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ name }}</h2>
+        <h4>{{ name }}</h4>
         <ul>
             <li>Latitude: {{ coordinate.latitude }}</li>
             <li>Longitude: {{ coordinate.longitude }}</li>

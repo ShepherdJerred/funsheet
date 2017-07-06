@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import Home from '../components/home.vue';
+import CreateActivity from '../components/create-activity.vue';
+import CreateLocation from '../components/create-location.vue';
+import CreateTag from '../components/create-tag.vue';
+import CreateType from '../components/create-type.vue';
 
 Vue.use(Router);
 
@@ -10,6 +15,26 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/activity/create',
+      name: 'Create Activity',
+      component: CreateActivity
+    },
+    {
+      path: '/location/create',
+      name: 'Create Location',
+      component: CreateLocation
+    },
+    {
+      path: '/tag/create',
+      name: 'Create Tag',
+      component: CreateTag
+    },
+    {
+      path: '/type/create',
+      name: 'Create Type',
+      component: CreateType
     }
   ]
 });

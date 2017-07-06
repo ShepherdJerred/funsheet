@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h2>{{ name }}
+        <h4>{{ name }}
             <small>Rating: {{ rating }}</small>
-        </h2>
+        </h4>
         <p>
             <template v-if="type">
                 Type: {{ type.name }}

@@ -1,42 +1,46 @@
 <template>
     <div>
         <h4>Create Activity</h4>
-        <form v-on:submit.prevent="onSubmit">
+        <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
             <label>
                 Name
                 <span>
-                        <input class="input" type="text" v-model="name" required>
-                    </span>
+                    <input class="input" type="text" v-model="name" required>
+                </span>
             </label>
             <label>
                 Rating
                 <span>
-                        <input class="input" type="number" v-model="rating" required>
-                    </span>
-            </label>
-            <label>
-                Type
-                <span>
-                        <select v-model="type">
-                            <option v-for="type in allTypes" v-bind:value="type.uuid">
-                                {{ type.name }}
-                            </option>
-                        </select>
-                    </span>
-            </label>
-            <label>
-                Location
-                <span>
-                        <select v-model="location">
-                            <option v-for="location in allLocations" v-bind:value="location.uuid">
-                                {{ location.name }}
-                            </option>
-                        </select>
-                    </span>
-            </label>
-            <span>
-                    <button>Submit</button>
+                    <input class="input" type="number" v-model="rating" required>
                 </span>
+            </label>
+            <template v-if="allTypes.length > 0">
+                <label>
+                    Type
+                    <span>
+                    <select v-model="type">
+                        <option v-for="type in allTypes" v-bind:value="type.uuid">
+                            {{ type.name }}
+                        </option>
+                    </select>
+                </span>
+                </label>
+            </template>
+            <template v-if="allLocations.length > 0">
+                <label>
+                    Location
+                    <span>
+                    <select v-model="location">
+                        <option v-for="location in allLocations" v-bind:value="location.uuid">
+                            {{ location.name }}
+                        </option>
+                    </select>
+                </span>
+                </label>
+            </template>
+            <span>
+                <button class="pure-button pure-button-primary">Submit</button>
+            </span>
         </form>
     </div>
 </template>

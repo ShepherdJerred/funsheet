@@ -1,26 +1,28 @@
 <template>
     <div>
         <h4>Create Type</h4>
-        <form v-on:submit.prevent="onSubmit">
+        <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
             <label>
                 Name
                 <span>
-                        <input class="input" type="text" v-model="name" required>
-                    </span>
-            </label>
-            <label>
-                Tags
-                <span>
-                        <select v-model="tags" multiple>
-                            <option v-for="tag in allTags" v-bind:value="tag.uuid">
-                                {{ tag.name }}
-                            </option>
-                        </select>
-                    </span>
-            </label>
-            <span>
-                    <button>Submit</button>
+                    <input class="input" type="text" v-model="name" required>
                 </span>
+            </label>
+            <template v-if="allTags.length > 0">
+                <label>
+                    Tags
+                    <span>
+                    <select v-model="tags" multiple>
+                        <option v-for="tag in allTags" v-bind:value="tag.uuid">
+                            {{ tag.name }}
+                        </option>
+                    </select>
+                </span>
+                </label>
+            </template>
+            <span>
+                <button class="pure-button pure-button-primary">Submit</button>
+            </span>
         </form>
     </div>
 </template>
