@@ -1,42 +1,21 @@
 <template>
     <div>
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                    Funsheet
-                </a>
-
-                <div class="navbar-burger burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <div class="container">
+            <div class="row">
+                <div class="three columns">
+                    <location-list></location-list>
+                </div>
+                <div class="three columns">
+                    <tag-list></tag-list>
+                </div>
+                <div class="three columns">
+                    <type-list></type-list>
+                </div>
+                <div class="three columns">
+                    <activity-list></activity-list>
                 </div>
             </div>
-
-            <div class="navbar-end">
-                <a class="navbar-item">
-                    Home
-                </a>
-            </div>
-        </nav>
-        <section class="section">
-            <div class="container">
-                <div class="columns">
-                    <div class="column">
-                        <location-list></location-list>
-                    </div>
-                    <div class="column">
-                        <tag-list></tag-list>
-                    </div>
-                    <div class="column">
-                        <type-list></type-list>
-                    </div>
-                    <div class="column">
-                        <activity-list></activity-list>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 </template>
 

@@ -1,17 +1,16 @@
 <template>
     <div>
-        <h4 class="subtitle is-4">Create Type</h4>
-        <div class=" field">
+        <h4>Create Type</h4>
         <form v-on:submit.prevent="onSubmit">
-            <label class="label">
+            <label>
                 Name
-                <span class="control">
+                <span>
                         <input class="input" type="text" v-model="name" required>
                     </span>
             </label>
-            <label class="label">
+            <label>
                 Tags
-                <span class="control select">
+                <span>
                         <select v-model="tags" multiple>
                             <option v-for="tag in allTags" v-bind:value="tag.uuid">
                                 {{ tag.name }}
@@ -19,11 +18,10 @@
                         </select>
                     </span>
             </label>
-            <span class="control">
-                    <button class="button is-primary">Submit</button>
+            <span>
+                    <button>Submit</button>
                 </span>
         </form>
-    </div>
     </div>
 </template>
 
