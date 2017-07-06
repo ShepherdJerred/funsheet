@@ -7,7 +7,9 @@
             <template v-if="type">
                 Type: {{ type.name }}
             </template>
-            Location: {{ location.name }}
+            <template v-if="location">
+                Location: {{ location.name }}
+            </template>
         </p>
     </div>
 </template>

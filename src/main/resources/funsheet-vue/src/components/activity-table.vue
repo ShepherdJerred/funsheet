@@ -16,9 +16,9 @@
             <template v-for="activity in activities">
                 <tr>
                     <td>{{ activity.name }}</td>
-                    <td>{{ activity.type.name }}</td>
+                    <td><template v-if="activity.type">{{ activity.type.name }}</template></td>
                     <td>{{ activity.rating }}</td>
-                    <td>{{ activity.location.name }}</td>
+                    <td><template v-if="activity.location">{{ activity.location.name }}</template></td>
                 </tr>
             </template>
             </tbody>

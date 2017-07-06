@@ -3,9 +3,9 @@
         <input v-model="query" @input="search" type="search" placeholder="Search for an activity">
         <template v-for="result in topResults">
             <activity :name="result.name"
-                      :type="result.type.name"
+                      :type="result.type"
                       :rating="result.rating"
-                      :location="result.location.name">
+                      :location="result.location">
             </activity>
         </template>
     </div>
