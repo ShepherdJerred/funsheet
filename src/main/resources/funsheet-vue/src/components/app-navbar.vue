@@ -8,10 +8,8 @@
                 </nav>
                 <nav class="navbarLinks">
                     <router-link to="/" class="navbarLink">Home</router-link>
-                    <router-link to="/activity/create" class="navbarLink">Create Activity</router-link>
-                    <router-link to="/location/create" class="navbarLink">Create Location</router-link>
-                    <router-link to="/tag/create" class="navbarLink">Create Tag</router-link>
-                    <router-link to="/type/create" class="navbarLink">Create Type</router-link>
+                    <router-link to="/activity/create" class="navbarLink">New Activity</router-link>
+                    <router-link to="/login" class="navbarLink">Login/Register</router-link>
                 </nav>
             </div>
         </div>
@@ -23,10 +21,11 @@
 </script>
 
 <style lang="scss" scoped>
-    $background: #7367F0;
+    $background: #ECF0F1;
+    $color: #2C3E50;
 
     .navbar {
-        color: #fff;
+        color: $color;
         background: $background;
         margin-bottom: 10px;
     }
@@ -37,7 +36,7 @@
     }
 
     .navbarBrand__link {
-        color: #fff;
+        color: $color;
         padding: 15px 10px;
         display: block;
         text-decoration: none;
@@ -47,7 +46,7 @@
     }
 
     .navbarLink {
-        color: #fff;
+        color: $color;
         padding: 15px 10px;
         display: inline-block;
         text-decoration: none;

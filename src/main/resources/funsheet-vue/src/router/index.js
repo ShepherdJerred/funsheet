@@ -6,6 +6,7 @@ import CreateActivity from '../components/create-activity.vue';
 import CreateLocation from '../components/create-location.vue';
 import CreateTag from '../components/create-tag.vue';
 import CreateType from '../components/create-type.vue';
+import Login from '../views/login.vue';
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/type/create',
       name: 'Create Type',
       component: CreateType
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 });

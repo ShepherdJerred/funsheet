@@ -1,9 +1,8 @@
 CREATE TABLE location (
-  location_uuid        CHAR(36) PRIMARY KEY,
-  name                 VARCHAR(255),
-  parent_location_uuid CHAR(36),
-  website              TEXT,
-  FOREIGN KEY (parent_location_uuid) REFERENCES location (location_uuid)
+  location_uuid CHAR(36) PRIMARY KEY,
+  name          VARCHAR(255),
+  latitude      DOUBLE,
+  longitude     DOUBLE
 );
 
 CREATE TABLE tag (
@@ -29,12 +28,21 @@ CREATE TABLE activity (
   name          VARCHAR(255),
   type_uuid     CHAR(36),
   rating        INT,
-  FOREIGN KEY (type_uuid) REFERENCES type (type_uuid)
-);
-
-CREATE TABLE activity_locations (
-  activity_uuid CHAR(36) PRIMARY KEY,
   location_uuid CHAR(36),
-  FOREIGN KEY (activity_uuid) REFERENCES activity (activity_uuid),
+  FOREIGN KEY (type_uuid) REFERENCES type (type_uuid),
   FOREIGN KEY (location_uuid) REFERENCES location (location_uuid)
 );
+
+CREATE TABLE users
+(
+  id                VARCHAR(255),
+  username          VARCHAR(255),
+  password          VARCHAR(255),
+  linkedid          VARCHAR(255),
+  serializedprofile VARCHAR(10000)
+);
+
+ALTER TABLE users
+  ADD PRIMARY KEY (id),
+  ADD KEY username (username),
+  ADD KEY linkedid (linkedid);

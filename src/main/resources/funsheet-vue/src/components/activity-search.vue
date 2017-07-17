@@ -1,24 +1,27 @@
 <template>
     <div>
-        <input v-model="query" @input="search" type="search" placeholder="Search for an activity">
-        <template v-for="result in topResults">
-            <activity :name="result.name"
-                      :type="result.type"
-                      :rating="result.rating"
-                      :location="result.location">
-            </activity>
-        </template>
+        <div class="activitySearch">
+            <div class="searchBar">
+                <i class="fa fa-fw fa-search searchIcon"></i>
+                <input v-model="query"
+                       @input="search"
+                       type="search"
+                       placeholder="Search for an activity"
+                       class="searchInput">
+            </div>
+            <activity-table :activities="results"></activity-table>
+        </div>
     </div>
 </template>
 
 <script>
-  import Activity from '../components/activity.vue';
+  import ActivityTable from '../components/activity-table.vue';
 
   import Fuse from 'fuse.js';
 
   export default {
     components: {
-      Activity
+      ActivityTable
     },
     props: {
       searchOptions: {
@@ -52,6 +55,42 @@
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+    $background: #ECF0F1;
+    $color: #2C3E50;
+    $color-light: #95A5A6;
 
+    .activitySearch {
+    }
+
+    .searchBar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .searchIcon {
+        color: $color-light;
+        font-size: 2.5vw;
+        margin-right: 20px;
+    }
+
+    .searchInput {
+        margin-top: 5px;
+        width: 100%;
+        background: $background;
+        color: $color   ;
+        border: none;
+        font-family: 'Mukta Vaani', sans-serif;
+        font-size: 3.5vw;
+        padding: 0;
+
+        &::placeholder {
+            color: $color-light;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
 </style>

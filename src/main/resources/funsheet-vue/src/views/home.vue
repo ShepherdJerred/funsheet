@@ -3,19 +3,16 @@
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
             <app-search :searchOptions="searchOptions"></app-search>
-            <activity-table></activity-table>
         </div>
     </div>
 </template>
 
 <script>
   import AppSearch from '../components/activity-search.vue';
-  import ActivityTable from '../components/activity-table.vue';
 
   export default {
     components: {
-      AppSearch,
-      ActivityTable
+      AppSearch
     },
     data: function () {
       return {
@@ -37,3 +34,7 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+
+</style>

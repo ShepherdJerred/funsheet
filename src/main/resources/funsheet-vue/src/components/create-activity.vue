@@ -1,5 +1,8 @@
 <template>
     <div>
+        <router-link to="/location/create" class="navbarLink">Create Location</router-link>
+        <router-link to="/tag/create" class="navbarLink">Create Tag</router-link>
+        <router-link to="/type/create" class="navbarLink">Create Type</router-link>
         <h4>Create Activity</h4>
         <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
             <label>

@@ -1,9 +1,6 @@
 <template>
     <div>
-        <h3>Activites</h3>
-
-
-        <table class="pure-table">
+        <table class="pure-table activityTable">
             <thead>
             <tr>
                 <th>Name</th>
@@ -35,13 +32,17 @@
       createActivity,
       activity
     },
-    computed: {
-      activities: function () {
-        return this.$store.state.activities;
+    props: {
+      activities: {
+        type: Array,
+        required: true
       }
-    },
-    created: function () {
-      this.$store.dispatch('getActivities');
     }
   };
 </script>
+
+<style lang="scss" scoped>
+    .activityTable {
+        width: 100%;
+    }
+</style>

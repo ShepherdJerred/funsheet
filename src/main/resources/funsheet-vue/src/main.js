@@ -2,7 +2,15 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import '../node_modules/purecss/build/pure-min.css';
+import 'purecss/build/pure-min.css';
+import 'font-awesome/css/font-awesome.css';
+import WebFontLoader from 'webfontloader';
+
+WebFontLoader.load({
+  google: {
+    families: ['Mukta Vaani']
+  }
+});
 
 Vue.config.productionTip = false;
 

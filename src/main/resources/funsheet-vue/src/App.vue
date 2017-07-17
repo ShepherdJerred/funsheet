@@ -26,6 +26,7 @@
 
 <style>
     #app {
+        background: #ECF0F1;
         min-height: 100vh;
     }
 </style>
