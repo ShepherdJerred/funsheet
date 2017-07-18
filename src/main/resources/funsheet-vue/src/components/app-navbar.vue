@@ -1,15 +1,16 @@
 <template>
     <div class="navbar">
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-11-12">
             <div class="navbar__items">
-                <nav class="navbarBrand">
-                    <a href="" class="navbarLink">Funsheet</a>
-                </nav>
                 <nav class="navbarLinks">
+                    <a href="" class="navbarLink navbarLink--brand">Funsheet</a>
                     <router-link to="/" class="navbarLink">Home</router-link>
                     <router-link to="/activity/create" class="navbarLink">New Activity</router-link>
-                    <router-link to="/login" class="navbarLink">Login/Register</router-link>
+                </nav>
+                <nav class="navbarLinks">
+                    <router-link to="/login" class="navbarLink">Login</router-link>
+                    <router-link to="/register" class="navbarLink">Sign Up</router-link>
                 </nav>
             </div>
         </div>
@@ -21,13 +22,13 @@
 </script>
 
 <style lang="scss" scoped>
-    $background: #ECF0F1;
-    $color: #2C3E50;
-
+@import "../scss/variables";
     .navbar {
         color: $color;
         background: $background;
         margin-bottom: 10px;
+        display: flex;
+        text-transform: none;
     }
 
     .navbar__items {
@@ -35,24 +36,28 @@
         justify-content: space-between;
     }
 
-    .navbarBrand__link {
-        color: $color;
-        padding: 15px 10px;
-        display: block;
-        text-decoration: none;
-    }
-
     .navbarLinks {
+        display: flex;
+        flex-direction: row;
+        font-family: 'Cabin', sans-serif;
+        font-size: 18px;
+        align-items: center;
     }
 
     .navbarLink {
         color: $color;
-        padding: 15px 10px;
-        display: inline-block;
+        padding: 5px 15px;
         text-decoration: none;
 
         &:hover {
             background: darken($background, 5%);
         }
     }
+
+.navbarLink--brand {
+    display: flex;
+    font-family: 'Lobster', cursive;
+    font-size: 22px;
+    align-items: center;
+}
 </style>

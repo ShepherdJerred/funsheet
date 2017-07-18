@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Login</h1>
         <form method="post" action="/login/callback" class="pure-form pure-form-stacked">
             <label>
                 Username

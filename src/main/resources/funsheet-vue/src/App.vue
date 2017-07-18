@@ -24,9 +24,10 @@
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+    @import 'scss/_variables.scss';
     #app {
-        background: #ECF0F1;
+        background: $background;
         min-height: 100vh;
     }
 </style>

@@ -7,6 +7,7 @@ import CreateLocation from '../components/create-location.vue';
 import CreateTag from '../components/create-tag.vue';
 import CreateType from '../components/create-type.vue';
 import Login from '../views/login.vue';
+import Register from '../views/register.vue';
 
 Vue.use(Router);
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 });

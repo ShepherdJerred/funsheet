@@ -8,7 +8,7 @@ import WebFontLoader from 'webfontloader';
 
 WebFontLoader.load({
   google: {
-    families: ['Mukta Vaani']
+    families: ['Mukta Vaani', 'Bevan']
   }
 });
 

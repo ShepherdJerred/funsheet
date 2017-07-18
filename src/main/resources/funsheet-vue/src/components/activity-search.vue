@@ -6,22 +6,38 @@
                 <input v-model="query"
                        @input="search"
                        type="search"
-                       placeholder="Search for an activity"
+                       placeholder="Search"
                        class="searchInput">
             </div>
-            <activity-table :activities="results"></activity-table>
+            <template v-if="activities.length > 0">
+                <template v-for="activity in activities">
+                    <activity :name="activity.name"
+                              :type="activity.type.name"
+                              :rating="activity.rating"
+                              :location="activity.location.name">
+                    </activity>
+                </template>
+            </template>
+            <template v-else-if="query.length > 0">
+                <h1 class="resultText">No results</h1>
+            </template>
+            <template v-else>
+                <h1 class="resultText">Search for an activity..</h1>
+            </template>
         </div>
     </div>
 </template>
 
 <script>
   import ActivityTable from '../components/activity-table.vue';
+  import Activity from '../components/activity.vue';
 
   import Fuse from 'fuse.js';
 
   export default {
     components: {
-      ActivityTable
+      ActivityTable,
+      Activity
     },
     props: {
       searchOptions: {
@@ -56,10 +72,7 @@
 </script>
 
 <style lang="scss" scoped>
-    $background: #ECF0F1;
-    $color: #2C3E50;
-    $color-light: #95A5A6;
-
+    @import '../scss/variables';
     .activitySearch {
     }
 
@@ -70,27 +83,34 @@
     }
 
     .searchIcon {
-        color: $color-light;
-        font-size: 2.5vw;
+        color: $color;
+        font-size: 2vw;
         margin-right: 20px;
     }
 
     .searchInput {
-        margin-top: 5px;
+        margin-top: 10px;
         width: 100%;
         background: $background;
-        color: $color   ;
+        color: $color;
         border: none;
         font-family: 'Mukta Vaani', sans-serif;
-        font-size: 3.5vw;
+        font-size: 2vw;
+        font-weight: 700;
         padding: 0;
 
         &::placeholder {
-            color: $color-light;
+            color: $color;
         }
 
         &:focus {
             outline: none;
         }
+    }
+
+    .resultText {
+        color: $color;
+        font-family: 'Mukta Vaani', sans-serif;
+        font-weight: 100;
     }
 </style>
