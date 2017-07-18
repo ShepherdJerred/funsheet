@@ -1,5 +1,6 @@
 package com.shepherdjerred.funsheet;
 
+import com.shepherdjerred.funsheet.objects.*;
 import com.shepherdjerred.funsheet.router.ActivityRouter;
 import com.shepherdjerred.funsheet.router.LocationRouter;
 import com.shepherdjerred.funsheet.router.TagRouter;
@@ -22,7 +23,9 @@ import org.pac4j.sparkjava.DefaultHttpActionAdapter;
 import org.pac4j.sparkjava.SecurityFilter;
 import org.pac4j.sparkjava.SparkWebContext;
 
+import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static spark.Spark.*;
 
@@ -32,7 +35,42 @@ public class Main {
 
     public static void main(String args[]) {
         setupInMemoryStorage();
+        createMockData();
         setupRoutes();
+    }
+
+    private static void createMockData() {
+        Tag entertainment = new Tag("Entertainment", UUID.randomUUID());
+        Tag food = new Tag("Food", UUID.randomUUID());
+        Tag outdoors = new Tag("Outdoors", UUID.randomUUID());
+
+        Location littleRock = new Location("Little Rock", UUID.randomUUID(), new Coordinate(10, 10));
+        Location searcy = new Location("Searcy", UUID.randomUUID(), new Coordinate(5, 5));
+        Location baldKnob = new Location("Bald Knob", UUID.randomUUID(), new Coordinate(10, 5));
+
+        Type movieTheater = new Type("Movie Theater", UUID.randomUUID(), Collections.singletonList(entertainment));
+        Type restaurant = new Type("Restaurant", UUID.randomUUID(), Collections.singletonList(food));
+        Type hiking = new Type("Hiking", UUID.randomUUID(), Collections.singletonList(outdoors));
+
+        Activity littleRockRiverTrail = new Activity("Little Rock river trail", UUID.randomUUID(), hiking, 3, littleRock);
+        Activity searcyMovieTheatre = new Activity("Searcy movie theater", UUID.randomUUID(), movieTheater, 2, searcy);
+        Activity bulldogCafe = new Activity("Bulldog cafe", UUID.randomUUID(), restaurant, 4, baldKnob);
+
+        store.addTag(entertainment);
+        store.addTag(food);
+        store.addTag(outdoors);
+
+        store.addLocation(littleRock);
+        store.addLocation(searcy);
+        store.addLocation(baldKnob);
+
+        store.addType(movieTheater);
+        store.addType(restaurant);
+        store.addType(hiking);
+
+        store.addActivity(littleRockRiverTrail);
+        store.addActivity(searcyMovieTheatre);
+        store.addActivity(bulldogCafe);
     }
 
     private static void setupInMemoryStorage() {

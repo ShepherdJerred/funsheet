@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4>{{ name }}
+        <h4><router-link :to="'/activity/' + uuid">{{ name }}</router-link>
             <small>Rating: {{ rating }}</small>
         </h4>
         <p>
@@ -17,6 +17,10 @@
 <script>
   export default {
     props: {
+      uuid: {
+        type: String,
+        required: true
+      },
       name: {
         type: String,
         required: true

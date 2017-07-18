@@ -8,6 +8,8 @@ import CreateTag from '../components/create-tag.vue';
 import CreateType from '../components/create-type.vue';
 import Login from '../views/login.vue';
 import Register from '../views/register.vue';
+import AllActivities from '../views/all-activities.vue';
+import Activity from '../views/activity.vue';
 
 Vue.use(Router);
 
@@ -47,6 +49,16 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/activity/all',
+      name: 'All Activities',
+      component: AllActivities
+    },
+    {
+      path: '/activity/:uuid',
+      name: 'Activity',
+      component: Activity
     }
   ]
 });

@@ -5,12 +5,16 @@
             <div class="navbar__items">
                 <nav class="navbarLinks">
                     <a href="" class="navbarLink navbarLink--brand">Funsheet</a>
-                    <router-link to="/" class="navbarLink">Home</router-link>
-                    <router-link to="/activity/create" class="navbarLink">New Activity</router-link>
+                    <router-link to="/"
+                                 class="navbarLink">Home</router-link>
+                    <router-link to="/activity/create"
+                                 class="navbarLink">New Activity</router-link>
                 </nav>
                 <nav class="navbarLinks">
-                    <router-link to="/login" class="navbarLink">Login</router-link>
-                    <router-link to="/register" class="navbarLink">Sign Up</router-link>
+                    <router-link to="/login"
+                                 class="navbarLink">Login</router-link>
+                    <router-link to="/register"
+                                 class="navbarLink">Sign Up</router-link>
                 </nav>
             </div>
         </div>

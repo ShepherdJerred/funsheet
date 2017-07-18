@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="activitySearch">
+        <div class="appSearch">
             <div class="searchBar">
                 <i class="fa fa-fw fa-search searchIcon"></i>
                 <input v-model="query"
@@ -9,35 +9,42 @@
                        placeholder="Search"
                        class="searchInput">
             </div>
-            <template v-if="activities.length > 0">
-                <template v-for="activity in activities">
-                    <activity :name="activity.name"
-                              :type="activity.type.name"
-                              :rating="activity.rating"
-                              :location="activity.location.name">
+            <template v-if="results.length > 0">
+                <template v-for="result in topResults">
+                    <activity :uuid="result.uuid"
+                              :name="result.name"
+                              :type="result.type.name"
+                              :rating="result.rating"
+                              :location="result.location.name">
                     </activity>
                 </template>
             </template>
             <template v-else-if="query.length > 0">
-                <h1 class="resultText">No results</h1>
+                <h1 class="resultText">No results found</h1>
             </template>
             <template v-else>
-                <h1 class="resultText">Search for an activity..</h1>
+                <h1 class="resultText">Search for an activity or
+                    <router-link to="/activity/all">view them all</router-link>
+                </h1>
             </template>
         </div>
     </div>
 </template>
 
 <script>
-  import ActivityTable from '../components/activity-table.vue';
   import Activity from '../components/activity.vue';
+  import Location from '../components/location.vue';
+  import Tag from '../components/tag.vue';
+  import Type from '../components/type.vue';
 
   import Fuse from 'fuse.js';
 
   export default {
     components: {
-      ActivityTable,
-      Activity
+      Activity,
+      Location,
+      Tag,
+      Type
     },
     props: {
       searchOptions: {
@@ -48,12 +55,12 @@
     data: function () {
       return {
         query: '',
-        results: ''
+        results: []
       };
     },
     computed: {
       topResults: function () {
-        return this.results.slice(0, 10);
+        return this.results.slice(0, 15);
       },
       activities: function () {
         return this.$store.state.activities;
@@ -73,7 +80,8 @@
 
 <style lang="scss" scoped>
     @import '../scss/variables';
-    .activitySearch {
+
+    .appSearch {
     }
 
     .searchBar {

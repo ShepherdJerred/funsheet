@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import AppSearch from '../components/activity-search.vue';
+  import AppSearch from '../components/app-search.vue';
 
   export default {
     components: {
@@ -25,9 +25,9 @@
           minMatchCharLength: 1,
           keys: [
             'name',
-            'location.name',
             'type.name',
-            'tags'
+            'type.tags.name',
+            'location.name'
           ]
         }
       };
