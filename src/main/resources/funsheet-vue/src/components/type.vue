@@ -4,7 +4,7 @@
         <h5>Tags</h5>
         <ul>
             <template v-for="tag in tags">
-                <li>{{ tag.name }}</li>
+                <li><router-link :to="'/tag/' + tag.uuid">{{ tag.name }}</router-link></li>
             </template>
         </ul>
     </div>

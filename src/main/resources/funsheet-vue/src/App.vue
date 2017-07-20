@@ -17,15 +17,22 @@
   import AppNavbar from './components/app-navbar.vue';
 
   export default {
+    name: 'App',
     components: {
       AppNavbar
     },
-    name: 'app'
+    created: function () {
+      this.$store.dispatch('getActivities');
+      this.$store.dispatch('getLocations');
+      this.$store.dispatch('getTypes');
+      this.$store.dispatch('getTags');
+    }
   };
 </script>
 
 <style lang="scss" scoped>
     @import 'scss/_variables.scss';
+
     #app {
         background: $background;
         min-height: 100vh;

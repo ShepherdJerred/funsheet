@@ -5,10 +5,10 @@
         </h4>
         <p>
             <template v-if="type">
-                Type: {{ type.name }}
+                Type: <router-link :to="'/type/' + type.uuid">{{ type.name }}</router-link>
             </template>
             <template v-if="location">
-                Location: {{ location.name }}
+                Location: <router-link :to="'/location/' + location.uuid">{{ location.name }}</router-link>
             </template>
         </p>
     </div>

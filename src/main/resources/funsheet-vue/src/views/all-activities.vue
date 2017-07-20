@@ -1,7 +1,10 @@
 <template>
     <div>
-        <activity-table :activities="activities">
-        </activity-table>
+        <div class="pure-u-1-8"></div>
+        <div class="pure-u-3-4">
+            <activity-table :activities="activities">
+            </activity-table>
+        </div>
     </div>
 </template>
 
@@ -16,9 +19,6 @@
         activities: function () {
           return this.$store.state.activities;
         }
-      },
-      created: function () {
-        this.$store.dispatch('getActivities');
       }
     };
 </script>

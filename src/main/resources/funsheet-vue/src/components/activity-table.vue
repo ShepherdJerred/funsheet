@@ -12,10 +12,21 @@
             <tbody>
             <template v-for="activity in activities">
                 <tr>
-                    <td>{{ activity.name }}</td>
-                    <td><template v-if="activity.type">{{ activity.type.name }}</template></td>
+                    <td>
+                        <router-link :to="'/activity/' + activity.uuid">{{ activity.name }}</router-link>
+                    </td>
+                    <td>
+                        <template v-if="activity.type">
+                            <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}</router-link>
+                        </template>
+                    </td>
                     <td>{{ activity.rating }}</td>
-                    <td><template v-if="activity.location">{{ activity.location.name }}</template></td>
+                    <td>
+                        <template v-if="activity.location">
+                            <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}
+                            </router-link>
+                        </template>
+                    </td>
                 </tr>
             </template>
             </tbody>
@@ -24,14 +35,8 @@
 </template>
 
 <script>
-  import createActivity from './create-activity.vue';
-  import activity from './activity.vue';
 
   export default {
-    components: {
-      createActivity,
-      activity
-    },
     props: {
       activities: {
         type: Array,

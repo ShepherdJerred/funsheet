@@ -1,11 +1,14 @@
 <template>
     <div>
-        <activity :uuid="activity.uuid"
-                  :name="activity.name"
-                  :type="activity.type.name"
-                  :rating="activity.rating"
-                  :location="activity.location.name">
-        </activity>
+        <div class="pure-u-1-8"></div>
+        <div class="pure-u-3-4">
+            <activity :uuid="activity.uuid"
+                      :name="activity.name"
+                      :type="activity.type"
+                      :rating="activity.rating"
+                      :location="activity.location">
+            </activity>
+        </div>
     </div>
 </template>
 
@@ -23,9 +26,6 @@
       activities: function () {
         return this.$store.state.activities;
       }
-    },
-    created: function () {
-      this.$store.dispatch('getActivities');
     }
   };
 </script>

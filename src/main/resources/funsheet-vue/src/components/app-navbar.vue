@@ -7,8 +7,6 @@
                     <a href="" class="navbarLink navbarLink--brand">Funsheet</a>
                     <router-link to="/"
                                  class="navbarLink">Home</router-link>
-                    <router-link to="/activity/create"
-                                 class="navbarLink">New Activity</router-link>
                 </nav>
                 <nav class="navbarLinks">
                     <router-link to="/login"

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h4>Create Tag</h4>
         <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
             <label>
                 Name
@@ -33,9 +32,6 @@
           console.log(response.body);
         });
       }
-    },
-    created: function () {
-      this.$store.dispatch('getTags');
     }
   };
 </script>

@@ -1,30 +1,29 @@
 <template>
     <div>
-        <h4>Create Location</h4>
-            <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
-                <label>
-                    Name
-                    <span>
+        <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
+            <label>
+                Name
+                <span>
                         <input class="input" type="text" v-model="name" required>
                     </span>
-                </label>
-                <label>
-                    Latitude
-                    <span>
-                        <input  class="input" type="number" v-model="latitude" required>
-                    </span>
-                </label>
-                <label>
-                    Longitude
-                    <span>
-                        <input  class="input" type="number" v-model="longitude" required>
-                    </span>
-                </label>
+            </label>
+            <label>
+                Latitude
                 <span>
+                        <input class="input" type="number" v-model="latitude" required>
+                    </span>
+            </label>
+            <label>
+                Longitude
+                <span>
+                        <input class="input" type="number" v-model="longitude" required>
+                    </span>
+            </label>
+            <span>
                     <button class="pure-button pure-button-primary">Submit</button>
                 </span>
-            </form>
-        </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -49,9 +48,6 @@
           console.log(response.body);
         });
       }
-    },
-    created: function () {
-      this.$store.dispatch('getLocations');
     }
   };
 </script>

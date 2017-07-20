@@ -2,7 +2,25 @@
     <div>
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <app-search :searchOptions="searchOptions"></app-search>
+            <div class="pure-g">
+                <div class="pure-u-1">
+                    <router-link to="/activity/create">
+                        <button class="pure-button pure-button-primary">New Activity</button>
+                    </router-link>
+                    <router-link to="/location/create">
+                        <button class="pure-button pure-button-primary">New Location</button>
+                    </router-link>
+                    <router-link to="/type/create">
+                        <button class="pure-button pure-button-primary">New Type</button>
+                    </router-link>
+                    <router-link to="/tag/create">
+                        <button class="pure-button pure-button-primary">New Tag</button>
+                    </router-link>
+                </div>
+                <div class="pure-u-1">
+                    <app-search :searchOptions="searchOptions"></app-search>
+                </div>
+            </div>
         </div>
     </div>
 </template>

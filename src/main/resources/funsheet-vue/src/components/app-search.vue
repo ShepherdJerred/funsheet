@@ -1,33 +1,38 @@
 <template>
     <div>
-        <div class="appSearch">
-            <div class="searchBar">
-                <i class="fa fa-fw fa-search searchIcon"></i>
-                <input v-model="query"
-                       @input="search"
-                       type="search"
-                       placeholder="Search"
-                       class="searchInput">
-            </div>
-            <template v-if="results.length > 0">
-                <template v-for="result in topResults">
-                    <activity :uuid="result.uuid"
-                              :name="result.name"
-                              :type="result.type.name"
-                              :rating="result.rating"
-                              :location="result.location.name">
-                    </activity>
+        <template v-if="activities.length > 0">
+            <div class="appSearch">
+                <div class="searchBar">
+                    <i class="fa fa-fw fa-search searchIcon"></i>
+                    <input v-model="query"
+                           @input="search"
+                           type="search"
+                           placeholder="Search"
+                           class="searchInput">
+                </div>
+                <template v-if="results.length > 0">
+                    <template v-for="result in topResults">
+                        <activity :uuid="result.uuid"
+                                  :name="result.name"
+                                  :type="result.type"
+                                  :rating="result.rating"
+                                  :location="result.location">
+                        </activity>
+                    </template>
                 </template>
-            </template>
-            <template v-else-if="query.length > 0">
-                <h1 class="resultText">No results found</h1>
-            </template>
-            <template v-else>
-                <h1 class="resultText">Search for an activity or
-                    <router-link to="/activity/all">view them all</router-link>
-                </h1>
-            </template>
-        </div>
+                <template v-else-if="query.length > 0">
+                    <h1 class="resultText">No results found</h1>
+                </template>
+                <template v-else>
+                    <h1 class="resultText">Search for an activity or
+                        <router-link to="/activity/all">view them all</router-link>
+                    </h1>
+                </template>
+            </div>
+        </template>
+        <template v-else>
+            <h1 class="resultText">There are no activities yet, how about <router-link to="/activity/create">adding one</router-link></h1>
+        </template>
     </div>
 </template>
 
@@ -73,7 +78,6 @@
     },
     created: function () {
       this.fuse = new Fuse(this.activities, this.searchOptions);
-      this.$store.dispatch('getActivities');
     }
   };
 </script>
