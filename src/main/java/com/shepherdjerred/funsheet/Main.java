@@ -44,9 +44,9 @@ public class Main {
         Tag food = new Tag("Food", UUID.randomUUID());
         Tag outdoors = new Tag("Outdoors", UUID.randomUUID());
 
-        Location littleRock = new Location("Little Rock", UUID.randomUUID(), new Coordinate(10, 10));
-        Location searcy = new Location("Searcy", UUID.randomUUID(), new Coordinate(5, 5));
-        Location baldKnob = new Location("Bald Knob", UUID.randomUUID(), new Coordinate(10, 5));
+        Location littleRock = new Location("Little Rock", UUID.randomUUID(), "ChIJm1YfoTSh0ocRF1vzDRD1BTQ");
+        Location searcy = new Location("Searcy", UUID.randomUUID(), "ChIJRdqBTnCp04cR9YqY9ZaPmdo");
+        Location baldKnob = new Location("Bald Knob", UUID.randomUUID(), "ChIJR47VhpCY04cRdHg7FXFimY8");
 
         Type movieTheater = new Type("Movie Theater", UUID.randomUUID(), Collections.singletonList(entertainment));
         Type restaurant = new Type("Restaurant", UUID.randomUUID(), Collections.singletonList(food));

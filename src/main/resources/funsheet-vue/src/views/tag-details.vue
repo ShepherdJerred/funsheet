@@ -4,39 +4,38 @@
         <div class="pure-u-3-4">
             <tag :name="tag.name">
             </tag>
+            <h3>All types tagged {{ tag.name }}</h3>
+            <ul>
+                <template v-for="type in typesWithTag">
+                    <type :name="type.name"
+                          :tags="type.tags">
+                    </type>
+                </template>
+            </ul>
         </div>
-        <h3>All activities with a type tagged {{ tag.name }}</h3>
-        <ul>
-            <template v-for="activity in activitiesWithTag">
-                <activity :uuid="activity.uuid"
-                          :name="activity.name"
-                          :type="activity.type"
-                          :rating="activity.rating"
-                          :location="activity.location">
-                </activity>
-            </template>
-        </ul>
     </div>
 </template>
 
 <script>
   import Tag from '../components/tag.vue';
-  import Activity from '../components/activity.vue';
+  import Type from '../components/type.vue';
 
   export default {
     components: {
       Tag,
-      Activity
+      Type
     },
     computed: {
-      activitiesWithTag: function () {
-        return []; // TODO
+      typesWithTag: function () {
+        return this.types.filter(type => {
+          return type.tags.find(tag => tag.uuid === this.$route.params.uuid);
+        });
       },
-      activities: function () {
-        return this.$store.state.activities;
+      types: function () {
+        return this.$store.state.types;
       },
       tag: function () {
-        return this.tags.find(e => e.uuid === this.$route.params.uuid);
+        return this.tags.find(tag => tag.uuid === this.$route.params.uuid);
       },
       tags: function () {
         return this.$store.state.tags;

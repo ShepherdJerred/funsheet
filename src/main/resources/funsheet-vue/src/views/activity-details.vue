@@ -21,7 +21,7 @@
     },
     computed: {
       activity: function () {
-        return this.activities.find(e => e.uuid === this.$route.params.uuid);
+        return this.activities.find(activity => activity.uuid === this.$route.params.uuid);
       },
       activities: function () {
         return this.$store.state.activities;

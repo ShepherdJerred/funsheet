@@ -1,10 +1,7 @@
 <template>
     <div>
         <h4>{{ name }}</h4>
-        <ul>
-            <li>Latitude: {{ coordinate.latitude }}</li>
-            <li>Longitude: {{ coordinate.longitude }}</li>
-        </ul>
+        <h5>{{ placeId }}</h5>
     </div>
 </template>
 
@@ -15,8 +12,8 @@
         type: String,
         required: true
       },
-      coordinate: {
-        type: Object,
+      placeId: {
+        type: String,
         required: true
       }
     }

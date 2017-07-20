@@ -15,12 +15,12 @@ public class Location {
     private final UUID uuid;
     @Getter
     @Setter
-    private Coordinate coordinate;
+    private String placeId;
 
-    public Location(String name, UUID uuid, Coordinate coordinate) {
+    public Location(String name, UUID uuid, String placeId) {
         this.name = name;
         this.uuid = uuid;
-        this.coordinate = coordinate;
+        this.placeId = placeId;
     }
 
 }

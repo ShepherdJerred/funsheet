@@ -31,13 +31,13 @@
     },
     computed: {
       activitiesWithType: function () {
-        return this.activities.filter(e => e.type.uuid === this.$route.params.uuid);
+        return this.activities.filter(activity => activity.type.uuid === this.$route.params.uuid);
       },
       activities: function () {
         return this.$store.state.activities;
       },
       type: function () {
-        return this.types.find(e => e.uuid === this.$route.params.uuid);
+        return this.types.find(type => type.uuid === this.$route.params.uuid);
       },
       types: function () {
         return this.$store.state.types;

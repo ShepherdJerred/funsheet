@@ -1,7 +1,6 @@
 package com.shepherdjerred.funsheet.router;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shepherdjerred.funsheet.objects.Coordinate;
 import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.payloads.NewLocationPayload;
 import com.shepherdjerred.funsheet.storage.Store;
@@ -55,10 +54,7 @@ public class LocationRouter implements Router {
             Location location = new Location(
                     locationPayload.getName(),
                     UUID.randomUUID(),
-                    new Coordinate(
-                            locationPayload.getLatitude(),
-                            locationPayload.getLongitude()
-                    )
+                    locationPayload.getPlaceId()
             );
 
             store.addLocation(location);

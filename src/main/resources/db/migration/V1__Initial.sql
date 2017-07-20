@@ -1,8 +1,7 @@
 CREATE TABLE location (
   location_uuid CHAR(36) PRIMARY KEY,
   name          VARCHAR(255),
-  latitude      DOUBLE,
-  longitude     DOUBLE
+  placeId       TEXT
 );
 
 CREATE TABLE tag (

@@ -14,10 +14,7 @@ public class NewLocationPayload implements Payload {
     private String name;
     @Getter
     @Setter
-    private double latitude;
-    @Getter
-    @Setter
-    private double longitude;
+    private String placeId;
 
     @Override
     public boolean isValid() {

@@ -8,15 +8,9 @@
                     </span>
             </label>
             <label>
-                Latitude
+                Place ID
                 <span>
-                        <input class="input" type="number" v-model="latitude" required>
-                    </span>
-            </label>
-            <label>
-                Longitude
-                <span>
-                        <input class="input" type="number" v-model="longitude" required>
+                        <input class="input" type="text" v-model="placeId" required>
                     </span>
             </label>
             <span>
@@ -31,16 +25,14 @@
     data: function () {
       return {
         name: '',
-        latitude: 0,
-        longitude: 0
+        placeId: ''
       };
     },
     methods: {
       onSubmit: function () {
         this.$http.post('/api/locations', {
           'name': this.name,
-          'latitude': this.latitude,
-          'longitude': this.longitude
+          'placeId': this.placeId
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getLocations');
