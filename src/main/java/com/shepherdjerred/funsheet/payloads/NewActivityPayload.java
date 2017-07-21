@@ -23,6 +23,12 @@ public class NewActivityPayload implements Payload {
     @Getter
     @Setter
     private UUID location;
+    @Getter
+    @Setter
+    private double cost;
+    @Getter
+    @Setter
+    private String description;
 
     @Override
     public boolean isValid() {

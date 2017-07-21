@@ -4,18 +4,23 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 
+import javax.sql.DataSource;
+
 public class Database {
 
-    private HikariDataSource hikariDataSource;
+    private DataSource dataSource;
 
     public Database(HikariConfig hikariConfig) {
-        hikariDataSource = new HikariDataSource(hikariConfig);
+        dataSource = new HikariDataSource(hikariConfig);
     }
 
     public void migrate() {
         Flyway flyway = new Flyway();
-        flyway.setDataSource(hikariDataSource);
+        flyway.setDataSource(dataSource);
         flyway.migrate();
     }
 
+    public DataSource getDataSource() {
+        return dataSource;
+    }
 }
