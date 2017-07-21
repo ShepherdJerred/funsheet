@@ -6,6 +6,7 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Rating</th>
+                <th>Cost</th>
                 <th>Location</th>
             </tr>
             </thead>
@@ -21,6 +22,7 @@
                         </template>
                     </td>
                     <td>{{ activity.rating }}</td>
+                    <td>{{ activity.cost }}</td>
                     <td>
                         <template v-if="activity.location">
                             <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}
@@ -35,7 +37,6 @@
 </template>
 
 <script>
-
   export default {
     props: {
       activities: {

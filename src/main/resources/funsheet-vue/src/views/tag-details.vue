@@ -2,14 +2,11 @@
     <div>
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <tag :name="tag.name">
-            </tag>
+            <tag :tag="tag"></tag>
             <h3>All types tagged {{ tag.name }}</h3>
             <ul>
                 <template v-for="type in typesWithTag">
-                    <type :name="type.name"
-                          :tags="type.tags">
-                    </type>
+                    <type :type="type"></type>
                 </template>
             </ul>
         </div>

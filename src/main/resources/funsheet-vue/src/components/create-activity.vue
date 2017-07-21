@@ -13,6 +13,18 @@
                     <input class="input" type="number" v-model="rating" required>
                 </span>
             </label>
+            <label>
+                Cost
+                <span>
+                    <input class="input" type="number" v-model="cost" required>
+                </span>
+            </label>
+            <label>
+                Description
+                <span>
+                    <input class="input" type="text" v-model="description" required>
+                </span>
+            </label>
             <template v-if="allTypes.length > 0">
                 <label>
                     Type
@@ -50,6 +62,8 @@
       return {
         name: '',
         rating: 0,
+        cost: 0,
+        description: '',
         type: null,
         location: null
       };
@@ -68,6 +82,8 @@
           'name': this.name,
           'rating': this.rating,
           'type': this.type,
+          'cost': this.cost,
+          'description': this.description,
           'location': this.location
         }).then(response => {
           console.log(response.body);

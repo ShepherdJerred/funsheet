@@ -1,19 +1,14 @@
 <template>
     <div>
-        <h4>{{ name }}</h4>
-        <h5>{{ placeId }}</h5>
+        <h4>{{ location.name }}</h4>
     </div>
 </template>
 
 <script>
   export default {
     props: {
-      name: {
-        type: String,
-        required: true
-      },
-      placeId: {
-        type: String,
+      location: {
+        type: Object,
         required: true
       }
     }

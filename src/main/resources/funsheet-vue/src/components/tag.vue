@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h4>{{ name }}</h4>
+        <h4>{{ tag.name }}</h4>
     </div>
 </template>
 
 <script>
   export default {
     props: {
-      name: {
-        type: String,
+      tag: {
+        type: Object,
         required: true
       }
     }

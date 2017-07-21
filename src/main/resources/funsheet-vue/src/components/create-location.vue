@@ -4,18 +4,18 @@
             <label>
                 Name
                 <span>
-                        <input class="input" type="text" v-model="name" required>
-                    </span>
+                    <input class="input" type="text" v-model="name" required>
+                </span>
             </label>
             <label>
                 Place ID
                 <span>
-                        <input class="input" type="text" v-model="placeId" required>
-                    </span>
+                    <input class="input" type="text" v-model="placeId" required>
+                </span>
             </label>
             <span>
-                    <button class="pure-button pure-button-primary">Submit</button>
-                </span>
+                <button class="pure-button pure-button-primary">Submit</button>
+            </span>
         </form>
     </div>
 </template>

@@ -12,12 +12,7 @@
                 </div>
                 <template v-if="results.length > 0">
                     <template v-for="result in topResults">
-                        <activity :uuid="result.uuid"
-                                  :name="result.name"
-                                  :type="result.type"
-                                  :rating="result.rating"
-                                  :location="result.location">
-                        </activity>
+                        <activity :activity="result"></activity>
                     </template>
                 </template>
                 <template v-else-if="query.length > 0">
@@ -31,25 +26,21 @@
             </div>
         </template>
         <template v-else>
-            <h1 class="resultText">There are no activities yet, how about <router-link to="/activity/create">adding one</router-link></h1>
+            <h1 class="resultText">There are no activities yet, how about
+                <router-link to="/activity/create">adding one</router-link>
+            </h1>
         </template>
     </div>
 </template>
 
 <script>
   import Activity from '../components/activity.vue';
-  import Location from '../components/location.vue';
-  import Tag from '../components/tag.vue';
-  import Type from '../components/type.vue';
 
   import Fuse from 'fuse.js';
 
   export default {
     components: {
-      Activity,
-      Location,
-      Tag,
-      Type
+      Activity
     },
     props: {
       searchOptions: {

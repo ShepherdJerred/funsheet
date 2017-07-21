@@ -2,28 +2,12 @@
     <div>
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <location :name="location.name"
-                      :placeId="location.placeId">
-            </location>
-
-            <iframe
-                    width="600"
-                    height="450"
-                    frameborder="0"
-                    style="border: 0"
-                    :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyDzHtAQxI5QVj-1aohH0f8VtmMfTFQxyFQ' +
-                     '&q=place_id:' + location.placeId"
-                    allowfullscreen>
-            </iframe>
+            <location :location="location"></location>
+            <place-view :placeId="location.placeId"></place-view>
             <h3>Everything to do in {{ location.name }}</h3>
             <ul>
                 <template v-for="activity in activitiesAtLocation">
-                    <activity :uuid="activity.uuid"
-                              :name="activity.name"
-                              :type="activity.type"
-                              :rating="activity.rating"
-                              :location="activity.location">
-                    </activity>
+                    <activity :activity="activity"></activity>
                 </template>
             </ul>
         </div>
@@ -33,11 +17,13 @@
 <script>
   import Location from '../components/location.vue';
   import Activity from '../components/activity.vue';
+  import PlaceView from '../components/place-view.vue';
 
   export default {
     components: {
       Location,
-      Activity
+      Activity,
+      PlaceView
     },
     computed: {
       activitiesAtLocation: function () {

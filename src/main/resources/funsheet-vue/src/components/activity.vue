@@ -1,39 +1,34 @@
 <template>
     <div>
-        <h4><router-link :to="'/activity/' + uuid">{{ name }}</router-link>
-            <small>Rating: {{ rating }}</small>
+        <h4>
+            <router-link :to="'/activity/' + activity.uuid">{{ activity.name }}</router-link>
+            <small>Rating: {{ activity.rating }}</small>
         </h4>
         <p>
-            <template v-if="type">
-                Type: <router-link :to="'/type/' + type.uuid">{{ type.name }}</router-link>
+            Cost: {{ activity.cost }}
+            Description: {{ activity.description }}
+            <template v-if="activity.type">
+                Type:
+                <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}</router-link>
             </template>
-            <template v-if="location">
-                Location: <router-link :to="'/location/' + location.uuid">{{ location.name }}</router-link>
+            <template v-if="activity.location">
+                Location:
+                <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}</router-link>
+                <place-view :placeId="activity.location.placeId"></place-view>
             </template>
         </p>
     </div>
 </template>
 
 <script>
+  import PlaceView from '../components/place-view.vue';
+
   export default {
+    components: {
+      PlaceView
+    },
     props: {
-      uuid: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String,
-        required: true
-      },
-      type: {
-        type: Object,
-        required: true
-      },
-      rating: {
-        type: Number,
-        required: true
-      },
-      location: {
+      activity: {
         type: Object,
         required: true
       }

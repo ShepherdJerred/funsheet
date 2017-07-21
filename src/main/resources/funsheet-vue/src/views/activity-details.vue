@@ -2,12 +2,7 @@
     <div>
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <activity :uuid="activity.uuid"
-                      :name="activity.name"
-                      :type="activity.type"
-                      :rating="activity.rating"
-                      :location="activity.location">
-            </activity>
+            <activity :activity="activity"></activity>
         </div>
     </div>
 </template>

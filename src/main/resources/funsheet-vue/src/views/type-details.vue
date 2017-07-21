@@ -2,18 +2,11 @@
     <div>
         <div class="pure-u-1-8"></div>
         <div class="pure-u-3-4">
-            <type :name="type.name"
-                  :tags="type.tags">
-            </type>
+            <type :type="type"></type>
             <h3>All activities of type {{ type.name }}</h3>
             <ul>
                 <template v-for="activity in activitiesWithType">
-                    <activity :uuid="activity.uuid"
-                              :name="activity.name"
-                              :type="activity.type"
-                              :rating="activity.rating"
-                              :location="activity.location">
-                    </activity>
+                    <activity :activity="activity"></activity>
                 </template>
             </ul>
         </div>

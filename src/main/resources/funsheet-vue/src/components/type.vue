@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h4>{{ name }}</h4>
+        <h4>{{ type.name }}</h4>
         <h5>Tags</h5>
         <ul>
-            <template v-for="tag in tags">
+            <template v-for="tag in type.tags">
                 <li><router-link :to="'/tag/' + tag.uuid">{{ tag.name }}</router-link></li>
             </template>
         </ul>
@@ -13,12 +13,8 @@
 <script>
   export default {
     props: {
-      name: {
-        type: String,
-        required: true
-      },
-      tags: {
-        type: Array,
+      type: {
+        type: Object,
         required: true
       }
     }
