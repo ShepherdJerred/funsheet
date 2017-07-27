@@ -3,16 +3,26 @@
         <section class="hero is-primary">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title">
-                        Let's find something to do
-                    </h1>
-                    <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
+                    <div class="columns">
+                        <div class="column is-one-third">
+                        </div>
+                        <div class="column is-one-third">
+                            <h1 class="title">
+                                Let's find something to do
+                            </h1>
+                            <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <div>
-            <div class="container">
-                <search-results :searchResults="searchResults"></search-results>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-third">
+                </div>
+                <div class="column is-one-third">
+                    <search-results :searchResults="searchResults" :query="query"></search-results>
+                </div>
             </div>
         </div>
     </div>
@@ -30,6 +40,7 @@
     data: function () {
       return {
         searchResults: [],
+        query: '',
         searchOptions: {
           shouldSort: true,
           threshold: 0.6,
@@ -47,9 +58,9 @@
       };
     },
     methods: {
-      updateResults: function (results) {
+      updateResults: function (results, query) {
         this.searchResults = results;
-        console.log(results);
+        this.query = query;
       }
     }
   };

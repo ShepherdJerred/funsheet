@@ -52,9 +52,27 @@ public class Main {
         Type restaurant = new Type("Restaurant", UUID.randomUUID(), Collections.singletonList(food));
         Type hiking = new Type("Hiking", UUID.randomUUID(), Collections.singletonList(outdoors));
 
-        Activity littleRockRiverTrail = new Activity("Little Rock river trail", UUID.randomUUID(), hiking, 3, littleRock, 0, "");
-        Activity searcyMovieTheatre = new Activity("Searcy movie theater", UUID.randomUUID(), movieTheater, 2, searcy, 5, "");
-        Activity bulldogCafe = new Activity("Bulldog cafe", UUID.randomUUID(), restaurant, 4, baldKnob, 5, "");
+        Activity littleRockRiverTrail = new Activity("Little Rock river trail",
+                UUID.randomUUID(),
+                hiking,
+                3,
+                littleRock,
+                0,
+                "Des");
+        Activity searcyMovieTheatre = new Activity("Searcy movie theater",
+                UUID.randomUUID(),
+                movieTheater,
+                2,
+                searcy,
+                5,
+                "Des");
+        Activity bulldogCafe = new Activity("Bulldog cafe",
+                UUID.randomUUID(),
+                restaurant,
+                4,
+                baldKnob,
+                5,
+                "Des");
 
         store.addTag(entertainment);
         store.addTag(food);

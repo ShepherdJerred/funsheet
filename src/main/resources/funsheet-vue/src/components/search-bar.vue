@@ -20,13 +20,12 @@
     },
     data: function () {
       return {
-        fuse: null,
         query: '',
         results: []
       };
     },
     computed: {
-      activities: function () {
+      activities () {
         return this.$store.state.activities;
       },
       randomActivity: function () {
@@ -39,14 +38,10 @@
     },
     methods: {
       search: function () {
-        this.results = this.fuse.search(this.query);
-        this.$emit('search', this.results);
-        console.log(this.fuse);
-        console.log(this.results);
+        let fuse = new Fuse(this.$store.state.activities, this.searchOptions);
+        this.results = fuse.search(this.query);
+        this.$emit('search', this.results, this.query);
       }
-    },
-    created: function () {
-      this.fuse = new Fuse(this.$store.state.activities, this.searchOptions);
     }
   };
 </script>
