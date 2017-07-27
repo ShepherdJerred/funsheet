@@ -1,20 +1,24 @@
 <template>
     <div>
         <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
-            <label>
-                Name
-                <span>
+            <div class="field">
+                <label class="label">
+                    Name
+                    <span>
                     <input class="input" type="text" v-model="name" required>
                 </span>
-            </label>
-            <label>
-                Place ID
-                <span>
+                </label>
+            </div>
+            <div class="field">
+                <label class="label">
+                    Place ID
+                    <span>
                     <input class="input" type="text" v-model="placeId" required>
                 </span>
-            </label>
+                </label>
+            </div>
             <span>
-                <button class="pure-button pure-button-primary">Submit</button>
+                <button class="button">Submit</button>
             </span>
         </form>
     </div>

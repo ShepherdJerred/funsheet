@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
+        <div class="container">
             <tag :tag="tag"></tag>
             <h3>All types tagged {{ tag.name }}</h3>
             <ul>
@@ -14,8 +13,8 @@
 </template>
 
 <script>
-  import Tag from '../components/tag.vue';
-  import Type from '../components/type.vue';
+  import Tag from '../../components/tag/tag.vue';
+  import Type from '../../components/type/type.vue';
 
   export default {
     components: {

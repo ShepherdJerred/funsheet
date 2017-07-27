@@ -4,23 +4,23 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Register
+                        Create type
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container">
-            <register></register>
+            <create-type></create-type>
         </div>
     </div>
 </template>
 
 <script>
-  import Register from '../components/ui-register.vue';
+  import CreateType from '../../components/type/create-type.vue';
 
   export default {
     components: {
-      Register
+      CreateType
     }
   };
 </script>

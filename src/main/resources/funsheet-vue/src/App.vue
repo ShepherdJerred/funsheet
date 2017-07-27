@@ -1,25 +1,17 @@
 <template>
     <div id="app">
-        <div class="pure-g">
-            <div class="pure-u-1">
-                <app-navbar></app-navbar>
-            </div>
-        </div>
-        <div class="pure-g">
-            <div class="pure-u-1">
-                <router-view></router-view>
-            </div>
-        </div>
+        <navbar></navbar>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-  import AppNavbar from './components/app-navbar.vue';
+  import Navbar from './components/ui-navbar.vue';
 
   export default {
     name: 'App',
     components: {
-      AppNavbar
+      Navbar
     },
     created: function () {
       this.$store.dispatch('getActivities');
@@ -30,11 +22,11 @@
   };
 </script>
 
-<style lang="scss" scoped>
-    @import 'scss/_variables.scss';
+<style lang="scss">
+    @import 'scss/global';
 
     #app {
-        background: $background;
+        background: $neutral-light;
         min-height: 100vh;
     }
 </style>

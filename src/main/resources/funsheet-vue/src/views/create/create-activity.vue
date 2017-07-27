@@ -4,23 +4,23 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Register
+                        Create activity
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container">
-            <register></register>
+            <create-activity></create-activity>
         </div>
     </div>
 </template>
 
 <script>
-  import Register from '../components/ui-register.vue';
+  import CreateActivity from '../../components/activity/create-activity.vue';
 
   export default {
     components: {
-      Register
+      CreateActivity
     }
   };
 </script>

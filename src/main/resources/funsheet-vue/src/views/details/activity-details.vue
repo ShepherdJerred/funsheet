@@ -1,14 +1,13 @@
 <template>
     <div>
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
+        <div class="container">
             <activity :activity="activity"></activity>
         </div>
     </div>
 </template>
 
 <script>
-  import Activity from '../components/activity.vue';
+  import Activity from '../../components/activity/activity.vue';
 
   export default {
     components: {

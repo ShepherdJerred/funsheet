@@ -5,17 +5,17 @@ import Home from '../views/home.vue';
 import Login from '../views/login.vue';
 import Register from '../views/register.vue';
 
-import ActivityDetails from '../views/activity-details.vue';
-import LocationDetails from '../views/location-details.vue';
-import TypeDetails from '../views/type-details.vue';
-import TagDetails from '../views/tag-details.vue';
+import ActivityDetails from '../views/details/activity-details.vue';
+import LocationDetails from '../views/details/location-details.vue';
+import TypeDetails from '../views/details/type-details.vue';
+import TagDetails from '../views/details/tag-details.vue';
 
-import CreateActivity from '../views/create-activity.vue';
-import CreateLocation from '../views/create-location.vue';
-import CreateTag from '../views/create-tag.vue';
-import CreateType from '../views/create-type.vue';
+import CreateActivity from '../views/create/create-activity.vue';
+import CreateLocation from '../views/create/create-location.vue';
+import CreateTag from '../views/create/create-tag.vue';
+import CreateType from '../views/create/create-type.vue';
 
-import AllActivities from '../views/all-activities.vue';
+import AllActivities from '../views/list/all-activities.vue';
 
 Vue.use(Router);
 

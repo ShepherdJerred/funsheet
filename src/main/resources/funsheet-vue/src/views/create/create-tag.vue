@@ -4,23 +4,23 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Register
+                        Create tag
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container">
-            <register></register>
+            <create-tag></create-tag>
         </div>
     </div>
 </template>
 
 <script>
-  import Register from '../components/ui-register.vue';
+  import CreateTag from '../../components/tag/create-tag.vue';
 
   export default {
     components: {
-      Register
+      CreateTag
     }
   };
 </script>

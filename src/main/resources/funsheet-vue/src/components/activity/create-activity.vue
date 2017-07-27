@@ -1,34 +1,42 @@
 <template>
     <div>
         <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
-            <label>
-                Name
-                <span>
+            <div class="field">
+                <label class="label">
+                    Name
+                    <span>
                     <input class="input" type="text" v-model="name" required>
                 </span>
-            </label>
-            <label>
-                Rating
-                <span>
+                </label>
+            </div>
+            <div class="field">
+                <label class="label">
+                    Rating
+                    <span>
                     <input class="input" type="number" v-model="rating" required>
                 </span>
-            </label>
-            <label>
-                Cost
-                <span>
+                </label>
+            </div>
+            <div class="field">
+                <label class="label">
+                    Cost
+                    <span>
                     <input class="input" type="number" v-model="cost" required>
                 </span>
-            </label>
-            <label>
-                Description
-                <span>
+                </label>
+            </div>
+            <div class="field">
+                <label class="label">
+                    Description
+                    <span>
                     <input class="input" type="text" v-model="description" required>
                 </span>
-            </label>
+                </label>
+            </div>
             <template v-if="allTypes.length > 0">
-                <label>
+                <label class="label">
                     Type
-                    <span>
+                    <span class="select">
                     <select v-model="type">
                         <option v-for="type in allTypes" v-bind:value="type.uuid">
                             {{ type.name }}
@@ -38,7 +46,7 @@
                 </label>
             </template>
             <template v-if="allLocations.length > 0">
-                <label>
+                <label class="label">
                     Location
                     <span>
                     <select v-model="location">
@@ -50,7 +58,7 @@
                 </label>
             </template>
             <span>
-                <button class="pure-button pure-button-primary">Submit</button>
+                <button class="button">Submit</button>
             </span>
         </form>
     </div>

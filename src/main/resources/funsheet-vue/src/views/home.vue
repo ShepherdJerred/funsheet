@@ -1,39 +1,35 @@
 <template>
     <div>
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
-            <div class="pure-g">
-                <div class="pure-u-1">
-                    <router-link to="/activity/create">
-                        <button class="pure-button pure-button-primary">New Activity</button>
-                    </router-link>
-                    <router-link to="/location/create">
-                        <button class="pure-button pure-button-primary">New Location</button>
-                    </router-link>
-                    <router-link to="/type/create">
-                        <button class="pure-button pure-button-primary">New Type</button>
-                    </router-link>
-                    <router-link to="/tag/create">
-                        <button class="pure-button pure-button-primary">New Tag</button>
-                    </router-link>
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Let's find something to do
+                    </h1>
+                    <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
                 </div>
-                <div class="pure-u-1">
-                    <app-search :searchOptions="searchOptions"></app-search>
-                </div>
+            </div>
+        </section>
+        <div>
+            <div class="container">
+                <search-results :searchResults="searchResults"></search-results>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import AppSearch from '../components/app-search.vue';
+  import SearchBar from '../components/search-bar.vue';
+  import SearchResults from '../components/search-results.vue';
 
   export default {
     components: {
-      AppSearch
+      SearchBar,
+      SearchResults
     },
     data: function () {
       return {
+        searchResults: [],
         searchOptions: {
           shouldSort: true,
           threshold: 0.6,
@@ -49,10 +45,16 @@
           ]
         }
       };
+    },
+    methods: {
+      updateResults: function (results) {
+        this.searchResults = results;
+        console.log(results);
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-
+    @import '../scss/global';
 </style>

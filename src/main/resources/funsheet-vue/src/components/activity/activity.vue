@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import PlaceView from '../components/place-view.vue';
+  import PlaceView from '../place-map.vue';
 
   export default {
     components: {

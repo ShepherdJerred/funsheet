@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
+        <div class="container">
             <type :type="type"></type>
             <h3>All activities of type {{ type.name }}</h3>
             <ul>
@@ -14,8 +13,8 @@
 </template>
 
 <script>
-  import Type from '../components/type.vue';
-  import Activity from '../components/activity.vue';
+  import Type from '../../components/type/type.vue';
+  import Activity from '../../components/activity/activity.vue';
 
   export default {
     components: {

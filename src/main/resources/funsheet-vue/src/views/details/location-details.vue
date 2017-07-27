@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u-3-4">
+        <div class="container">
             <location :location="location"></location>
             <place-view :placeId="location.placeId"></place-view>
             <h3>Everything to do in {{ location.name }}</h3>
@@ -15,9 +14,9 @@
 </template>
 
 <script>
-  import Location from '../components/location.vue';
-  import Activity from '../components/activity.vue';
-  import PlaceView from '../components/place-view.vue';
+  import Location from '../../components/location/location.vue';
+  import Activity from '../../components/activity/activity.vue';
+  import PlaceView from '../../components/place-map.vue';
 
   export default {
     components: {

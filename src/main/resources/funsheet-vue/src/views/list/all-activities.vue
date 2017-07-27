@@ -4,23 +4,29 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Register
+                        All Activities
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container">
-            <register></register>
+            <activity-table :activities="activities">
+            </activity-table>
         </div>
     </div>
 </template>
 
 <script>
-  import Register from '../components/ui-register.vue';
+  import ActivityTable from '../../components/activity/activity-table.vue';
 
   export default {
     components: {
-      Register
+      ActivityTable
+    },
+    computed: {
+      activities: function () {
+        return this.$store.state.activities;
+      }
     }
   };
 </script>

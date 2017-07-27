@@ -1,16 +1,18 @@
 <template>
     <div>
-        <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
-            <label>
-                Name
-                <span>
+        <form v-on:submit.prevent="onSubmit">
+            <div class="field">
+                <label class="label">
+                    Name
+                    <span>
                     <input class="input" type="text" v-model="name" required>
                 </span>
-            </label>
+                </label>
+            </div>
             <template v-if="allTags.length > 0">
-                <label>
+                <label class="label">
                     Tags
-                    <span>
+                    <span class="select is-multiple">
                     <select v-model="tags" multiple>
                         <option v-for="tag in allTags" v-bind:value="tag.uuid">
                             {{ tag.name }}
@@ -20,7 +22,7 @@
                 </label>
             </template>
             <span>
-                <button class="pure-button pure-button-primary">Submit</button>
+                <button class="button">Submit</button>
             </span>
         </form>
     </div>

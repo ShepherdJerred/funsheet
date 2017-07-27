@@ -4,23 +4,23 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Register
+                        Create location
                     </h1>
                 </div>
             </div>
         </section>
         <div class="container">
-            <register></register>
+            <create-location></create-location>
         </div>
     </div>
 </template>
 
 <script>
-  import Register from '../components/ui-register.vue';
+  import CreateLocation from '../../components/location/create-location.vue';
 
   export default {
     components: {
-      Register
+      CreateLocation
     }
   };
 </script>

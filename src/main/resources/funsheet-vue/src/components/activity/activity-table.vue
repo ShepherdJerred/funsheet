@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="pure-table activityTable">
+        <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
