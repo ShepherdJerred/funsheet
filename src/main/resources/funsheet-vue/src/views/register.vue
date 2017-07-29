@@ -1,16 +1,9 @@
 <template>
     <div>
-        <section class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Register
-                    </h1>
-                </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <register></register>
             </div>
-        </section>
-        <div class="container">
-            <register></register>
         </div>
     </div>
 </template>

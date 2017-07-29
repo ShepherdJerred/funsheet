@@ -15,7 +15,12 @@
                     </div>
                     <footer class="card-footer">
                         <span class="card-footer-item">
-                            <template v-for="i in result.rating">$</template>
+                            <template v-if="result.cost === 0">
+                                Free
+                            </template>
+                            <template v-else>
+                                <template v-for="i in result.cost">$</template>
+                            </template>
                         </span>
                         <span class="card-footer-item">
                             <template v-for="i in result.rating">
@@ -30,17 +35,17 @@
             </template>
         </template>
         <template v-else>
-            <template v-if="activities.length < 0">
-                <p>Add an activity first</p>
-            </template>
-            <template v-else-if="query.length == 0">
-                <p>Search for an activity</p>
-            </template>
-            <template v-else>
-                <p>
-                    No results
-                </p>
-            </template>
+            <h1 class="title resultNotice">
+                <template v-if="activities.length < 0">
+                    Add an activity before searching
+                </template>
+                <template v-else-if="query.length == 0">
+
+                </template>
+                <template v-else>
+                    No results found
+                </template>
+            </h1>
         </template>
     </div>
 </template>
@@ -63,7 +68,7 @@
       }
     },
     computed: {
-      activities () {
+      activities: function () {
         return this.$store.state.activities;
       }
     }
@@ -73,5 +78,9 @@
 <style lang="scss" scoped>
     .result {
         margin-top: 10px;
+    }
+
+    .resultNotice {
+        margin-top: 50px;
     }
 </style>

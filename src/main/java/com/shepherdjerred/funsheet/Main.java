@@ -34,8 +34,7 @@ public class Main {
     private static Store store;
 
     public static void main(String args[]) {
-        setupInMemoryStorage();
-        createMockData();
+        setupMysqlStorage();
         setupRoutes();
     }
 
@@ -52,27 +51,30 @@ public class Main {
         Type restaurant = new Type("Restaurant", UUID.randomUUID(), Collections.singletonList(food));
         Type hiking = new Type("Hiking", UUID.randomUUID(), Collections.singletonList(outdoors));
 
-        Activity littleRockRiverTrail = new Activity("Little Rock river trail",
+        Activity littleRockRiverTrail = new Activity(
+                "Arkansas River Trail",
                 UUID.randomUUID(),
                 hiking,
                 3,
                 littleRock,
-                0,
-                "Des");
-        Activity searcyMovieTheatre = new Activity("Searcy movie theater",
+                1,
+                "The Arkansas River Trail is a rail trail that runs 17 miles in along both sides of the Arkansas River in Central Arkansas.");
+        Activity searcyMovieTheatre = new Activity(
+                "Searcy Cinema 8",
                 UUID.randomUUID(),
                 movieTheater,
                 2,
                 searcy,
-                5,
-                "Des");
-        Activity bulldogCafe = new Activity("Bulldog cafe",
+                2,
+                "Searcy Cinema 8 - movie theatre serving Searcy, Arkansas and the surrounding area. Great family entertainment at your local movie theater.");
+        Activity bulldogCafe = new Activity(
+                "Bulldog Restaurant",
                 UUID.randomUUID(),
                 restaurant,
-                4,
+                3,
                 baldKnob,
-                5,
-                "Des");
+                1,
+                "Great strawberry shortcake!");
 
         store.addTag(entertainment);
         store.addTag(food);

@@ -1,7 +1,9 @@
 <template>
     <div>
-        <div class="container">
-            <activity :activity="activity"></activity>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <activity :activity="activity"></activity>
+            </div>
         </div>
     </div>
 </template>

@@ -1,19 +1,20 @@
 <template>
     <div>
         <nav class="navbar">
-            <div class="container">
+            <div v-bind:class="{ 'container': !isActive }">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/">
                         Funsheet
                     </a>
-                    <div class="navbar-burger burger" data-target="navMenuExample">
+                    <div class="navbar-burger burger" v-bind:class="{ 'is-active': isActive }" data-target="navbar"
+                         v-on:click="isActive = !isActive">
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
                 </div>
 
-                <div id="navMenuExample" class="navbar-menu">
+                <div id="navbar" class="navbar-menu" v-bind:class="{ 'is-active': isActive }">
                     <div class="navbar-start">
                         <router-link class="navbar-item" to="/">
                             Home
@@ -63,7 +64,7 @@
                             <div class="field is-grouped">
                                 <p class="control">
                                     <router-link class="button"
-                                       to="/login">
+                                                 to="/login">
                                     <span class="icon">
                                         <i class="fa fa-user"></i>
                                     </span>
@@ -78,6 +79,16 @@
         </nav>
     </div>
 </template>
+
+<script>
+  export default {
+    data: function () {
+      return {
+        isActive: false
+      };
+    }
+  };
+</script>
 
 <style lang="scss" scoped>
     @import '../scss/global';

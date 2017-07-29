@@ -1,8 +1,10 @@
 package com.shepherdjerred.funsheet.storage.mysql;
 
 import com.shepherdjerred.funsheet.objects.Activity;
+import com.shepherdjerred.funsheet.storage.Store;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
+import org.codejargon.fluentjdbc.api.query.Mapper;
 import org.codejargon.fluentjdbc.api.query.Query;
 
 import java.util.Collection;
@@ -11,31 +13,52 @@ import java.util.UUID;
 
 public class ActivityDAO implements DAO<Activity> {
 
+    private final Store store;
     private final FluentJdbc fluentJdbc;
+    private final Mapper<Activity> activityMapper;
 
-    public ActivityDAO(Database database) {
+    public ActivityDAO(Database database, Store store) {
         fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
+        this.store = store;
+        // TODO don't create with every object (should be static?)
+        activityMapper = rs -> new Activity(rs.getString("name"),
+                UUID.fromString(rs.getString("activity_uuid")),
+                store.getType(UUID.fromString(rs.getString("type_uuid"))),
+                rs.getInt("rating"),
+                store.getLocation(UUID.fromString(rs.getString("location_uuid"))),
+                rs.getDouble("cost"),
+                rs.getString("description")
+        );
     }
 
     @Override
     public Optional<Activity> select(UUID uuid) {
-        return Optional.empty();
+        Query query = fluentJdbc.query();
+        return query.select("SELECT * FROM activity WHERE activity_uuid = ?")
+                .params(String.valueOf(uuid))
+                .firstResult(activityMapper);
     }
 
     @Override
     public Collection<Activity> select() {
-        return null;
+        Query query = fluentJdbc.query();
+        return query.select("SELECT * FROM activity")
+                .listResult(activityMapper);
     }
 
     @Override
     public void insert(Activity activity) {
+
+        UUID typeUuid = activity.getType() != null ? activity.getType().getUuid() : null;
+        UUID locationUuid = activity.getLocation() != null ? activity.getLocation().getUuid() : null;
+
         Query query = fluentJdbc.query();
-        query.update("INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?, ?)")
-                .params(activity.getUuid(),
+        query.update("INSERT INTO activity VALUES (?, ?, ?, ?, ?, ?, ?)")
+                .params(String.valueOf(activity.getUuid()),
                         activity.getName(),
-                        activity.getType().getUuid(),
+                        typeUuid,
                         activity.getRating(),
-                        activity.getLocation().getUuid(),
+                        locationUuid,
                         activity.getCost(),
                         activity.getDescription())
                 .run();
@@ -44,12 +67,32 @@ public class ActivityDAO implements DAO<Activity> {
     @Override
     public void drop(Activity activity) {
         Query query = fluentJdbc.query();
-        query.update("DELETE FROM activities WHERE activity_uuid = ?")
+        query.update("DELETE FROM activity WHERE activity_uuid = ?")
                 .params(activity.getUuid())
                 .run();
     }
 
     public void updateName(Activity activity) {
+
+    }
+
+    public void updateType() {
+
+    }
+
+    public void updateRating() {
+
+    }
+
+    public void updateLocation() {
+
+    }
+
+    public void updateCost() {
+
+    }
+
+    public void updateDescription() {
 
     }
 

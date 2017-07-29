@@ -11,70 +11,78 @@ import java.util.UUID;
 
 public class MysqlStore implements Store {
 
-    private Database database;
+    private final Database database;
+    private final ActivityDAO activityDAO;
+    private final LocationDAO locationDAO;
+    private final TypeDAO typeDAO;
+    private final TagDAO tagDAO;
 
     public MysqlStore(Database database) {
         this.database = database;
+        activityDAO = new ActivityDAO(database, this);
+        locationDAO = new LocationDAO(database);
+        typeDAO = new TypeDAO(database, this);
+        tagDAO = new TagDAO(database);
     }
 
     @Override
     public void addActivity(Activity activity) {
-
+        activityDAO.insert(activity);
     }
 
     @Override
     public Activity getActivity(UUID uuid) {
-        return null;
+        return activityDAO.select(uuid).orElse(null); // TODO Return something other than null
     }
 
     @Override
     public Collection<Activity> getActivities() {
-        return null;
+        return activityDAO.select();
     }
 
     @Override
     public void addTag(Tag tag) {
-
+        tagDAO.insert(tag);
     }
 
     @Override
     public Tag getTag(UUID uuid) {
-        return null;
+        return tagDAO.select(uuid).orElse(null); // TODO Return something other than null
     }
 
     @Override
     public Collection<Tag> getTags() {
-        return null;
+        return tagDAO.select();
     }
 
     @Override
     public void addType(Type type) {
-
+        typeDAO.insert(type);
     }
 
     @Override
     public Type getType(UUID uuid) {
-        return null;
+        return typeDAO.select(uuid).orElse(null); // TODO Return something other than null
     }
 
     @Override
     public Collection<Type> getTypes() {
-        return null;
+        return typeDAO.select();
     }
 
     @Override
     public void addLocation(Location location) {
-
+        locationDAO.insert(location);
     }
 
     @Override
     public Location getLocation(UUID uuid) {
-        return null;
+        return locationDAO.select(uuid).orElse(null); // TODO Return something other than null
     }
 
     @Override
     public Collection<Location> getLocations() {
-        return null;
+        return locationDAO.select();
     }
 
 }

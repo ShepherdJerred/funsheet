@@ -1,17 +1,10 @@
 <template>
     <div>
-        <section class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        All Activities
-                    </h1>
-                </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <activity-table :activities="activities">
+                </activity-table>
             </div>
-        </section>
-        <div class="container">
-            <activity-table :activities="activities">
-            </activity-table>
         </div>
     </div>
 </template>
