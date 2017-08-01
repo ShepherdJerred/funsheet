@@ -34,7 +34,8 @@ public class Main {
     private static Store store;
 
     public static void main(String args[]) {
-        setupMysqlStorage();
+        setupInMemoryStorage();
+        createMockData();
         setupRoutes();
     }
 
