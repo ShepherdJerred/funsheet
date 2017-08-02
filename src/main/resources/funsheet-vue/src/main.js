@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import router from './router';
 import store from './store';
+import Buefy from 'buefy';
 import WebFontLoader from 'webfontloader';
 import 'font-awesome/css/font-awesome.css';
-import 'normalize.css/normalize.css';
-import 'flexboxgrid/css/flexboxgrid.min.css';
+import 'buefy/lib/buefy.css';
 
 import App from './App';
 
@@ -13,6 +13,8 @@ WebFontLoader.load({
     families: ['Cabin', 'Lobster']
   }
 });
+
+Vue.use(Buefy);
 
 Vue.config.productionTip = !(process.env.NODE_ENV === 'production');
 
