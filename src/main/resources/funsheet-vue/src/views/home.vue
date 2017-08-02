@@ -1,13 +1,18 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <h1 class="title">
-                    Let's find something to do
-                </h1>
-                <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
-                <search-results :searchResults="searchResults" :query="query"></search-results>
+        <div class="hero">
+            <div class="hero-body">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                    <h1 class="title">
+                        Let's find something to do
+                    </h1>
+                    <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
+                </div>
             </div>
+        </div>
+
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
+            <search-results :searchResults="searchResults" :query="query"></search-results>
         </div>
     </div>
 </template>
