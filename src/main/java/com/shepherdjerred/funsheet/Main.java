@@ -14,6 +14,8 @@ import com.shepherdjerred.funsheet.storage.mysql.Database;
 import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
 import com.zaxxer.hikari.HikariConfig;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -101,7 +103,17 @@ public class Main {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("JAWSDB_URL") != null) {
             HikariConfig hikariConfig = new HikariConfig();
-            hikariConfig.setJdbcUrl(processBuilder.environment().get("JAWSDB_URL"));
+            try {
+                URI jdbUri = new URI(processBuilder.environment().get("JAWSDB_URL"));
+                String jdbcUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + String.valueOf(jdbUri.getPort()) + jdbUri.getPath();
+
+                hikariConfig.setJdbcUrl(jdbcUrl);
+                hikariConfig.setUsername(jdbUri.getUserInfo().split(":")[0]);
+                hikariConfig.setPassword(jdbUri.getUserInfo().split(":")[1]);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            
             return hikariConfig;
         } else {
             return new HikariConfig("hikari.properties");
