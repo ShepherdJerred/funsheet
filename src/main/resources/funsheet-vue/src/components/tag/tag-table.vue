@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table">
+        <table class="table is-fullwidth">
             <thead>
             <tr>
                 <th>Name</th>
@@ -31,7 +31,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .table {
-        width: 100%;
-    }
+
 </style>

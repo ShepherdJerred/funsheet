@@ -13,9 +13,10 @@
                 <label class="label">
                     Rating
                     <span>
-                        <input class="input" type="number" v-model="rating" required min="1" max="5" value="1">
+                        <input class="input" type="number" v-model="rating" required min="1" max="5">
                     </span>
                 </label>
+                <p class="help">Rating between 1-5</p>
             </div>
             <div class="field">
                 <label class="label">
@@ -24,12 +25,13 @@
                         <input class="input" type="number" v-model="cost" required min="0" max="5">
                     </span>
                 </label>
+                <p class="help">Cost between 0-5</p>
             </div>
             <div class="field">
                 <label class="label">
                     Description
                     <span>
-                    <input class="input" type="text" v-model="description" required>
+                        <textarea class="textarea" v-model="description" required></textarea>
                 </span>
                 </label>
             </div>
@@ -72,7 +74,7 @@
                 <p>No locations exist</p>
             </template>
             <span>
-                <button class="button">Submit</button>
+                <button class="button is-primary">Submit</button>
             </span>
         </form>
     </div>

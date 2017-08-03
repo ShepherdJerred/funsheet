@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table">
+        <table class="table is-fullwidth">
             <thead>
             <tr>
                 <th>Name</th>
@@ -15,7 +15,7 @@
                     </td>
                     <td>
                         <template v-for="tag in type.tags">
-                            {{ tag.name }}
+                            {{ tag.name }},
                         </template>
                     </td>
                 </tr>
@@ -37,7 +37,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .table {
-        width: 100%;
-    }
+
 </style>

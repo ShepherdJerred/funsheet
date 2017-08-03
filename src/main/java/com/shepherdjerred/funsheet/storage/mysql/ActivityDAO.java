@@ -1,7 +1,6 @@
 package com.shepherdjerred.funsheet.storage.mysql;
 
 import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.storage.Store;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.query.Mapper;
@@ -13,11 +12,11 @@ import java.util.UUID;
 
 public class ActivityDAO implements DAO<Activity> {
 
-    private final Store store;
+    private final MysqlStore store;
     private final FluentJdbc fluentJdbc;
     private final Mapper<Activity> activityMapper;
 
-    public ActivityDAO(Database database, Store store) {
+    public ActivityDAO(Database database, MysqlStore store) {
         fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
         this.store = store;
         // TODO don't create with every object (should be static?)

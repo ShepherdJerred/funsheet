@@ -90,12 +90,23 @@ public class Main {
     }
 
     private static void setupMysqlStorage() {
-        HikariConfig hikariConfig = new HikariConfig("hikari.properties");
+        HikariConfig hikariConfig = getHikariConfig();
 
         Database database = new Database(hikariConfig);
         database.migrate();
 
         store = new MysqlStore(database);
+    }
+
+    private static HikariConfig getHikariConfig() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("JAWSDB_URL") != null) {
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setJdbcUrl(processBuilder.environment().get("JAWSDB_URL"));
+            return hikariConfig;
+        } else {
+            return new HikariConfig("hikari.properties");
+        }
     }
 
     private static void setupRoutes() {

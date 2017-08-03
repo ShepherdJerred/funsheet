@@ -55,6 +55,10 @@ public class MysqlStore implements Store {
         return tagDAO.select();
     }
 
+    public Collection<Tag> getTagsOfType(UUID typeUuid) {
+        return tagDAO.selectTagsOfType(typeUuid);
+    }
+
     @Override
     public void addType(Type type) {
         typeDAO.insert(type);

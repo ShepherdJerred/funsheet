@@ -39,6 +39,13 @@ public class TagDAO implements DAO<Tag> {
                 .listResult(tagMapper);
     }
 
+    public Collection<Tag> selectTagsOfType(UUID typeUuid) {
+        Query query = fluentJdbc.query();
+        return query.select("SELECT * FROM type_tags INNER JOIN tag ON type_tags.tag_uuid = tag.tag_uuid WHERE type_uuid = ?")
+                .params(String.valueOf(typeUuid))
+                .listResult(tagMapper);
+    }
+
     @Override
     public void insert(Tag tag) {
         Query query = fluentJdbc.query();

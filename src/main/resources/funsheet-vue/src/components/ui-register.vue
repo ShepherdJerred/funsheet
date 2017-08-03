@@ -35,7 +35,7 @@
                     </span>
                 </label>
             </div>
-            <button class="button">Login</button>
+            <button class="button is-primary">Login</button>
         </form>
     </div>
 </template>

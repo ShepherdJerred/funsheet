@@ -66,17 +66,17 @@ export default new Router({
     },
     {
       path: '/location/all',
-      name: 'All Activities',
+      name: 'All Locations',
       component: AllLocations
     },
     {
       path: '/type/all',
-      name: 'All Activities',
+      name: 'All Types',
       component: AllTypes
     },
     {
       path: '/tag/all',
-      name: 'All Activities',
+      name: 'All Tags',
       component: AllTags
     },
     {

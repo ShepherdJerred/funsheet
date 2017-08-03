@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="hero">
+        <section class="hero is-primary">
             <div class="hero-body">
                 <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">

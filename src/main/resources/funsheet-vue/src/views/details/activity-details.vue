@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="hero">
+        <div class="hero is-primary">
             <div class="hero-body">
                 <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">
@@ -9,21 +9,41 @@
                 </div>
             </div>
         </div>
-        <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <p>
-                Rating: {{ activity.rating }}<br>
-                Cost: {{ activity.cost }}<br>
-                Description: {{ activity.description }}<br>
-            </p>
-            <template v-if="activity.type">
-                Type:
-                <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}</router-link><br>
-            </template>
-            <template v-if="activity.location">
-                Location:
-                <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}</router-link>
-                <place-view :placeId="activity.location.placeId"></place-view>
-            </template>
+        <div class="columns">
+            <div class="column is-one-third-desktop is-offset-2-desktop">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            {{ activity.description }}
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="card-footer-item">
+                            <template v-if="activity.cost === 0">
+                                Free
+                            </template>
+                            <template v-else>
+                                <template v-for="i in activity.cost">$</template>
+                            </template>
+                        </div>
+                        <div class="card-footer-item">
+                            <template v-for="i in activity.rating">
+                                <i class="fa fa-star"></i>
+                            </template>
+                        </div>
+                        <a class="card-footer-item">
+                            <template v-if="activity.type">
+                                <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}</router-link>
+                            </template>
+                        </a>
+                    </footer>
+                </div>
+            </div>
+            <div class="column is-one-third-desktop">
+                <template v-if="activity.location">
+                    <place-view :location="activity.location"></place-view>
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -47,3 +67,9 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+    .columns {
+        margin-top: 10px;
+    }
+</style>

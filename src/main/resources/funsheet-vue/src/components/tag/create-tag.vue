@@ -10,7 +10,7 @@
                 </label>
             </div>
             <span>
-                <button class="button">Submit</button>
+                <button class="button is-primary">Submit</button>
             </span>
         </form>
     </div>
