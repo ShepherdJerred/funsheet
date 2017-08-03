@@ -4,10 +4,10 @@ import com.shepherdjerred.funsheet.objects.Activity;
 import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
-import com.shepherdjerred.funsheet.router.ActivityRouter;
-import com.shepherdjerred.funsheet.router.LocationRouter;
-import com.shepherdjerred.funsheet.router.TagRouter;
-import com.shepherdjerred.funsheet.router.TypeRouter;
+import com.shepherdjerred.funsheet.controller.ActivityController;
+import com.shepherdjerred.funsheet.controller.LocationController;
+import com.shepherdjerred.funsheet.controller.TagController;
+import com.shepherdjerred.funsheet.controller.TypeController;
 import com.shepherdjerred.funsheet.storage.InMemoryStore;
 import com.shepherdjerred.funsheet.storage.Store;
 import com.shepherdjerred.funsheet.storage.mysql.Database;
@@ -27,7 +27,8 @@ public class Main {
     private static Store store;
 
     public static void main(String args[]) {
-        setupMysqlStorage();
+        setupInMemoryStorage();
+        createMockData();
         setupRoutes();
     }
 
@@ -127,10 +128,10 @@ public class Main {
         port(port);
         staticFileLocation("/funsheet-vue/dist");
 
-        new ActivityRouter(store).setupRoutes();
-        new TypeRouter(store).setupRoutes();
-        new TagRouter(store).setupRoutes();
-        new LocationRouter(store).setupRoutes();
+        new ActivityController(store).setupRoutes();
+        new TypeController(store).setupRoutes();
+        new TagController(store).setupRoutes();
+        new LocationController(store).setupRoutes();
     }
 
     private static int getPort() {

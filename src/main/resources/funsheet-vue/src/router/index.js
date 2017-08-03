@@ -20,6 +20,8 @@ import AllLocations from '../views/list/all-locations.vue';
 import AllTypes from '../views/list/all-types.vue';
 import AllTags from '../views/list/all-tags.vue';
 
+import EditActivity from '../views/edit/edit-activity.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -98,6 +100,11 @@ export default new Router({
       path: '/tag/:uuid',
       name: 'Tag Details',
       component: TagDetails
+    },
+    {
+      path: '/activity/edit/:uuid',
+      name: 'Edit Activity',
+      component: EditActivity
     }
   ]
 });

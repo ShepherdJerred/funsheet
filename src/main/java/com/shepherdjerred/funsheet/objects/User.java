@@ -5,26 +5,23 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
 import java.util.UUID;
 
 @ToString
 @EqualsAndHashCode
-public class Type {
+public class User {
 
-    @Getter
-    @Setter
-    private String name;
     @Getter
     private final UUID uuid;
     @Getter
     @Setter
-    private List<Tag> tags;
+    private String username;
+    @Getter
+    @Setter
+    private String password;
 
-    public Type(String name, UUID uuid, List<Tag> tags) {
-        this.name = name;
+    public User(UUID uuid) {
         this.uuid = uuid;
-        this.tags = tags;
     }
 
 }

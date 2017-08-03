@@ -1,4 +1,4 @@
-package com.shepherdjerred.funsheet.router;
+package com.shepherdjerred.funsheet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Tag;
@@ -11,12 +11,12 @@ import java.util.UUID;
 import static spark.Spark.*;
 
 @Log4j2
-public class TagRouter implements Router {
+public class TagController implements Controller {
 
     private Store store;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public TagRouter(Store store) {
+    public TagController(Store store) {
         this.store = store;
     }
 

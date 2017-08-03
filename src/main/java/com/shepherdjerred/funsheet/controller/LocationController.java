@@ -1,4 +1,4 @@
-package com.shepherdjerred.funsheet.router;
+package com.shepherdjerred.funsheet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Location;
@@ -11,12 +11,12 @@ import java.util.UUID;
 import static spark.Spark.*;
 
 @Log4j2
-public class LocationRouter implements Router {
+public class LocationController implements Controller {
 
     private Store store;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public LocationRouter(Store store) {
+    public LocationController(Store store) {
         this.store = store;
     }
 

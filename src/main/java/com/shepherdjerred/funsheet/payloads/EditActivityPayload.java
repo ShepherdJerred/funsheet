@@ -1,16 +1,15 @@
 package com.shepherdjerred.funsheet.payloads;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.UUID;
 
-@ToString
-@EqualsAndHashCode
-public class NewActivityPayload implements Payload {
+public class EditActivityPayload implements Payload {
 
+    @Getter
+    @Setter
+    private UUID uuid;
     @Getter
     @Setter
     private String name;
@@ -32,18 +31,24 @@ public class NewActivityPayload implements Payload {
 
     @Override
     public boolean isValid() {
+        // Check activity exists
         // Check if name is unique
         // Check types exist
         // Check location exists
 
-        if (rating < 1 || rating > 5) {
-            return false;
+        if (rating != null) {
+            if (rating < 1 || rating > 5) {
+                return false;
+            }
         }
 
-        if (cost < 0 || cost > 5) {
-            return false;
+        if (cost != null) {
+            if (cost < 0 || cost > 5) {
+                return false;
+            }
         }
 
         return true;
     }
+
 }

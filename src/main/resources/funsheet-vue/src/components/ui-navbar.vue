@@ -63,13 +63,13 @@
                         <!--<div class="navbar-item">-->
                             <!--<div class="field is-grouped">-->
                                 <!--<p class="control">-->
-                                    <!--<router-link class="button"-->
+                                    <!--<controller-link class="button"-->
                                                  <!--to="/login">-->
                                     <!--<span class="icon">-->
                                         <!--<i class="fa fa-user"></i>-->
                                     <!--</span>-->
                                         <!--<span>Sign in</span>-->
-                                    <!--</router-link>-->
+                                    <!--</controller-link>-->
                                 <!--</p>-->
                             <!--</div>-->
                         <!--</div>-->

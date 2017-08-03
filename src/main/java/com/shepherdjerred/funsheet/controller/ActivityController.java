@@ -1,9 +1,10 @@
-package com.shepherdjerred.funsheet.router;
+package com.shepherdjerred.funsheet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Activity;
 import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.payloads.EditActivityPayload;
 import com.shepherdjerred.funsheet.payloads.NewActivityPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
@@ -13,12 +14,12 @@ import java.util.UUID;
 import static spark.Spark.*;
 
 @Log4j2
-public class ActivityRouter implements Router {
+public class ActivityController implements Controller {
 
     private Store store;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public ActivityRouter(Store store) {
+    public ActivityController(Store store) {
         this.store = store;
     }
 
@@ -48,8 +49,6 @@ public class ActivityRouter implements Router {
         post("/api/activities", (request, response) -> {
             response.type("application/json");
 
-            log.info(request.body());
-
             NewActivityPayload activityPayload = objectMapper.readValue(request.body(), NewActivityPayload.class);
 
             if (!activityPayload.isValid()) {
@@ -76,7 +75,42 @@ public class ActivityRouter implements Router {
         });
 
         patch("/api/activities/:activity", (request, response) -> {
-            return "";
+            response.type("application/json");
+
+            EditActivityPayload activityPayload = objectMapper.readValue(request.body(), EditActivityPayload.class);
+
+            if (!activityPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
+            Activity activity = store.getActivity(activityPayload.getUuid());
+
+            if (activityPayload.getName() != null) {
+                activity.setName(activityPayload.getName());
+            }
+
+            if (activityPayload.getType() != null) {
+                activity.setType(store.getType(activityPayload.getType()));
+            }
+
+            if (activityPayload.getRating() != null) {
+                activity.setRating(activityPayload.getRating());
+            }
+
+            if (activityPayload.getLocation() != null) {
+                activity.setLocation(store.getLocation(activityPayload.getLocation()));
+            }
+
+            if (activityPayload.getCost() != null) {
+                activity.setCost(activityPayload.getCost());
+            }
+
+            if (activityPayload.getDescription() != null) {
+                activity.setDescription(activityPayload.getDescription());
+            }
+
+            return objectMapper.writeValueAsString(activity);
         });
     }
 
