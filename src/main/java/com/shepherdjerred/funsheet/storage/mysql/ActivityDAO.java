@@ -1,6 +1,7 @@
 package com.shepherdjerred.funsheet.storage.mysql;
 
 import com.shepherdjerred.funsheet.objects.Activity;
+import lombok.extern.log4j.Log4j2;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.query.Mapper;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+@Log4j2
 public class ActivityDAO implements DAO<Activity> {
 
     private final MysqlStore store;
@@ -56,16 +58,16 @@ public class ActivityDAO implements DAO<Activity> {
     @Override
     public void insert(Activity activity) {
 
-        UUID typeUuid = activity.getType() != null ? activity.getType().getUuid() : null;
-        UUID locationUuid = activity.getLocation() != null ? activity.getLocation().getUuid() : null;
+        String type = activity.getType() != null ? String.valueOf(activity.getType().getUuid()) : null;
+        String location = activity.getLocation() != null ? String.valueOf(activity.getLocation().getUuid()) : null;
 
         Query query = fluentJdbc.query();
         query.update("INSERT INTO activity VALUES (?, ?, ?, ?, ?, ?, ?)")
                 .params(String.valueOf(activity.getUuid()),
                         activity.getName(),
-                        String.valueOf(typeUuid),
+                        type,
                         activity.getRating(),
-                        String.valueOf(locationUuid),
+                        location,
                         activity.getCost(),
                         activity.getDescription())
                 .run();
@@ -80,27 +82,51 @@ public class ActivityDAO implements DAO<Activity> {
     }
 
     public void updateName(Activity activity) {
-
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET name = ? WHERE activity_uuid = ?")
+                .params(activity.getName(),
+                        activity.getUuid())
+                .run();
     }
 
-    public void updateType() {
-
+    public void updateType(Activity activity) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET type_uuid = ? WHERE activity_uuid = ?")
+                .params(String.valueOf(activity.getType().getUuid()),
+                        activity.getUuid())
+                .run();
     }
 
-    public void updateRating() {
-
+    public void updateRating(Activity activity) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET rating = ? WHERE activity_uuid = ?")
+                .params(activity.getRating(),
+                        activity.getUuid())
+                .run();
     }
 
-    public void updateLocation() {
-
+    public void updateLocation(Activity activity) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET location_uuid = ? WHERE activity_uuid = ?")
+                .params(String.valueOf(activity.getLocation().getUuid()),
+                        activity.getUuid())
+                .run();
     }
 
-    public void updateCost() {
-
+    public void updateCost(Activity activity) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET cost = ? WHERE activity_uuid = ?")
+                .params(activity.getCost(),
+                        activity.getUuid())
+                .run();
     }
 
-    public void updateDescription() {
-
+    public void updateDescription(Activity activity) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE activity SET description = ? WHERE activity_uuid = ?")
+                .params(activity.getDescription(),
+                        activity.getUuid())
+                .run();
     }
 
 }

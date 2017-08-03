@@ -41,6 +41,11 @@ public class MysqlStore implements Store {
     }
 
     @Override
+    public void deleteActivity(UUID uuid) {
+        activityDAO.drop(getActivity(uuid));
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tagDAO.insert(tag);
     }

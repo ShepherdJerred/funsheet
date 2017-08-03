@@ -37,6 +37,11 @@ public class InMemoryStore implements Store {
     }
 
     @Override
+    public void deleteActivity(UUID uuid) {
+        activities.remove(uuid);
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tags.put(tag.getUuid(), tag);
     }

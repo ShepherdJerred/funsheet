@@ -14,19 +14,34 @@
             <template v-for="activity in activities">
                 <tr>
                     <td>
-                        <router-link :to="'/activity/' + activity.uuid">{{ activity.name }}</router-link>
+                        <router-link :to="'/activity/' + activity.uuid">
+                            {{ activity.name }}
+                        </router-link>
                     </td>
                     <td>
                         <template v-if="activity.type">
-                            <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}</router-link>
+                            <router-link :to="'/type/' + activity.type.uuid">
+                                {{ activity.type.name }}
+                            </router-link>
+                        </template>
+                        <template v-else>
+                            None
                         </template>
                     </td>
-                    <td>{{ activity.rating }}</td>
-                    <td>{{ activity.cost }}</td>
+                    <td>
+                        {{ activity.rating }}
+                    </td>
+                    <td>
+                        {{ activity.cost }}
+                    </td>
                     <td>
                         <template v-if="activity.location">
-                            <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}
+                            <router-link :to="'/location/' + activity.location.uuid">
+                                {{ activity.location.name }}
                             </router-link>
+                        </template>
+                        <template v-else>
+                            None
                         </template>
                     </td>
                 </tr>

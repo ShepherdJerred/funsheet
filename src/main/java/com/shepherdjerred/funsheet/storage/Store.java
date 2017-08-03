@@ -13,6 +13,7 @@ public interface Store {
     void addActivity(Activity activity);
     Activity getActivity(UUID uuid);
     Collection<Activity> getActivities();
+    void deleteActivity(UUID uuid);
 
     void addTag(Tag tag);
     Tag getTag(UUID uuid);

@@ -86,6 +86,7 @@ public class ActivityController implements Controller {
 
             Activity activity = store.getActivity(activityPayload.getUuid());
 
+            // TODO Update in store
             if (activityPayload.getName() != null) {
                 activity.setName(activityPayload.getName());
             }
@@ -111,6 +112,17 @@ public class ActivityController implements Controller {
             }
 
             return objectMapper.writeValueAsString(activity);
+        });
+
+        delete("/api/activities/:activity", (request, response) -> {
+            response.type("application/json");
+
+            String activityParam = request.params().get(":activity");
+            UUID activityUuid = UUID.fromString(activityParam);
+
+            store.deleteActivity(activityUuid);
+
+            return "";
         });
     }
 
