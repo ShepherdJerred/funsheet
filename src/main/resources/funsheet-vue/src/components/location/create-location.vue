@@ -5,7 +5,7 @@
                 <label class="label">
                     Name
                     <span>
-                    <input class="input" type="text" v-model="name" required>
+                    <input class="input" v-model="name" required>
                 </span>
                 </label>
             </div>
@@ -13,9 +13,13 @@
                 <label class="label">
                     Place ID
                     <span>
-                    <input class="input" type="text" v-model="placeId" required>
+                    <input class="input" v-model="placeId" required>
                 </span>
                 </label>
+                <p class="help">
+                    <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/places-placeid-finder" target="_blank">
+                        Place ID finder</a>
+                </p>
             </div>
             <span>
                 <button class="button is-primary">Submit</button>

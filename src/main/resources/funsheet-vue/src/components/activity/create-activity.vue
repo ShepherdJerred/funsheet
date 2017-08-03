@@ -5,7 +5,7 @@
                 <label class="label">
                     Name
                     <span>
-                        <input class="input" type="text" v-model="name" required>
+                        <input class="input" v-model="name" required>
                     </span>
                 </label>
             </div>

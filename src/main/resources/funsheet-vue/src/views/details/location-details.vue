@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <place-view :placeId="location.placeId"></place-view>
+            <place-view :location="location"></place-view>
             <div class="card">
                 <div class="card-content">
                     <h3 class="title">Everything to do in {{ location.name }}</h3>
