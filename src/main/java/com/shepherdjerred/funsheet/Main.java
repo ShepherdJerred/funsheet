@@ -110,10 +110,11 @@ public class Main {
                 hikariConfig.setJdbcUrl(jdbcUrl);
                 hikariConfig.setUsername(jdbUri.getUserInfo().split(":")[0]);
                 hikariConfig.setPassword(jdbUri.getUserInfo().split(":")[1]);
+                hikariConfig.setMaximumPoolSize(4);
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-            
+
             return hikariConfig;
         } else {
             return new HikariConfig("hikari.properties");
