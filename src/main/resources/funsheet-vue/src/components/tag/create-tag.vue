@@ -33,6 +33,10 @@
         }, response => {
           console.log(response.body);
         });
+        this.resetForm();
+      },
+      resetForm: function () {
+        this.name = '';
       }
     }
   };

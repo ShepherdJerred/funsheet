@@ -1,13 +1,25 @@
 <template>
     <div>
-        <div class="container">
-            <type :type="type"></type>
-            <h3>All activities of type {{ type.name }}</h3>
-            <ul>
-                <template v-for="activity in activitiesWithType">
-                    <activity :activity="activity"></activity>
-                </template>
-            </ul>
+        <div class="hero">
+            <div class="hero-body">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                    <h1 class="title">
+                        {{ type.name }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="title">All activities of type {{ type.name }}</h3>
+                    <ul>
+                        <template v-for="activity in activitiesWithType">
+                            <activity :activity="activity"></activity><br>
+                        </template>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>

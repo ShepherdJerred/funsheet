@@ -51,6 +51,11 @@ public class LocationRouter implements Router {
 
             NewLocationPayload locationPayload = objectMapper.readValue(request.body(), NewLocationPayload.class);
 
+            if (!locationPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
             Location location = new Location(
                     locationPayload.getName(),
                     UUID.randomUUID(),

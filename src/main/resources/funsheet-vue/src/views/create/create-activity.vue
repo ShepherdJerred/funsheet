@@ -1,15 +1,15 @@
 <template>
     <div>
-        <section class="hero is-primary">
+        <div class="hero">
             <div class="hero-body">
-                <div class="container">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">
                         Create activity
                     </h1>
                 </div>
             </div>
-        </section>
-        <div class="container">
+        </div>
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
             <create-activity></create-activity>
         </div>
     </div>

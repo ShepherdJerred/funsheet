@@ -16,6 +16,9 @@ import CreateTag from '../views/create/create-tag.vue';
 import CreateType from '../views/create/create-type.vue';
 
 import AllActivities from '../views/list/all-activities.vue';
+import AllLocations from '../views/list/all-locations.vue';
+import AllTypes from '../views/list/all-types.vue';
+import AllTags from '../views/list/all-tags.vue';
 
 Vue.use(Router);
 
@@ -60,6 +63,21 @@ export default new Router({
       path: '/activity/all',
       name: 'All Activities',
       component: AllActivities
+    },
+    {
+      path: '/location/all',
+      name: 'All Activities',
+      component: AllLocations
+    },
+    {
+      path: '/type/all',
+      name: 'All Activities',
+      component: AllTypes
+    },
+    {
+      path: '/tag/all',
+      name: 'All Activities',
+      component: AllTags
     },
     {
       path: '/activity/:uuid',

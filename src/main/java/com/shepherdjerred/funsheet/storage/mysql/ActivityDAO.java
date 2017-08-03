@@ -21,14 +21,22 @@ public class ActivityDAO implements DAO<Activity> {
         fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
         this.store = store;
         // TODO don't create with every object (should be static?)
-        activityMapper = rs -> new Activity(rs.getString("name"),
-                UUID.fromString(rs.getString("activity_uuid")),
-                store.getType(UUID.fromString(rs.getString("type_uuid"))),
-                rs.getInt("rating"),
-                store.getLocation(UUID.fromString(rs.getString("location_uuid"))),
-                rs.getDouble("cost"),
-                rs.getString("description")
-        );
+        activityMapper = rs -> {
+
+            UUID type = rs.getString("type_uuid") == null ? null : UUID.fromString(rs.getString("type_uuid"));
+
+
+            UUID location = rs.getString("location_uuid") == null ? null : UUID.fromString(rs.getString("location_uuid"));
+
+            return new Activity(rs.getString("name"),
+                    UUID.fromString(rs.getString("activity_uuid")),
+                    store.getType(type),
+                    rs.getInt("rating"),
+                    store.getLocation(location),
+                    rs.getDouble("cost"),
+                    rs.getString("description")
+            );
+        };
     }
 
     @Override
@@ -56,9 +64,9 @@ public class ActivityDAO implements DAO<Activity> {
         query.update("INSERT INTO activity VALUES (?, ?, ?, ?, ?, ?, ?)")
                 .params(String.valueOf(activity.getUuid()),
                         activity.getName(),
-                        typeUuid,
+                        String.valueOf(typeUuid),
                         activity.getRating(),
-                        locationUuid,
+                        String.valueOf(locationUuid),
                         activity.getCost(),
                         activity.getDescription())
                 .run();

@@ -59,21 +59,21 @@
                         </div>
                     </div>
 
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="field is-grouped">
-                                <p class="control">
-                                    <router-link class="button"
-                                                 to="/login">
-                                    <span class="icon">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                        <span>Sign in</span>
-                                    </router-link>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="navbar-end">-->
+                        <!--<div class="navbar-item">-->
+                            <!--<div class="field is-grouped">-->
+                                <!--<p class="control">-->
+                                    <!--<router-link class="button"-->
+                                                 <!--to="/login">-->
+                                    <!--<span class="icon">-->
+                                        <!--<i class="fa fa-user"></i>-->
+                                    <!--</span>-->
+                                        <!--<span>Sign in</span>-->
+                                    <!--</router-link>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </nav>

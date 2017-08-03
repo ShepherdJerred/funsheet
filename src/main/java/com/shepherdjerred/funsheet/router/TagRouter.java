@@ -48,6 +48,11 @@ public class TagRouter implements Router {
 
             NewTagPayload tagPayload = objectMapper.readValue(request.body(), NewTagPayload.class);
 
+            if (!tagPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
             Tag tag = new Tag(
                     tagPayload.getName(),
                     UUID.randomUUID()

@@ -10,16 +10,23 @@
                 </label>
             </div>
             <template v-if="allTags.length > 0">
-                <label class="label">
-                    Tags
-                    <span class="select is-multiple">
-                    <select v-model="tags" multiple>
-                        <option v-for="tag in allTags" v-bind:value="tag.uuid">
-                            {{ tag.name }}
-                        </option>
-                    </select>
-                </span>
-                </label>
+                <div class="field">
+                    <label class="label">
+                        Tags
+                        <div class="control">
+                            <span class="select is-multiple">
+                                <select v-model="tags" multiple>
+                                    <option v-for="tag in allTags" v-bind:value="tag.uuid">
+                                        {{ tag.name }}
+                                    </option>
+                                </select>
+                            </span>
+                        </div>
+                    </label>
+                </div>
+            </template>
+            <template v-else>
+                <p>No tags exist</p>
             </template>
             <span>
                 <button class="button">Submit</button>
@@ -52,6 +59,11 @@
         }, response => {
           console.log(response.body);
         });
+        this.resetForm();
+      },
+      resetForm: function () {
+        this.name = '';
+        this.tags = [];
       }
     }
   };

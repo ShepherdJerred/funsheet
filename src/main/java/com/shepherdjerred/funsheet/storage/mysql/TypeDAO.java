@@ -56,7 +56,7 @@ public class TypeDAO implements DAO<Type> {
         type.getTags().forEach(tag -> {
             query.update("INSERT INTO type_tags VALUES (?, ?)")
                     .params(String.valueOf(type.getUuid()),
-                            tag.getUuid())
+                            String.valueOf(tag.getUuid()))
                     .run();
         });
     }

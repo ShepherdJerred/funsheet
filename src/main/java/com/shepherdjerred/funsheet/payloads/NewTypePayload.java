@@ -21,6 +21,8 @@ public class NewTypePayload implements Payload {
 
     @Override
     public boolean isValid() {
+        // Verify tags
+        // Verify name
         return true;
     }
 

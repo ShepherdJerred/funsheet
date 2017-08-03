@@ -15,6 +15,7 @@ public class NewTagPayload implements Payload {
 
     @Override
     public boolean isValid() {
-        return false;
+        // Check name
+        return true;
     }
 }

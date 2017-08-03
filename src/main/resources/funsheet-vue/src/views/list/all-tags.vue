@@ -4,28 +4,28 @@
             <div class="hero-body">
                 <div class="column is-half-desktop is-offset-one-quarter-desktop">
                     <h1 class="title">
-                        All Activities
+                        All Tags
                     </h1>
                 </div>
             </div>
         </div>
         <div class="column is-half-desktop is-offset-one-quarter-desktop">
-            <activity-table :activities="activities">
-            </activity-table>
+            <tag-table :tags="tags">
+            </tag-table>
         </div>
     </div>
 </template>
 
 <script>
-  import ActivityTable from '../../components/activity/activity-table.vue';
+  import TagTable from '../../components/tag/tag-table.vue';
 
   export default {
     components: {
-      ActivityTable
+      TagTable
     },
     computed: {
-      activities: function () {
-        return this.$store.state.activities;
+      tags: function () {
+        return this.$store.state.tags;
       }
     }
   };

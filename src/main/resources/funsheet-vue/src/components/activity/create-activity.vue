@@ -5,24 +5,24 @@
                 <label class="label">
                     Name
                     <span>
-                    <input class="input" type="text" v-model="name" required>
-                </span>
+                        <input class="input" type="text" v-model="name" required>
+                    </span>
                 </label>
             </div>
             <div class="field">
                 <label class="label">
                     Rating
                     <span>
-                    <input class="input" type="number" v-model="rating" required>
-                </span>
+                        <input class="input" type="number" v-model="rating" required min="1" max="5" value="1">
+                    </span>
                 </label>
             </div>
             <div class="field">
                 <label class="label">
                     Cost
                     <span>
-                    <input class="input" type="number" v-model="cost" required>
-                </span>
+                        <input class="input" type="number" v-model="cost" required min="0" max="5">
+                    </span>
                 </label>
             </div>
             <div class="field">
@@ -34,28 +34,42 @@
                 </label>
             </div>
             <template v-if="allTypes.length > 0">
-                <label class="label">
-                    Type
-                    <span class="select">
-                    <select v-model="type">
-                        <option v-for="type in allTypes" v-bind:value="type.uuid">
-                            {{ type.name }}
-                        </option>
-                    </select>
-                </span>
-                </label>
+                <div class="field">
+                    <label class="label">
+                        Type
+                        <div class="control">
+                            <div class="select">
+                                <select v-model="type">
+                                    <option v-for="type in allTypes" v-bind:value="type.uuid">
+                                        {{ type.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </template>
+            <template v-else>
+                <p>No types exist</p>
             </template>
             <template v-if="allLocations.length > 0">
-                <label class="label">
-                    Location
-                    <span>
-                    <select v-model="location">
-                        <option v-for="location in allLocations" v-bind:value="location.uuid">
-                            {{ location.name }}
-                        </option>
-                    </select>
-                </span>
-                </label>
+                <div class="field">
+                    <label class="label">
+                        Location
+                        <div class="control">
+                            <div class="select">
+                                <select v-model="location">
+                                    <option v-for="location in allLocations" v-bind:value="location.uuid">
+                                        {{ location.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </template>
+            <template v-else>
+                <p>No locations exist</p>
             </template>
             <span>
                 <button class="button">Submit</button>
@@ -69,7 +83,7 @@
     data: function () {
       return {
         name: '',
-        rating: 0,
+        rating: 1,
         cost: 0,
         description: '',
         type: null,
@@ -99,6 +113,15 @@
         }, response => {
           console.log(response.body);
         });
+        this.resetForm();
+      },
+      resetForm: function () {
+        this.name = '';
+        this.rating = 1;
+        this.cost = 0;
+        this.description = '';
+        this.type = null;
+        this.location = null;
       }
     }
   };

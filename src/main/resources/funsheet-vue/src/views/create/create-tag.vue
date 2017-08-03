@@ -1,15 +1,15 @@
 <template>
     <div>
-        <section class="hero is-primary">
+        <section class="hero">
             <div class="hero-body">
-                <div class="container">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">
                         Create tag
                     </h1>
                 </div>
             </div>
         </section>
-        <div class="container">
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
             <create-tag></create-tag>
         </div>
     </div>

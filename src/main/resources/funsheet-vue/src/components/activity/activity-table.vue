@@ -48,7 +48,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .activityTable {
+    .table {
         width: 100%;
     }
 </style>

@@ -1,10 +1,14 @@
 <template>
     <div>
-        <iframe class="map"
-                frameborder="0"
-                allowfullscreen
-                :src="src">
-        </iframe>
+        <div class="card">
+            <div class="card-content">
+                <iframe class="map"
+                        frameborder="0"
+                        allowfullscreen
+                        :src="src">
+                </iframe>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -27,7 +31,7 @@
 
 <style lang="scss" scoped>
     .map {
-        width: 600px;
+        width: 100%;
         height: 450px;
         border: 0;
     }

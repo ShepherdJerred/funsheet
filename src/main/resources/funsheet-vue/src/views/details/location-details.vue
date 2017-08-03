@@ -1,14 +1,26 @@
 <template>
     <div>
-        <div class="container">
-            <location :location="location"></location>
+        <div class="hero">
+            <div class="hero-body">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                    <h1 class="title">
+                        {{ location.name }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
             <place-view :placeId="location.placeId"></place-view>
-            <h3>Everything to do in {{ location.name }}</h3>
-            <ul>
-                <template v-for="activity in activitiesAtLocation">
-                    <activity :activity="activity"></activity>
-                </template>
-            </ul>
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="title">Everything to do in {{ location.name }}</h3>
+                    <ul>
+                        <template v-for="activity in activitiesAtLocation">
+                            <activity :activity="activity"></activity><br>
+                        </template>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>

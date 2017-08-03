@@ -14,7 +14,6 @@
             <template v-if="activity.location">
                 Location:
                 <router-link :to="'/location/' + activity.location.uuid">{{ activity.location.name }}</router-link>
-                <place-view :placeId="activity.location.placeId"></place-view>
             </template>
         </p>
     </div>

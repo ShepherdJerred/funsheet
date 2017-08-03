@@ -1,13 +1,25 @@
 <template>
     <div>
-        <div class="container">
-            <tag :tag="tag"></tag>
-            <h3>All types tagged {{ tag.name }}</h3>
-            <ul>
-                <template v-for="type in typesWithTag">
-                    <type :type="type"></type>
-                </template>
-            </ul>
+        <div class="hero">
+            <div class="hero-body">
+                <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                    <h1 class="title">
+                        {{ tag.name }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="title">All types tagged {{ tag.name }}</h3>
+                    <ul>
+                        <template v-for="type in typesWithTag">
+                            <type :type="type"></type><br>
+                        </template>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>

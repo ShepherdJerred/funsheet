@@ -52,6 +52,11 @@ public class TypeRouter implements Router {
 
             NewTypePayload typePayload = objectMapper.readValue(request.body(), NewTypePayload.class);
 
+            if (!typePayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
             List<Tag> tags = new ArrayList<>();
 
             typePayload.getTags().forEach(tagUuid -> tags.add(store.getTag(tagUuid)));

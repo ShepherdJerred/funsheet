@@ -4,28 +4,28 @@
             <div class="hero-body">
                 <div class="column is-half-desktop is-offset-one-quarter-desktop">
                     <h1 class="title">
-                        All Activities
+                        All Locations
                     </h1>
                 </div>
             </div>
         </div>
         <div class="column is-half-desktop is-offset-one-quarter-desktop">
-            <activity-table :activities="activities">
-            </activity-table>
+            <location-table :locations="locations">
+            </location-table>
         </div>
     </div>
 </template>
 
 <script>
-  import ActivityTable from '../../components/activity/activity-table.vue';
+  import LocationTable from '../../components/location/location-table.vue';
 
   export default {
     components: {
-      ActivityTable
+      LocationTable
     },
     computed: {
-      activities: function () {
-        return this.$store.state.activities;
+      locations: function () {
+        return this.$store.state.locations;
       }
     }
   };

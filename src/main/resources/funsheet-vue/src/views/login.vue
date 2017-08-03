@@ -1,9 +1,7 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <login></login>
-            </div>
+        <div class="column is-one-third-desktop is-offset-one-third-desktop">
+            <login></login>
         </div>
     </div>
 </template>

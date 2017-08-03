@@ -18,6 +18,9 @@ public class NewLocationPayload implements Payload {
 
     @Override
     public boolean isValid() {
-        return false;
+        // Check if name is taken
+        // Check if placeId exists
+
+        return true;
     }
 }

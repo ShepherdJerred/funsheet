@@ -2,6 +2,8 @@ package com.shepherdjerred.funsheet.router;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Activity;
+import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.objects.Type;
 import com.shepherdjerred.funsheet.payloads.NewActivityPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
@@ -50,12 +52,20 @@ public class ActivityRouter implements Router {
 
             NewActivityPayload activityPayload = objectMapper.readValue(request.body(), NewActivityPayload.class);
 
+            if (!activityPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
+            Type type = activityPayload.getType() == null ? null : store.getType(activityPayload.getType());
+            Location location = activityPayload.getLocation() == null ? null : store.getLocation(activityPayload.getLocation());
+
             Activity activity = new Activity(
                     activityPayload.getName(),
                     UUID.randomUUID(),
-                    store.getType(activityPayload.getType()),
+                    type,
                     activityPayload.getRating(),
-                    store.getLocation(activityPayload.getLocation()),
+                    location,
                     activityPayload.getCost(),
                     activityPayload.getDescription()
             );
