@@ -22,6 +22,8 @@ import AllTags from '../views/list/all-tags.vue';
 
 import EditActivity from '../views/edit/edit-activity.vue';
 
+import DeleteActivity from '../views/delete/delete-activity.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -105,6 +107,11 @@ export default new Router({
       path: '/activity/edit/:uuid',
       name: 'Edit Activity',
       component: EditActivity
+    },
+    {
+      path: '/activity/delete/:uuid',
+      name: 'Delete Activity',
+      component: DeleteActivity
     }
   ]
 });

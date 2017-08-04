@@ -32,39 +32,35 @@
                                     <i class="fa fa-star"></i>
                                 </template>
                             </div>
-                            <a class="card-footer-item">
-                                <template v-if="activity.type">
+                            <template v-if="activity.type">
+                                <a class="card-footer-item">
                                     <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}
                                     </router-link>
-                                </template>
-                            </a>
+                                </a>
+                            </template>
                         </footer>
                     </div>
 
                     <div class="card controls">
                         <footer class="card-footer">
                             <a class="card-footer-item">
-                                <template v-if="activity.type">
-                                    <router-link :to="'/activity/edit/' + activity.uuid">
-                                        Edit
-                                    </router-link>
-                                </template>
+                                <router-link :to="'/activity/edit/' + activity.uuid">
+                                    Edit
+                                </router-link>
                             </a>
                             <a class="card-footer-item">
-                                <template v-if="activity.type">
-                                    <router-link :to="'/activity/delete/' + activity.uuid">
-                                        Delete
-                                    </router-link>
-                                </template>
+                                <router-link :to="'/activity/delete/' + activity.uuid">
+                                    Delete
+                                </router-link>
                             </a>
                         </footer>
                     </div>
                 </div>
-                <div class="column">
-                    <template v-if="activity.location">
+                <template v-if="activity.location">
+                    <div class="column">
                         <place-view :location="activity.location"></place-view>
-                    </template>
-                </div>
+                    </div>
+                </template>
             </div>
         </div>
     </div>

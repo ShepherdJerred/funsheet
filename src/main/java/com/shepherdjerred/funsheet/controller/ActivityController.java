@@ -122,7 +122,7 @@ public class ActivityController implements Controller {
 
             store.deleteActivity(activityUuid);
 
-            return "";
+            return "DELETE";
         });
     }
 

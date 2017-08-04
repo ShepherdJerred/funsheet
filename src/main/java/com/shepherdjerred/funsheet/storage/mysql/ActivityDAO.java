@@ -77,7 +77,7 @@ public class ActivityDAO implements DAO<Activity> {
     public void drop(Activity activity) {
         Query query = fluentJdbc.query();
         query.update("DELETE FROM activity WHERE activity_uuid = ?")
-                .params(activity.getUuid())
+                .params(String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -85,7 +85,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET name = ? WHERE activity_uuid = ?")
                 .params(activity.getName(),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -93,7 +93,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET type_uuid = ? WHERE activity_uuid = ?")
                 .params(String.valueOf(activity.getType().getUuid()),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -101,7 +101,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET rating = ? WHERE activity_uuid = ?")
                 .params(activity.getRating(),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -109,7 +109,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET location_uuid = ? WHERE activity_uuid = ?")
                 .params(String.valueOf(activity.getLocation().getUuid()),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -117,7 +117,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET cost = ? WHERE activity_uuid = ?")
                 .params(activity.getCost(),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
@@ -125,7 +125,7 @@ public class ActivityDAO implements DAO<Activity> {
         Query query = fluentJdbc.query();
         query.update("UPDATE activity SET description = ? WHERE activity_uuid = ?")
                 .params(activity.getDescription(),
-                        activity.getUuid())
+                        String.valueOf(activity.getUuid()))
                 .run();
     }
 
