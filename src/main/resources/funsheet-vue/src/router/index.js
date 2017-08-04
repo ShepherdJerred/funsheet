@@ -21,6 +21,9 @@ import AllTypes from '../views/list/all-types.vue';
 import AllTags from '../views/list/all-tags.vue';
 
 import EditActivity from '../views/edit/edit-activity.vue';
+import EditLocation from '../views/edit/edit-location.vue';
+import EditType from '../views/edit/edit-type.vue';
+import EditTag from '../views/edit/edit-tag.vue';
 
 import DeleteActivity from '../views/delete/delete-activity.vue';
 
@@ -107,6 +110,21 @@ export default new Router({
       path: '/activity/edit/:uuid',
       name: 'Edit Activity',
       component: EditActivity
+    },
+    {
+      path: '/location/edit/:uuid',
+      name: 'Edit Location',
+      component: EditLocation
+    },
+    {
+      path: '/type/edit/:uuid',
+      name: 'Edit Type',
+      component: EditType
+    },
+    {
+      path: '/tag/edit/:uuid',
+      name: 'Edit Tag',
+      component: EditTag
     },
     {
       path: '/activity/delete/:uuid',

@@ -9,8 +9,10 @@
                 </div>
             </div>
         </div>
-        <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <create-activity></create-activity>
+        <div class="columns">
+            <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                <create-activity></create-activity>
+            </div>
         </div>
     </div>
 </template>
@@ -24,3 +26,7 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+    
+</style>

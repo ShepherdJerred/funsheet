@@ -1,12 +1,12 @@
 <template>
     <div>
-        <form v-on:submit.prevent="onSubmit">
+        <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
             <div class="field">
                 <label class="label">
                     Name
                     <span>
-                    <input class="input" v-model="name" required>
-                </span>
+                        <input class="input" v-model="name" required>
+                    </span>
                 </label>
             </div>
             <template v-if="allTags.length > 0">
@@ -29,7 +29,7 @@
                 <p>No tags exist</p>
             </template>
             <span>
-                <button class="button is-primary">Create</button>
+                <button class="button is-primary">Edit</button>
             </span>
         </form>
     </div>
@@ -37,20 +37,23 @@
 
 <script>
   export default {
+    props: {
+      type: {
+        type: Object,
+        required: true
+      }
+    },
     data: function () {
       return {
+        uuid: '',
         name: '',
         tags: []
       };
     },
-    computed: {
-      allTags: function () {
-        return this.$store.state.tags;
-      }
-    },
     methods: {
       onSubmit: function () {
-        this.$http.post('/api/types', {
+        this.$http.patch('/api/types/' + this.uuid, {
+          'uuid': this.uuid,
           'name': this.name,
           'tags': this.tags
         }).then(response => {
@@ -59,12 +62,12 @@
         }, response => {
           console.log(response.body);
         });
-        this.resetForm();
-      },
-      resetForm: function () {
-        this.name = '';
-        this.tags = [];
       }
+    },
+    created: function () {
+      this.uuid = this.type.uuid;
+      this.name = this.type.name;
+      this.tags = this.type.tags; // TODO this should be uuid
     }
   };
 </script>

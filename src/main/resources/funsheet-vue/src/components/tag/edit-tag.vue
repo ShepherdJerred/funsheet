@@ -5,12 +5,12 @@
                 <label class="label">
                     Name
                     <span>
-                    <input class="input" v-model="name" required>
-                </span>
+                        <input class="input" v-model="name" required>
+                    </span>
                 </label>
             </div>
             <span>
-                <button class="button is-primary">Create</button>
+                <button class="button is-primary">Edit</button>
             </span>
         </form>
     </div>
@@ -18,14 +18,22 @@
 
 <script>
   export default {
+    props: {
+      tag: {
+        type: Object,
+        required: true
+      }
+    },
     data: function () {
       return {
+        uuid: '',
         name: ''
       };
     },
     methods: {
       onSubmit: function () {
-        this.$http.post('/api/tags', {
+        this.$http.patch('/api/tags/' + this.uuid, {
+          'uuid': this.uuid,
           'name': this.name
         }).then(response => {
           console.log(response.body);
@@ -33,11 +41,11 @@
         }, response => {
           console.log(response.body);
         });
-        this.resetForm();
-      },
-      resetForm: function () {
-        this.name = '';
       }
+    },
+    created: function () {
+      this.uuid = this.tag.uuid;
+      this.name = this.tag.name;
     }
   };
 </script>

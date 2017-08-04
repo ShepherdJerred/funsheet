@@ -5,16 +5,16 @@
                 <label class="label">
                     Name
                     <span>
-                    <input class="input" v-model="name" required>
-                </span>
+                        <input class="input" v-model="name" required>
+                    </span>
                 </label>
             </div>
             <div class="field">
                 <label class="label">
                     Place ID
                     <span>
-                    <input class="input" v-model="placeId" required>
-                </span>
+                        <input class="input" v-model="name" required>
+                    </span>
                 </label>
                 <p class="help">
                     <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/places-placeid-finder" target="_blank">
@@ -22,7 +22,7 @@
                 </p>
             </div>
             <span>
-                <button class="button is-primary">Create</button>
+                <button class="button is-primary">Edit</button>
             </span>
         </form>
     </div>
@@ -30,15 +30,23 @@
 
 <script>
   export default {
+    props: {
+      location: {
+        type: Object,
+        required: true
+      }
+    },
     data: function () {
       return {
+        uuid: '',
         name: '',
         placeId: ''
       };
     },
     methods: {
       onSubmit: function () {
-        this.$http.post('/api/locations', {
+        this.$http.patch('/api/locations/' + this.uuid, {
+          'uuid': this.uuid,
           'name': this.name,
           'placeId': this.placeId
         }).then(response => {
@@ -47,12 +55,12 @@
         }, response => {
           console.log(response.body);
         });
-        this.resetForm();
-      },
-      resetForm: function () {
-        this.name = '';
-        this.placeId = '';
       }
+    },
+    created: function () {
+      this.uuid = this.location.uuid;
+      this.name = this.location.name;
+      this.placeId = this.location.placeId;
     }
   };
 </script>

@@ -74,7 +74,7 @@
                 <p>No locations exist</p>
             </template>
             <span>
-                <button class="button is-primary">Submit</button>
+                <button class="button is-primary">Create</button>
             </span>
         </form>
     </div>
