@@ -6,13 +6,13 @@
                     <h1 class="title">
                         Let's find something to do
                     </h1>
-                    <search-bar :searchOptions="searchOptions" v-on:search="updateResults"></search-bar>
+                    <search-bar v-on:input="updateSearchResults"></search-bar>
                 </div>
             </div>
         </div>
 
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <search-results :searchResults="searchResults" :query="query"></search-results>
+            <search-results :searchResults="searchResults" :query="searchQuery"></search-results>
         </div>
     </div>
 </template>
@@ -28,28 +28,14 @@
     },
     data: function () {
       return {
-        searchResults: [],
-        query: '',
-        searchOptions: {
-          shouldSort: true,
-          threshold: 0.6,
-          location: 0,
-          distance: 100,
-          maxPatternLength: 32,
-          minMatchCharLength: 1,
-          keys: [
-            'name',
-            'type.name',
-            'type.tags.name',
-            'location.name'
-          ]
-        }
+        searchQuery: '',
+        searchResults: []
       };
     },
     methods: {
-      updateResults: function (results, query) {
+      updateSearchResults: function (results, query) {
         this.searchResults = results;
-        this.query = query;
+        this.searchQuery = query;
       }
     }
   };
@@ -57,4 +43,5 @@
 
 <style lang="scss" scoped>
     @import '../scss/global';
+
 </style>

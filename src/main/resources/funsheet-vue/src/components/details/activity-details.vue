@@ -34,7 +34,8 @@
                             </div>
                             <template v-if="activity.type">
                                 <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Type Details', params: { 'uuid': activity.type.uuid } }">{{ activity.type.name }}
+                                    <router-link :to="{ name: 'Type Details', params: { 'uuid': activity.type.uuid } }">
+                                        {{ activity.type.name }}
                                     </router-link>
                                 </a>
                             </template>
@@ -73,12 +74,18 @@
     components: {
       PlaceView
     },
+    props: {
+      uuid: {
+        Type: String,
+        required: true
+      }
+    },
     computed: {
       activity: function () {
-        return this.activities.find(activity => activity.uuid === this.$route.params.uuid);
+        return this.activities[this.uuid];
       },
       activities: function () {
-        return this.$store.state.activities;
+        return this.$store.state.Activities.activities;
       }
     }
   };

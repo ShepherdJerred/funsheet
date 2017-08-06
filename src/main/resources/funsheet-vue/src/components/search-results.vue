@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="activities.length > 0">
+        <template v-if="numberOfActivities > 0">
             <template v-if="searchResults.length > 0">
                 <template v-for="result in searchResults">
                     <div class="card result">
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+  import Helpers from '../helpers';
+
   export default {
     props: {
       searchResults: {
@@ -72,7 +74,10 @@
     },
     computed: {
       activities: function () {
-        return this.$store.state.activities;
+        return this.$store.state.Activities.activities;
+      },
+      numberOfActivities: function () {
+        return Helpers.numberOfKeys(this.activities);
       }
     }
   };

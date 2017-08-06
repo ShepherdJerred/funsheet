@@ -7,13 +7,11 @@
 
 <script>
   import Navbar from './components/ui-navbar.vue';
-  import AppFooter from './components/ui-footer.vue';
 
   export default {
     name: 'App',
     components: {
-      Navbar,
-      AppFooter
+      Navbar
     },
     created: function () {
       this.$store.dispatch('getActivities');

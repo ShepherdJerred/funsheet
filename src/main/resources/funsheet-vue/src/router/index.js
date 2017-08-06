@@ -12,8 +12,8 @@ import TagDetails from '../components/details/tag-details.vue';
 
 import CreateActivity from '../components/create/create-activity.vue';
 import CreateLocation from '../components/create/create-location.vue';
-import CreateTag from '../components/create/create-tag.vue';
 import CreateType from '../components/create/create-type.vue';
+import CreateTag from '../components/create/create-tag.vue';
 
 import AllActivities from '../components/table/activity-table.vue';
 import AllLocations from '../components/table/location-table.vue';
@@ -89,47 +89,56 @@ export default new Router({
     {
       path: '/activity/:uuid',
       name: 'Activity Details',
-      component: ActivityDetails
+      component: ActivityDetails,
+      props: true
     },
     {
       path: '/location/:uuid',
       name: 'Location Details',
-      component: LocationDetails
+      component: LocationDetails,
+      props: true
     },
     {
       path: '/type/:uuid',
       name: 'Type Details',
-      component: TypeDetails
+      component: TypeDetails,
+      props: true
     },
     {
       path: '/tag/:uuid',
       name: 'Tag Details',
-      component: TagDetails
+      component: TagDetails,
+      props: true
     },
     {
       path: '/activity/edit/:uuid',
       name: 'Edit Activity',
-      component: EditActivity
+      component: EditActivity,
+      props: true
     },
     {
       path: '/location/edit/:uuid',
       name: 'Edit Location',
-      component: EditLocation
+      component: EditLocation,
+      props: true
     },
     {
       path: '/type/edit/:uuid',
       name: 'Edit Type',
-      component: EditType
+      component: EditType,
+      props: true
     },
     {
       path: '/tag/edit/:uuid',
       name: 'Edit Tag',
-      component: EditTag
+      component: EditTag,
+      props: true
     },
     {
       path: '/activity/delete/:uuid',
       name: 'Delete Activity',
-      component: DeleteActivity
+      component: DeleteActivity,
+      props: true
     }
   ]
 });

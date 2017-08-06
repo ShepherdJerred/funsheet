@@ -2,11 +2,13 @@ import Vue from 'vue';
 import router from './router';
 import store from './store';
 import Buefy from 'buefy';
+
 import WebFontLoader from 'webfontloader';
+
 import 'font-awesome/css/font-awesome.css';
 import 'buefy/lib/buefy.css';
 
-import App from './App';
+import App from './App.vue';
 
 WebFontLoader.load({
   google: {

@@ -48,23 +48,30 @@
 
 <script>
   import PlaceView from '../place-map.vue';
+  import Helper from '../../helpers';
 
   export default {
     components: {
       PlaceView
     },
+    props: {
+      uuid: {
+        Type: String,
+        required: true
+      }
+    },
     computed: {
       activitiesAtLocation: function () {
-        return this.activities.filter(activity => activity.location.uuid === this.$route.params.uuid);
+        return Helper.objectToArray(this.activities).filter(activity => activity.location.uuid === this.location.uuid);
       },
       activities: function () {
-        return this.$store.state.activities;
+        return this.$store.state.Activities.activities;
       },
       location: function () {
-        return this.locations.find(location => location.uuid === this.$route.params.uuid);
+        return this.locations[this.uuid];
       },
       locations: function () {
-        return this.$store.state.locations;
+        return this.$store.state.Locations.locations;
       }
     }
   };

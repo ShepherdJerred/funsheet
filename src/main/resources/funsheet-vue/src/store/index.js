@@ -16,5 +16,6 @@ export default new Vuex.Store({
     Locations,
     Types,
     Tags
-  }
+  },
+  strict: process.env.NODE_ENV !== 'production'
 });
