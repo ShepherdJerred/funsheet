@@ -59,12 +59,7 @@
 </template>
 
 <script>
-  import Activity from './activity/activity.vue';
-
   export default {
-    components: {
-      Activity
-    },
     props: {
       searchResults: {
         type: Array,

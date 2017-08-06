@@ -1,31 +1,31 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '../views/home.vue';
-import Login from '../views/login.vue';
-import Register from '../views/register.vue';
+import Home from '../components/home.vue';
+import Login from '../components/login.vue';
+import Register from '../components/register.vue';
 
-import ActivityDetails from '../views/details/activity-details.vue';
-import LocationDetails from '../views/details/location-details.vue';
-import TypeDetails from '../views/details/type-details.vue';
-import TagDetails from '../views/details/tag-details.vue';
+import ActivityDetails from '../components/details/activity-details.vue';
+import LocationDetails from '../components/details/location-details.vue';
+import TypeDetails from '../components/details/type-details.vue';
+import TagDetails from '../components/details/tag-details.vue';
 
-import CreateActivity from '../views/create/create-activity.vue';
-import CreateLocation from '../views/create/create-location.vue';
-import CreateTag from '../views/create/create-tag.vue';
-import CreateType from '../views/create/create-type.vue';
+import CreateActivity from '../components/create/create-activity.vue';
+import CreateLocation from '../components/create/create-location.vue';
+import CreateTag from '../components/create/create-tag.vue';
+import CreateType from '../components/create/create-type.vue';
 
-import AllActivities from '../views/list/all-activities.vue';
-import AllLocations from '../views/list/all-locations.vue';
-import AllTypes from '../views/list/all-types.vue';
-import AllTags from '../views/list/all-tags.vue';
+import AllActivities from '../components/table/activity-table.vue';
+import AllLocations from '../components/table/location-table.vue';
+import AllTypes from '../components/table/type-table.vue';
+import AllTags from '../components/table/tag-table.vue';
 
-import EditActivity from '../views/edit/edit-activity.vue';
-import EditLocation from '../views/edit/edit-location.vue';
-import EditType from '../views/edit/edit-type.vue';
-import EditTag from '../views/edit/edit-tag.vue';
+import EditActivity from '../components/edit/edit-activity.vue';
+import EditLocation from '../components/edit/edit-location.vue';
+import EditType from '../components/edit/edit-type.vue';
+import EditTag from '../components/edit/edit-tag.vue';
 
-import DeleteActivity from '../views/delete/delete-activity.vue';
+import DeleteActivity from '../components/delete/delete-activity.vue';
 
 Vue.use(Router);
 

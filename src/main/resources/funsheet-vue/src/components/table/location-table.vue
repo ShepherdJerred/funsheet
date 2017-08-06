@@ -1,0 +1,49 @@
+<template>
+    <div>
+        <div class="hero is-primary">
+            <div class="hero-body">
+                <div class="column is-half-desktop is-offset-one-quarter-desktop">
+                    <h1 class="title">
+                        All Locations
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="column is-half-desktop is-offset-one-quarter-desktop">
+            <table class="table is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Place ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                <template v-for="location in locations">
+                    <tr>
+                        <td>
+                            <router-link :to="'/location/' + location.uuid">{{ location.name }}</router-link>
+                        </td>
+                        <td>
+                            {{ location.placeId }}
+                        </td>
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script>
+  export default {
+    computed: {
+      locations: function () {
+        return this.$store.state.locations;
+      }
+    }
+  };
+</script>
+
+<style lang="scss" scoped>
+
+</style>
