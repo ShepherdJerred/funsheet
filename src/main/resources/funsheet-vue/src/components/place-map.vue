@@ -10,7 +10,7 @@
             </div>
             <div class="card-content">
                 <div class="content">
-                    <router-link :to="'/location/' + location.uuid"><h1 class="title">{{ location.name }}</h1></router-link>
+                    <router-link :to="{ name: 'Location Details', params: { 'uuid': location.uuid } }"><h1 class="title">{{ location.name }}</h1></router-link>
                 </div>
             </div>
         </div>

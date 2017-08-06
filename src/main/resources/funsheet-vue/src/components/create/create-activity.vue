@@ -125,7 +125,7 @@
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getActivities');
-          this.$router.push('/');
+          this.$router.push({ name: 'Home' });
         }, response => {
           console.log(response.body);
         });

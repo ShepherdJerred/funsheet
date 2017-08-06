@@ -68,22 +68,22 @@ export default new Router({
     },
     {
       path: '/activity/all',
-      name: 'All Activities',
+      name: 'Activity Table',
       component: AllActivities
     },
     {
       path: '/location/all',
-      name: 'All Locations',
+      name: 'Location Table',
       component: AllLocations
     },
     {
       path: '/type/all',
-      name: 'All Types',
+      name: 'Type Table',
       component: AllTypes
     },
     {
       path: '/tag/all',
-      name: 'All Tags',
+      name: 'Tag Table',
       component: AllTags
     },
     {

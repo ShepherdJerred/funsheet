@@ -26,12 +26,12 @@
                     <div class="card controls">
                         <footer class="card-footer">
                             <a class="card-footer-item">
-                                <router-link :to="'/location/edit/' + location.uuid">
+                                <router-link :to="{ name: 'Edit Location', params: { 'uuid': location.uuid } }">
                                     Edit
                                 </router-link>
                             </a>
                             <a class="card-footer-item">
-                                <router-link :to="'/location/delete/' + location.uuid">
+                                <router-link :to="{ name: 'Delete Location', params: { 'uuid': location.uuid } }">
                                     Delete
                                 </router-link>
                             </a>

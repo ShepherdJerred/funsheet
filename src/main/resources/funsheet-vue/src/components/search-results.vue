@@ -5,7 +5,7 @@
                 <template v-for="result in searchResults">
                     <div class="card result">
                         <header class="card-header">
-                            <router-link class="card-header-title" :to="'activity/' + result.uuid">
+                            <router-link class="card-header-title" :to="{ name: 'Activity Details', params: { 'uuid': result.uuid } }">
                                 {{ result.name }}
                             </router-link>
                         </header>
@@ -30,7 +30,7 @@
                         </span>
                             <template v-if="result.location">
                         <span class="card-footer-item">
-                            <router-link :to="'/location/' + result.location.uuid" class="card-footer-item">
+                            <router-link :to="{ name: 'Location Details', params: { 'uuid': result.location.uuid } }" class="card-footer-item">
                                 {{ result.location.name }}
                             </router-link>
                         </span>

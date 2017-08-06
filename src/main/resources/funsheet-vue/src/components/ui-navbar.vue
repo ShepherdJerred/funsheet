@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar">
             <div class="navbar-brand">
-                <a class="navbar-item" href="/">
+                <a class="navbar-item">
                     Funsheet
                 </a>
                 <div class="navbar-burger burger" v-bind:class="{ 'is-active': isActive }" data-target="navbar"
@@ -15,7 +15,7 @@
 
             <div id="navbar" class="navbar-menu" v-bind:class="{ 'is-active': isActive }">
                 <div class="navbar-start">
-                    <router-link class="navbar-item" to="/" active-class="is-active" v-on:click="toggleActive()">
+                    <router-link class="navbar-item" :to="{ name: 'Home' }" active-class="is-active" v-on:click="toggleActive()">
                         Home
                     </router-link>
                     <div class="navbar-item has-dropdown is-hoverable">
@@ -23,19 +23,19 @@
                             Create
                         </a>
                         <div class="navbar-dropdown">
-                            <router-link class="navbar-item" to="/activity/create" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Create Activity' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Activity
                             </router-link>
-                            <router-link class="navbar-item" to="/location/create" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Create Location' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Location
                             </router-link>
-                            <router-link class="navbar-item" to="/type/create" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Create Type' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Type
                             </router-link>
-                            <router-link class="navbar-item" to="/tag/create" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Create Tag' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Tag
                             </router-link>
@@ -46,19 +46,19 @@
                             View all
                         </a>
                         <div id="blogDropdown" class="navbar-dropdown">
-                            <router-link class="navbar-item" to="/activity/all" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Activity Table' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Activities
                             </router-link>
-                            <router-link class="navbar-item" to="/location/all" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Location Table' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Locations
                             </router-link>
-                            <router-link class="navbar-item" to="/type/all" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Type Table' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Types
                             </router-link>
-                            <router-link class="navbar-item" to="/tag/all" active-class="is-active"
+                            <router-link class="navbar-item" :to="{ name: 'Tag Table' }" active-class="is-active"
                                          v-on:click.native="toggleActive()">
                                 Tags
                             </router-link>

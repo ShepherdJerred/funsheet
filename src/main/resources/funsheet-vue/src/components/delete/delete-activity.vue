@@ -42,7 +42,7 @@
       onSubmit: function () {
         this.$http.delete('/api/activities/' + this.activity.uuid).then(response => {
           this.$store.dispatch('getActivities');
-          this.$router.push('/');
+          this.$router.push({ name: 'Home' });
         }, response => {
           console.log(response.body);
         });

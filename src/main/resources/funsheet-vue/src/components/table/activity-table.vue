@@ -24,13 +24,13 @@
                 <template v-for="activity in activities">
                     <tr>
                         <td>
-                            <router-link :to="'/activity/' + activity.uuid">
+                            <router-link :to="{ name: 'Activity Details', params: { 'uuid': activity.uuid } }">
                                 {{ activity.name }}
                             </router-link>
                         </td>
                         <td>
                             <template v-if="activity.type">
-                                <router-link :to="'/type/' + activity.type.uuid">
+                                <router-link :to="{ name: 'Type Details', params: { 'uuid': activity.type.uuid } }">
                                     {{ activity.type.name }}
                                 </router-link>
                             </template>
@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <template v-if="activity.location">
-                                <router-link :to="'/location/' + activity.location.uuid">
+                                <router-link :to="{ name: 'Location Details', params: { 'uuid': activity.location.uuid } }">
                                     {{ activity.location.name }}
                                 </router-link>
                             </template>

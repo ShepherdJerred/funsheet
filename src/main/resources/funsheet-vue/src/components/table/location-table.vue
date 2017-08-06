@@ -21,7 +21,7 @@
                 <template v-for="location in locations">
                     <tr>
                         <td>
-                            <router-link :to="'/location/' + location.uuid">{{ location.name }}</router-link>
+                            <router-link :to="{ name: 'Location Details', params: { 'uuid': location.uuid } }">{{ location.name }}</router-link>
                         </td>
                         <td>
                             {{ location.placeId }}

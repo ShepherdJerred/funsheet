@@ -20,7 +20,7 @@
                 <template v-for="tag in tags">
                     <tr>
                         <td>
-                            <router-link :to="'/tag/' + tag.uuid">{{ tag.name }}</router-link>
+                            <router-link :to="{ name: 'Tag Details', params: { 'uuid': tag.uuid } }">{{ tag.name }}</router-link>
                         </td>
                     </tr>
                 </template>

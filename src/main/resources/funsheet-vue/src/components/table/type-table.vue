@@ -21,7 +21,7 @@
                 <template v-for="type in types">
                     <tr>
                         <td>
-                            <router-link :to="'/type/' + type.uuid">{{ type.name }}</router-link>
+                            <router-link :to="{ name: 'Type Details', params: { 'uuid': type.uuid } }">{{ type.name }}</router-link>
                         </td>
                         <td>
                             <template v-for="tag in type.tags">

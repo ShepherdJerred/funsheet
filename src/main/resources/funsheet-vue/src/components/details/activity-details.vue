@@ -34,7 +34,7 @@
                             </div>
                             <template v-if="activity.type">
                                 <a class="card-footer-item">
-                                    <router-link :to="'/type/' + activity.type.uuid">{{ activity.type.name }}
+                                    <router-link :to="{ name: 'Type Details', params: { 'uuid': activity.type.uuid } }">{{ activity.type.name }}
                                     </router-link>
                                 </a>
                             </template>
@@ -44,12 +44,12 @@
                     <div class="card controls">
                         <footer class="card-footer">
                             <a class="card-footer-item">
-                                <router-link :to="'/activity/edit/' + activity.uuid">
+                                <router-link :to="{ name: 'Edit Activity', params: { 'uuid': activity.uuid } }">
                                     Edit
                                 </router-link>
                             </a>
                             <a class="card-footer-item">
-                                <router-link :to="'/activity/delete/' + activity.uuid">
+                                <router-link :to="{ name: 'Delete Activity', params: { 'uuid': activity.uuid } }">
                                     Delete
                                 </router-link>
                             </a>
