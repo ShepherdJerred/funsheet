@@ -92,7 +92,15 @@
 </template>
 
 <script>
+  import Helper from '../../helpers';
+
   export default {
+    props: {
+      uuid: {
+        Type: String,
+        required: true
+      }
+    },
     data: function () {
       return {
         uuid: '',
@@ -106,16 +114,16 @@
     },
     computed: {
       activity: function () {
-        return this.activities.find(activity => activity.uuid === this.$route.params.uuid);
+        return this.activities[this.uuid];
       },
       activities: function () {
         return this.$store.state.activities;
       },
       allTypes: function () {
-        return this.$store.state.types;
+        return Helper.objectToArray(this.$store.state.types);
       },
       allLocations: function () {
-        return this.$store.state.locations;
+        return Helper.objectToArray(this.$store.state.locations);
       }
     },
     methods: {

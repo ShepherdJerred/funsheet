@@ -47,6 +47,8 @@
 </template>
 
 <script>
+  import Helper from '../../helpers';
+
   export default {
     data: function () {
       return {
@@ -57,13 +59,13 @@
     },
     computed: {
       allTags: function () {
-        return this.$store.state.tags;
+        return Helper.objectToArray(this.$store.state.Tags.tags);
       },
       type: function () {
-        return this.types.find(type => type.uuid === this.$route.params.uuid);
+        return this.types[this.uuid];
       },
       types: function () {
-        return this.$store.state.types;
+        return this.$store.state.Types.types;
       }
     },
     methods: {
@@ -83,7 +85,7 @@
     created: function () {
       this.uuid = this.type.uuid;
       this.name = this.type.name;
-      this.tags = this.type.tags; // TODO this should be uuid
+      this.tags = this.type.tags; // TODO this should be the tag uuid, not the tag object
     }
   };
 </script>

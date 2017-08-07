@@ -94,6 +94,8 @@
 </template>
 
 <script>
+  import Helper from '../../helpers';
+
   export default {
     data: function () {
       return {
@@ -107,10 +109,10 @@
     },
     computed: {
       allTypes: function () {
-        return this.$store.state.types;
+        return Helper.objectToArray(this.$store.state.types);
       },
       allLocations: function () {
-        return this.$store.state.locations;
+        return Helper.objectToArray(this.$store.state.locations);
       }
     },
     methods: {

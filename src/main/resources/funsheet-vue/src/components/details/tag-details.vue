@@ -44,21 +44,29 @@
 </template>
 
 <script>
+  import Helper from '../../helpers';
+
   export default {
+    props: {
+      uuid: {
+        Type: String,
+        required: true
+      }
+    },
     computed: {
       typesWithTag: function () {
-        return this.types.filter(type => {
-          return type.tags.find(tag => tag.uuid === this.$route.params.uuid);
+        return Helper.objectToArray(this.types).filter(type => {
+          return Helper.objectToArray(type.tags).find(tag => tag.uuid === this.uuid);
         });
       },
       types: function () {
-        return this.$store.state.types;
+        return this.$store.state.Types.types;
       },
       tag: function () {
-        return this.tags.find(tag => tag.uuid === this.$route.params.uuid);
+        return this.tags[this.uuid];
       },
       tags: function () {
-        return this.$store.state.tags;
+        return this.$store.state.Tags.tags;
       }
     }
   };

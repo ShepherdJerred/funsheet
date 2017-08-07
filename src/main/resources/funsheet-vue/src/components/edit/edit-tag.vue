@@ -30,8 +30,8 @@
 <script>
   export default {
     props: {
-      tag: {
-        type: Object,
+      uuid: {
+        Type: String,
         required: true
       }
     },
@@ -43,10 +43,10 @@
     },
     computed: {
       tag: function () {
-        return this.tags.find(tag => tag.uuid === this.$route.params.uuid);
+        return this.tags[this.uuid];
       },
       tags: function () {
-        return this.$store.state.tags;
+        return this.$store.state.Tags.tags;
       }
     },
     methods: {

@@ -47,6 +47,8 @@
 </template>
 
 <script>
+  import Helper from '../../helpers';
+
   export default {
     data: function () {
       return {
@@ -56,7 +58,7 @@
     },
     computed: {
       allTags: function () {
-        return this.$store.state.tags;
+        return Helper.objectToArray(this.$store.state.Tags.tags);
       }
     },
     methods: {

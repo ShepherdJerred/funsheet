@@ -66,7 +66,7 @@
   export default {
     computed: {
       activities: function () {
-        return this.$store.state.activities;
+        return this.$store.state.Activities.activities;
       }
     }
   };

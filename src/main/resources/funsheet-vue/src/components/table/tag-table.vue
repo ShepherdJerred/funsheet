@@ -34,7 +34,7 @@
   export default {
     computed: {
       tags: function () {
-        return this.$store.state.tags;
+        return this.$store.state.Tags.tags;
       }
     }
   };

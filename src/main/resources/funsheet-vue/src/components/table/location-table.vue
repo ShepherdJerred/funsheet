@@ -38,7 +38,7 @@
   export default {
     computed: {
       locations: function () {
-        return this.$store.state.locations;
+        return this.$store.state.Locations.locations;
       }
     }
   };

@@ -40,7 +40,7 @@
   export default {
     computed: {
       types: function () {
-        return this.$store.state.types;
+        return this.$store.state.Types.types;
       }
     }
   };

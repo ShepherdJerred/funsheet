@@ -43,8 +43,8 @@
 <script>
   export default {
     props: {
-      location: {
-        type: Object,
+      uuid: {
+        Type: String,
         required: true
       }
     },
@@ -57,10 +57,10 @@
     },
     computed: {
       location: function () {
-        return this.locations.find(location => location.uuid === this.$route.params.uuid);
+        return this.locations[this.uuid];
       },
       locations: function () {
-        return this.$store.state.locations;
+        return this.$store.state.Locations.locations;
       }
     },
     methods: {
