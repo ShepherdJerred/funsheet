@@ -62,7 +62,9 @@
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "favicons-webpack-plugin": "0.0.7"
+  },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
