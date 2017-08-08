@@ -12,7 +12,7 @@
         </div>
 
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <search-results :searchResults="searchResults" :query="searchQuery"></search-results>
+            <search-results :searchResults="searchResults" :searchQuery="searchQuery"></search-results>
         </div>
     </div>
 </template>
@@ -22,6 +22,7 @@
   import SearchResults from './search-results.vue';
 
   export default {
+    name: 'App-Home',
     components: {
       SearchBar,
       SearchResults

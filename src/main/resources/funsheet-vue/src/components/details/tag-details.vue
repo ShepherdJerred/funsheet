@@ -47,6 +47,7 @@
   import Helper from '../../helpers';
 
   export default {
+    name: 'Tag-Details',
     props: {
       uuid: {
         Type: String,

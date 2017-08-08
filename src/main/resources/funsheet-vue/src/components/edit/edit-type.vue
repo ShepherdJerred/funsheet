@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
+            <form v-on:submit.prevent="onSubmit">
                 <div class="field">
                     <label class="label">
                         Name
@@ -50,9 +50,15 @@
   import Helper from '../../helpers';
 
   export default {
+    name: 'Edit-Type',
+    props: {
+      uuid: {
+        type: String,
+        required: true
+      }
+    },
     data: function () {
       return {
-        uuid: '',
         name: '',
         tags: []
       };
@@ -83,7 +89,6 @@
       }
     },
     created: function () {
-      this.uuid = this.type.uuid;
       this.name = this.type.name;
       this.tags = this.type.tags; // TODO this should be the tag uuid, not the tag object
     }

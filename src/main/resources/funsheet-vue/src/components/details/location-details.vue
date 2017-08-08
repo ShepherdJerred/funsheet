@@ -51,6 +51,7 @@
   import Helper from '../../helpers';
 
   export default {
+    name: 'Location-Details',
     components: {
       PlaceView
     },

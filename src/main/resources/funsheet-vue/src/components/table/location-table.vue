@@ -36,6 +36,7 @@
 
 <script>
   export default {
+    name: 'Location-Table',
     computed: {
       locations: function () {
         return this.$store.state.Locations.locations;

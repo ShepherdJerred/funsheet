@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
+            <form v-on:submit.prevent="onSubmit">
                 <div class="field">
                     <label class="label">
                         Name
@@ -95,6 +95,7 @@
   import Helper from '../../helpers';
 
   export default {
+    name: 'Edit-Activity',
     props: {
       uuid: {
         Type: String,
@@ -103,7 +104,6 @@
     },
     data: function () {
       return {
-        uuid: '',
         name: '',
         rating: 1,
         cost: 0,
@@ -117,13 +117,13 @@
         return this.activities[this.uuid];
       },
       activities: function () {
-        return this.$store.state.activities;
+        return this.$store.state.Activities.activities;
       },
       allTypes: function () {
-        return Helper.objectToArray(this.$store.state.types);
+        return Helper.objectToArray(this.$store.state.Types.types);
       },
       allLocations: function () {
-        return Helper.objectToArray(this.$store.state.locations);
+        return Helper.objectToArray(this.$store.state.Locations.locations);
       }
     },
     methods: {
@@ -145,7 +145,6 @@
       }
     },
     created: function () {
-      this.uuid = this.activity.uuid;
       this.name = this.activity.name;
       this.rating = this.activity.rating;
       this.cost = this.activity.cost;

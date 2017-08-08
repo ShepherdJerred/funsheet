@@ -71,6 +71,7 @@
   import PlaceView from '../place-map.vue';
 
   export default {
+    name: 'Activity-Details',
     components: {
       PlaceView
     },

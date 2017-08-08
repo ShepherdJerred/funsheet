@@ -64,6 +64,7 @@
 
 <script>
   export default {
+    name: 'Activity-Table',
     computed: {
       activities: function () {
         return this.$store.state.Activities.activities;

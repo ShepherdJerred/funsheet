@@ -32,6 +32,7 @@
 
 <script>
   export default {
+    name: 'Tag-Table',
     computed: {
       tags: function () {
         return this.$store.state.Tags.tags;

@@ -14,8 +14,7 @@
   import Helpers from '../helpers';
 
   export default {
-    query: '',
-    results: [],
+    name: 'Search-Bar',
     data: function () {
       return {
         query: '',

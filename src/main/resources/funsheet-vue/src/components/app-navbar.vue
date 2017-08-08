@@ -89,6 +89,7 @@
 
 <script>
   export default {
+    name: 'Navbar',
     data: function () {
       return {
         isActive: false

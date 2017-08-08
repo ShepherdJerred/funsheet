@@ -50,6 +50,7 @@
   import Helper from '../../helpers';
 
   export default {
+    name: 'Create-Type',
     data: function () {
       return {
         name: '',

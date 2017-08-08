@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form v-on:submit.prevent="onSubmit" class="pure-form pure-form-stacked">
+            <form v-on:submit.prevent="onSubmit">
                 <div class="field">
                     <label class="label">
                         Name
@@ -42,6 +42,7 @@
 
 <script>
   export default {
+    name: 'Edit-Location',
     props: {
       uuid: {
         Type: String,
@@ -50,7 +51,6 @@
     },
     data: function () {
       return {
-        uuid: '',
         name: '',
         placeId: ''
       };
@@ -78,7 +78,6 @@
       }
     },
     created: function () {
-      this.uuid = this.location.uuid;
       this.name = this.location.name;
       this.placeId = this.location.placeId;
     }

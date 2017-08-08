@@ -19,6 +19,7 @@
 
 <script>
     export default {
+      name: 'Place-Map',
       props: {
         location: {
           type: Object,

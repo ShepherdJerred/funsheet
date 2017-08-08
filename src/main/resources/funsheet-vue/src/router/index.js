@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Home from '../components/home.vue';
-import Login from '../components/login.vue';
-import Register from '../components/register.vue';
+import Home from '../components/app-home.vue';
+import Login from '../components/user-login.vue';
+import Register from '../components/user-register.vue';
+
+import Error404 from '../components/error-404.vue';
 
 import ActivityDetails from '../components/details/activity-details.vue';
 import LocationDetails from '../components/details/location-details.vue';
@@ -26,6 +28,9 @@ import EditType from '../components/edit/edit-type.vue';
 import EditTag from '../components/edit/edit-tag.vue';
 
 import DeleteActivity from '../components/delete/delete-activity.vue';
+import DeleteLocation from '../components/delete/delete-location.vue';
+import DeleteType from '../components/delete/delete-type.vue';
+import DeleteTag from '../components/delete/delete-tag.vue';
 
 Vue.use(Router);
 
@@ -139,6 +144,29 @@ export default new Router({
       name: 'Delete Activity',
       component: DeleteActivity,
       props: true
+    },
+    {
+      path: '/location/delete/:uuid',
+      name: 'Delete Location',
+      component: DeleteLocation,
+      props: true
+    },
+    {
+      path: '/type/delete/:uuid',
+      name: 'Delete Type',
+      component: DeleteType,
+      props: true
+    },
+    {
+      path: '/tag/delete/:uuid',
+      name: 'Delete Tag',
+      component: DeleteTag,
+      props: true
+    },
+    {
+      path: '*',
+      name: '404',
+      component: Error404
     }
   ]
 });
