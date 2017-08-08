@@ -63,7 +63,7 @@
     },
     computed: {
       activitiesAtLocation: function () {
-        return Helper.objectToArray(this.activities).filter(activity => activity.location.uuid === this.uuid);
+        return Helper.objectToArray(this.activities).filter(activity => activity.location && activity.location.uuid === this.uuid);
       },
       activities: function () {
         return this.$store.state.Activities.activities;

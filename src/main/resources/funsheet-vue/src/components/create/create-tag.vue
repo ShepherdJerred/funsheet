@@ -20,7 +20,8 @@
                     </label>
                 </div>
                 <span>
-                <button class="button is-primary">Create</button>
+                    <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
+                <button class="button is-success">Create</button>
             </span>
             </form>
         </div>
@@ -42,13 +43,10 @@
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getTags');
+          this.$router.push({name: 'Tag Details', params: {'uuid': response.body.uuid}});
         }, response => {
           console.log(response.body);
         });
-        this.resetForm();
-      },
-      resetForm: function () {
-        this.name = '';
       }
     }
   };

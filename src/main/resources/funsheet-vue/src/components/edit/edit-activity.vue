@@ -84,7 +84,8 @@
                     <p>No locations exist</p>
                 </template>
                 <span>
-                <button class="button is-primary">Edit</button>
+                    <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
+                <button class="button is-success">Edit</button>
             </span>
             </form>
         </div>
@@ -139,6 +140,7 @@
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getActivities');
+          this.$router.push({name: 'Activity Details', params: {'uuid': this.uuid}});
         }, response => {
           console.log(response.body);
         });

@@ -26,7 +26,7 @@
                         <input class="input" type="number" v-model="rating" required min="1" max="5">
                     </span>
                     </label>
-                    <p class="help">Rating between 1-5</p>
+                    <p class="help">Rating from 1 to 5</p>
                 </div>
                 <div class="field">
                     <label class="label">
@@ -35,7 +35,7 @@
                         <input class="input" type="number" v-model="cost" required min="0" max="5">
                     </span>
                     </label>
-                    <p class="help">Cost between 0-5</p>
+                    <p class="help">Cost from 0 to 5</p>
                 </div>
                 <div class="field">
                     <label class="label">
@@ -45,7 +45,7 @@
                 </span>
                     </label>
                 </div>
-                <template v-if="allTypes.length > 0">
+                <template v-if="Object.keys(allTypes).length > 0">
                     <div class="field">
                         <label class="label">
                             Type
@@ -64,7 +64,7 @@
                 <template v-else>
                     <p>No types exist</p>
                 </template>
-                <template v-if="allLocations.length > 0">
+                <template v-if="Object.keys(allLocations).length > 0">
                     <div class="field">
                         <label class="label">
                             Location
@@ -84,7 +84,8 @@
                     <p>No locations exist</p>
                 </template>
                 <span>
-                <button class="button is-primary">Create</button>
+                    <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
+                <button class="button is-success">Create</button>
             </span>
             </form>
         </div>
@@ -92,8 +93,6 @@
 </template>
 
 <script>
-  import Helper from '../../helpers';
-
   export default {
     name: 'Create-Activity',
     data: function () {
@@ -107,11 +106,11 @@
       };
     },
     computed: {
-      allTypes: function () {
-        return Helper.objectToArray(this.$store.state.Types.types);
-      },
       allLocations: function () {
-        return Helper.objectToArray(this.$store.state.Locations.locations);
+        return this.$store.state.Locations.locations;
+      },
+      allTypes: function () {
+        return this.$store.state.Types.types;
       }
     },
     methods: {
@@ -126,19 +125,10 @@
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getActivities');
-          this.$router.push({name: 'Home'});
+          this.$router.push({name: 'Activity Details', params: {'uuid': response.body.uuid}});
         }, response => {
           console.log(response.body);
         });
-        this.resetForm();
-      },
-      resetForm: function () {
-        this.name = '';
-        this.rating = 1;
-        this.cost = 0;
-        this.description = '';
-        this.type = null;
-        this.location = null;
       }
     }
   };

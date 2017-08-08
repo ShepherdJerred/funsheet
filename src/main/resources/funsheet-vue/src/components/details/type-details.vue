@@ -56,7 +56,7 @@
     },
     computed: {
       activitiesWithType: function () {
-        return Helper.objectToArray(this.activities).filter(activity => activity.type.uuid === this.uuid);
+        return Helper.objectToArray(this.activities).filter(activity => activity.type && activity.type.uuid === this.uuid);
       },
       activities: function () {
         return this.$store.state.Activities.activities;
