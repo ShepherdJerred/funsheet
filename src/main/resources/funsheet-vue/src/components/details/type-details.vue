@@ -1,45 +1,58 @@
 <template>
     <div>
-        <div class="hero is-primary">
-            <div class="hero-body">
-                <div class="column is-one-third-desktop is-offset-one-third-desktop">
-                    <h1 class="title">
-                        {{ type.name }}
-                    </h1>
+        <template v-if="type">
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="column is-two-thirds-desktop is-offset-2-desktop">
+                        <h1 class="title">
+                            {{ type.name }}
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column is-two-thirds-desktop is-offset-2">
-            <div class="columns">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 class="title">All activities of type {{ type.name }}</h3>
-                            <ul>
-                                <template v-for="activity in activitiesWithType">
-                                    <li>{{ activity.name }}</li>
-                                </template>
-                            </ul>
+            <div class="column is-two-thirds-desktop is-offset-2">
+                <div class="columns">
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3 class="title">All activities of type {{ type.name }}</h3>
+                                <ul>
+                                    <template v-for="activity in activitiesWithType">
+                                        <li>{{ activity.name }}</li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card controls">
+                            <footer class="card-footer">
+                                <a class="card-footer-item">
+                                    <router-link :to="{ name: 'Edit Type', params: { 'uuid': type.uuid } }">
+                                        Edit
+                                    </router-link>
+                                </a>
+                                <a class="card-footer-item">
+                                    <router-link :to="{ name: 'Delete Type', params: { 'uuid': type.uuid } }">
+                                        Delete
+                                    </router-link>
+                                </a>
+                            </footer>
                         </div>
                     </div>
-
-                    <div class="card controls">
-                        <footer class="card-footer">
-                            <a class="card-footer-item">
-                                <router-link :to="{ name: 'Edit Type', params: { 'uuid': type.uuid } }">
-                                    Edit
-                                </router-link>
-                            </a>
-                            <a class="card-footer-item">
-                                <router-link :to="{ name: 'Delete Type', params: { 'uuid': type.uuid } }">
-                                    Delete
-                                </router-link>
-                            </a>
-                        </footer>
+                </div>
+            </div>
+        </template>
+        <template v-else>
+            <div class="hero is-danger">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Type not found
+                        </h1>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 

@@ -1,94 +1,107 @@
 <template>
     <div>
-        <div class="hero is-primary">
-            <div class="hero-body">
-                <div class="column is-one-third-desktop is-offset-one-third-desktop">
-                    <h1 class="title">
-                        Edit {{ activity.name }}
-                    </h1>
+        <template v-if="activity">
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                        <h1 class="title">
+                            Edit {{ activity.name }}
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form v-on:submit.prevent="onSubmit">
-                <div class="field">
-                    <label class="label">
-                        Name
-                        <span>
+            <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                <form v-on:submit.prevent="onSubmit">
+                    <div class="field">
+                        <label class="label">
+                            Name
+                            <span>
                         <input class="input" v-model="name" required>
                     </span>
-                    </label>
-                </div>
-                <div class="field">
-                    <label class="label">
-                        Rating
-                        <span>
+                        </label>
+                    </div>
+                    <div class="field">
+                        <label class="label">
+                            Rating
+                            <span>
                         <input class="input" type="number" v-model="rating" required min="1" max="5">
                     </span>
-                    </label>
-                    <p class="help">Rating between 1-5</p>
-                </div>
-                <div class="field">
-                    <label class="label">
-                        Cost
-                        <span>
+                        </label>
+                        <p class="help">Rating between 1-5</p>
+                    </div>
+                    <div class="field">
+                        <label class="label">
+                            Cost
+                            <span>
                         <input class="input" type="number" v-model="cost" required min="0" max="5">
                     </span>
-                    </label>
-                    <p class="help">Cost between 0-5</p>
-                </div>
-                <div class="field">
-                    <label class="label">
-                        Description
-                        <span>
+                        </label>
+                        <p class="help">Cost between 0-5</p>
+                    </div>
+                    <div class="field">
+                        <label class="label">
+                            Description
+                            <span>
                         <textarea class="textarea" v-model="description" required></textarea>
                 </span>
-                    </label>
-                </div>
-                <template v-if="allTypes.length > 0">
-                    <div class="field">
-                        <label class="label">
-                            Type
-                            <div class="control">
-                                <div class="select">
-                                    <select v-model="type">
-                                        <option v-for="type in allTypes" v-bind:value="type.uuid">
-                                            {{ type.name }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
                         </label>
                     </div>
-                </template>
-                <template v-else>
-                    <p>No types exist</p>
-                </template>
-                <template v-if="allLocations.length > 0">
-                    <div class="field">
-                        <label class="label">
-                            Location
-                            <div class="control">
-                                <div class="select">
-                                    <select v-model="location">
-                                        <option v-for="location in allLocations" v-bind:value="location.uuid">
-                                            {{ location.name }}
-                                        </option>
-                                    </select>
+                    <template v-if="allTypes.length > 0">
+                        <div class="field">
+                            <label class="label">
+                                Type
+                                <div class="control">
+                                    <div class="select">
+                                        <select v-model="type">
+                                            <option v-for="type in allTypes" v-bind:value="type.uuid">
+                                                {{ type.name }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </label>
-                    </div>
-                </template>
-                <template v-else>
-                    <p>No locations exist</p>
-                </template>
-                <span>
+                            </label>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p>No types exist</p>
+                    </template>
+                    <template v-if="allLocations.length > 0">
+                        <div class="field">
+                            <label class="label">
+                                Location
+                                <div class="control">
+                                    <div class="select">
+                                        <select v-model="location">
+                                            <option v-for="location in allLocations" v-bind:value="location.uuid">
+                                                {{ location.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <p>No locations exist</p>
+                    </template>
+                    <span>
                     <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
                 <button class="button is-success">Edit</button>
             </span>
-            </form>
-        </div>
+                </form>
+            </div>
+        </template>
+        <template v-else>
+            <div class="hero is-danger">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Activity not found
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 

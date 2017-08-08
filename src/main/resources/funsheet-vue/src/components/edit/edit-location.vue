@@ -1,43 +1,56 @@
 <template>
     <div>
-        <div class="hero is-primary">
-            <div class="hero-body">
-                <div class="column is-one-third-desktop is-offset-one-third-desktop">
-                    <h1 class="title">
-                        Edit {{ location.name }}
-                    </h1>
+        <template v-if="location">
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                        <h1 class="title">
+                            Edit {{ location.name }}
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form v-on:submit.prevent="onSubmit">
-                <div class="field">
-                    <label class="label">
-                        Name
-                        <span>
+            <div class="column is-one-third-desktop is-offset-one-third-desktop">
+                <form v-on:submit.prevent="onSubmit">
+                    <div class="field">
+                        <label class="label">
+                            Name
+                            <span>
                         <input class="input" v-model="name" required>
                     </span>
-                    </label>
-                </div>
-                <div class="field">
-                    <label class="label">
-                        Place ID
-                        <span>
+                        </label>
+                    </div>
+                    <div class="field">
+                        <label class="label">
+                            Place ID
+                            <span>
                         <input class="input" v-model="placeId" required>
                     </span>
-                    </label>
-                    <p class="help">
-                        <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/places-placeid-finder"
-                           target="_blank">
-                            Place ID finder</a>
-                    </p>
-                </div>
-                <span>
+                        </label>
+                        <p class="help">
+                            <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/places-placeid-finder"
+                               target="_blank">
+                                Place ID finder</a>
+                        </p>
+                    </div>
+                    <span>
                 <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
                 <button class="button is-success">Edit</button>
             </span>
-            </form>
-        </div>
+                </form>
+            </div>
+        </template>
+        <template v-else>
+            <div class="hero is-danger">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Location not found
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
