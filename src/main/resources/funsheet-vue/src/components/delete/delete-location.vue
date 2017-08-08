@@ -4,7 +4,7 @@
             <div class="hero-body">
                 <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">
-                        Delete {{ activity.name }}
+                        Delete {{ location.name }}
                     </h1>
                 </div>
             </div>
@@ -12,7 +12,7 @@
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
             <div>
                 <form v-on:submit.prevent="onSubmit">
-                    <h1 class="title">Are you sure you want to delete {{ activity.name }}?</h1>
+                    <h1 class="title">Are you sure you want to delete {{ location.name }}?</h1>
                     <span>
                 <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
                 <button class="button is-success">Confirm</button>
@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'Delete-Activity',
+    name: 'Delete-Location',
     data: function () {
       return {
         name: ''
@@ -38,17 +38,17 @@
       }
     },
     computed: {
-      activity: function () {
-        return this.activities[this.uuid];
+      location: function () {
+        return this.locations[this.uuid];
       },
-      activities: function () {
-        return this.$store.state.Activities.activities;
+      locations: function () {
+        return this.$store.state.Locations.locations;
       }
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/activities/' + this.activity.uuid).then(response => {
-          this.$store.dispatch('getActivities');
+        this.$http.delete('/api/locations/' + this.location.uuid).then(response => {
+          this.$store.dispatch('getLocations');
           this.$router.push({name: 'Home'});
         }, response => {
           console.log(response.body);

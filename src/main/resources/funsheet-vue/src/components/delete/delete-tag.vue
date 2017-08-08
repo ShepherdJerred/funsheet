@@ -4,7 +4,7 @@
             <div class="hero-body">
                 <div class="column is-one-third-desktop is-offset-one-third-desktop">
                     <h1 class="title">
-                        Delete {{ activity.name }}
+                        Delete {{ tag.name }}
                     </h1>
                 </div>
             </div>
@@ -12,7 +12,7 @@
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
             <div>
                 <form v-on:submit.prevent="onSubmit">
-                    <h1 class="title">Are you sure you want to delete {{ activity.name }}?</h1>
+                    <h1 class="title">Are you sure you want to delete {{ tag.name }}?</h1>
                     <span>
                 <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
                 <button class="button is-success">Confirm</button>
@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'Delete-Activity',
+    name: 'Delete-Tag',
     data: function () {
       return {
         name: ''
@@ -38,17 +38,17 @@
       }
     },
     computed: {
-      activity: function () {
-        return this.activities[this.uuid];
+      tag: function () {
+        return this.tags[this.uuid];
       },
-      activities: function () {
-        return this.$store.state.Activities.activities;
+      tags: function () {
+        return this.$store.state.Tags.tags;
       }
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/activities/' + this.activity.uuid).then(response => {
-          this.$store.dispatch('getActivities');
+        this.$http.delete('/api/tags/' + this.tag.uuid).then(response => {
+          this.$store.dispatch('getTags');
           this.$router.push({name: 'Home'});
         }, response => {
           console.log(response.body);
