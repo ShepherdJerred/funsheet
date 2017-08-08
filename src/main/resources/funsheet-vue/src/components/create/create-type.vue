@@ -20,7 +20,7 @@
                     </label>
                 </div>
                 <template v-if="allTags.length > 0">
-                    <div class="field">
+                    <div class="field" v-on:click.capture="getTags">
                         <label class="label">
                             Tags
                             <div class="control">
@@ -75,6 +75,9 @@
         }, response => {
           console.log(response.body);
         });
+      },
+      getTags: function () {
+        this.$store.dispatch('getTags');
       }
     }
   };

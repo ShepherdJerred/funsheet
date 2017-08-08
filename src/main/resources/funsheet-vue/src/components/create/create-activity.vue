@@ -23,7 +23,7 @@
                     <label class="label">
                         Rating
                         <span>
-                        <input class="input" type="number" v-model="rating" required min="1" max="5">
+                        <input class="input" type="number" v-model.number="rating" required min="1" max="5">
                     </span>
                     </label>
                     <p class="help">Rating from 1 to 5</p>
@@ -32,7 +32,7 @@
                     <label class="label">
                         Cost
                         <span>
-                        <input class="input" type="number" v-model="cost" required min="0" max="5">
+                        <input class="input" type="number" v-model.number="cost" required min="0" max="5">
                     </span>
                     </label>
                     <p class="help">Cost from 0 to 5</p>
@@ -46,7 +46,7 @@
                     </label>
                 </div>
                 <template v-if="Object.keys(allTypes).length > 0">
-                    <div class="field">
+                    <div class="field" v-on:click.capture="getTypes">
                         <label class="label">
                             Type
                             <div class="control">
@@ -65,7 +65,7 @@
                     <p>No types exist</p>
                 </template>
                 <template v-if="Object.keys(allLocations).length > 0">
-                    <div class="field">
+                    <div class="field" v-on:click.capture="getLocations">
                         <label class="label">
                             Location
                             <div class="control">
@@ -129,6 +129,12 @@
         }, response => {
           console.log(response.body);
         });
+      },
+      getLocations: function () {
+        this.$store.dispatch('getLocations');
+      },
+      getTypes: function () {
+        this.$store.dispatch('getTypes');
       }
     }
   };
