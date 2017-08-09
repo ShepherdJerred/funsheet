@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueAnalytics from 'vue-analytics';
 import router from './router';
 import store from './store';
 import Buefy from 'buefy';
@@ -14,6 +15,11 @@ WebFontLoader.load({
   google: {
     families: ['Cabin', 'Lobster']
   }
+});
+
+Vue.use(VueAnalytics, {
+  id: 'UA-104313543-1',
+  router
 });
 
 Vue.use(Buefy);
