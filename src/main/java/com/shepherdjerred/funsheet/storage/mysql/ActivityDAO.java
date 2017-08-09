@@ -34,7 +34,7 @@ public class ActivityDAO implements DAO<Activity> {
                     store.getType(type),
                     rs.getInt("rating"),
                     store.getLocation(location),
-                    rs.getDouble("cost"),
+                    rs.getInt("cost"),
                     rs.getString("description")
             );
         };

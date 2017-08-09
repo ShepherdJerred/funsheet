@@ -25,7 +25,7 @@ public class NewActivityPayload implements Payload {
     private UUID location;
     @Getter
     @Setter
-    private Double cost;
+    private Integer cost;
     @Getter
     @Setter
     private String description;

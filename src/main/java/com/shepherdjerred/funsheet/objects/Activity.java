@@ -24,12 +24,12 @@ public class Activity {
     private Location location;
     @Getter
     @Setter
-    private double cost;
+    private int cost;
     @Getter
     @Setter
     private String description;
 
-    public Activity(String name, UUID uuid, Type type, int rating, Location location, double cost, String description) {
+    public Activity(String name, UUID uuid, Type type, int rating, Location location, int cost, String description) {
         this.name = name;
         this.uuid = uuid;
         this.type = type;
