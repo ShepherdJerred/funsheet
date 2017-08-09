@@ -2,9 +2,9 @@
     <div>
         <nav class="navbar">
             <div class="navbar-brand">
-                <a class="navbar-item">
+                <router-link :to="{ name: 'Home' }" class="navbar-item">
                     Funsheet
-                </a>
+                </router-link>
                 <div class="navbar-burger burger" v-bind:class="{ 'is-active': isActive }" data-target="navbar"
                      v-on:click="toggleActive()">
                     <span></span>
