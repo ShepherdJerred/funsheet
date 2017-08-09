@@ -30,6 +30,21 @@
                         </div>
                     </div>
                     <div class="column">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3 class="title">Tags</h3>
+                                <ul>
+                                    <template v-for="tag in type.tags">
+                                        <li>
+                                            <router-link
+                                                    :to="{ name: 'Tag Details', params: { 'uuid': tag.uuid } }">
+                                                {{ tag.name }}
+                                            </router-link>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="card controls">
                             <footer class="card-footer">
                                 <a class="card-footer-item">
@@ -91,5 +106,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .controls {
+        margin-top: 20px;
+    }
 </style>
