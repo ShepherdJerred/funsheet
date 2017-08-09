@@ -27,8 +27,7 @@ public class Main {
     private static Store store;
 
     public static void main(String args[]) {
-        setupInMemoryStorage();
-        createMockData();
+        setupMysqlStorage();
         setupRoutes();
     }
 
