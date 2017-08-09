@@ -12,4 +12,6 @@ public interface DAO<T> {
     void insert(T type);
 
     void drop(T type);
+
+    void update(T type);
 }

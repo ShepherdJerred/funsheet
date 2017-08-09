@@ -46,6 +46,11 @@ public class MysqlStore implements Store {
     }
 
     @Override
+    public void updateActivity(Activity activity) {
+        activityDAO.update(activity);
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tagDAO.insert(tag);
     }
@@ -58,6 +63,16 @@ public class MysqlStore implements Store {
     @Override
     public Collection<Tag> getTags() {
         return tagDAO.select();
+    }
+
+    @Override
+    public void deleteTag(UUID uuid) {
+        tagDAO.drop(getTag(uuid));
+    }
+
+    @Override
+    public void updateTag(Tag tag) {
+        tagDAO.update(tag);
     }
 
     public Collection<Tag> getTagsOfType(UUID typeUuid) {
@@ -80,6 +95,16 @@ public class MysqlStore implements Store {
     }
 
     @Override
+    public void deleteType(UUID uuid) {
+        typeDAO.drop(getType(uuid));
+    }
+
+    @Override
+    public void updateType(Type type) {
+        typeDAO.update(type);
+    }
+
+    @Override
     public void addLocation(Location location) {
         locationDAO.insert(location);
     }
@@ -92,6 +117,16 @@ public class MysqlStore implements Store {
     @Override
     public Collection<Location> getLocations() {
         return locationDAO.select();
+    }
+
+    @Override
+    public void deleteLocation(UUID uuid) {
+        locationDAO.drop(getLocation(uuid));
+    }
+
+    @Override
+    public void updateLocation(Location location) {
+        locationDAO.update(location);
     }
 
 }

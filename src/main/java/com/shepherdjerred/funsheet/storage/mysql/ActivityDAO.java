@@ -81,50 +81,16 @@ public class ActivityDAO implements DAO<Activity> {
                 .run();
     }
 
-    public void updateName(Activity activity) {
+    @Override
+    public void update(Activity activity) {
         Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET name = ? WHERE activity_uuid = ?")
+        query.update("UPDATE activity SET name = ?, type_uuid = ?, rating = ?, location_uuid = ?, cost = ?, description = ? WHERE activity_uuid = ?")
                 .params(activity.getName(),
-                        String.valueOf(activity.getUuid()))
-                .run();
-    }
-
-    public void updateType(Activity activity) {
-        Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET type_uuid = ? WHERE activity_uuid = ?")
-                .params(String.valueOf(activity.getType().getUuid()),
-                        String.valueOf(activity.getUuid()))
-                .run();
-    }
-
-    public void updateRating(Activity activity) {
-        Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET rating = ? WHERE activity_uuid = ?")
-                .params(activity.getRating(),
-                        String.valueOf(activity.getUuid()))
-                .run();
-    }
-
-    public void updateLocation(Activity activity) {
-        Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET location_uuid = ? WHERE activity_uuid = ?")
-                .params(String.valueOf(activity.getLocation().getUuid()),
-                        String.valueOf(activity.getUuid()))
-                .run();
-    }
-
-    public void updateCost(Activity activity) {
-        Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET cost = ? WHERE activity_uuid = ?")
-                .params(activity.getCost(),
-                        String.valueOf(activity.getUuid()))
-                .run();
-    }
-
-    public void updateDescription(Activity activity) {
-        Query query = fluentJdbc.query();
-        query.update("UPDATE activity SET description = ? WHERE activity_uuid = ?")
-                .params(activity.getDescription(),
+                        String.valueOf(activity.getType().getUuid()),
+                        activity.getRating(),
+                        String.valueOf(activity.getLocation().getUuid()),
+                        activity.getCost(),
+                        activity.getDescription(),
                         String.valueOf(activity.getUuid()))
                 .run();
     }

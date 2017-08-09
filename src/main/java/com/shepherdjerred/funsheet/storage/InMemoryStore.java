@@ -42,6 +42,11 @@ public class InMemoryStore implements Store {
     }
 
     @Override
+    public void updateActivity(Activity activity) {
+        // Nothing needs to be done
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tags.put(tag.getUuid(), tag);
     }
@@ -54,6 +59,16 @@ public class InMemoryStore implements Store {
     @Override
     public Collection<Tag> getTags() {
         return tags.values();
+    }
+
+    @Override
+    public void deleteTag(UUID uuid) {
+        tags.remove(uuid);
+    }
+
+    @Override
+    public void updateTag(Tag tag) {
+        // Nothing needs to be done
     }
 
     @Override
@@ -72,6 +87,16 @@ public class InMemoryStore implements Store {
     }
 
     @Override
+    public void deleteType(UUID uuid) {
+        types.remove(uuid);
+    }
+
+    @Override
+    public void updateType(Type type) {
+        // Nothing needs to be done
+    }
+
+    @Override
     public void addLocation(Location location) {
         locations.put(location.getUuid(), location);
     }
@@ -84,6 +109,16 @@ public class InMemoryStore implements Store {
     @Override
     public Collection<Location> getLocations() {
         return locations.values();
+    }
+
+    @Override
+    public void deleteLocation(UUID uuid) {
+        locations.remove(uuid);
+    }
+
+    @Override
+    public void updateLocation(Location location) {
+        // Nothing needs to be done
     }
 
 }

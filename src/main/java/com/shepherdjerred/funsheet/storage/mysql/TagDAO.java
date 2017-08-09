@@ -63,7 +63,13 @@ public class TagDAO implements DAO<Tag> {
                 .run();
     }
 
-    public void updateName() {
-
+    // TODO
+    @Override
+    public void update(Tag tag) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE tag SET name = ? WHERE tag_uuid = ?")
+                .params(tag.getName(),
+                        String.valueOf(tag.getUuid()))
+                .run();
     }
 }

@@ -64,7 +64,18 @@ public class TagController implements Controller {
         });
 
         patch("/api/tags/:tag", (request, response) -> {
-            return "";
+            return ""; // TODO
+        });
+
+        delete("/api/tags/:tag", (request, response) -> {
+            response.type("application/json");
+
+            String tagParam = request.params().get(":tag");
+            UUID tagUuid = UUID.fromString(tagParam);
+
+            store.deleteTag(tagUuid);
+
+            return "DELETE";
         });
     }
 }

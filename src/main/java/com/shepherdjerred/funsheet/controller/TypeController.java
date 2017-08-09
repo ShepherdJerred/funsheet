@@ -73,7 +73,18 @@ public class TypeController implements Controller {
         });
 
         patch("/api/types/:type", (request, response) -> {
-            return "";
+            return ""; // TODO
+        });
+
+        delete("/api/types/:type", (request, response) -> {
+            response.type("application/json");
+
+            String typeParam = request.params().get(":type");
+            UUID typeUuid = UUID.fromString(typeParam);
+
+            store.deleteType(typeUuid);
+
+            return "DELETE";
         });
 
     }

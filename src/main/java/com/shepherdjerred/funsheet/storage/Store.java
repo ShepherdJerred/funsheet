@@ -14,17 +14,24 @@ public interface Store {
     Activity getActivity(UUID uuid);
     Collection<Activity> getActivities();
     void deleteActivity(UUID uuid);
+    void updateActivity(Activity activity);
 
     void addTag(Tag tag);
     Tag getTag(UUID uuid);
     Collection<Tag> getTags();
+    void deleteTag(UUID uuid);
+    void updateTag(Tag tag);
 
     void addType(Type type);
     Type getType(UUID uuid);
     Collection<Type> getTypes();
+    void deleteType(UUID uuid);
+    void updateType(Type type);
 
     void addLocation(Location location);
     Location getLocation(UUID uuid);
     Collection<Location> getLocations();
+    void deleteLocation(UUID uuid);
+    void updateLocation(Location location);
 
 }

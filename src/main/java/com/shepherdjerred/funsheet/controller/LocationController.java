@@ -68,7 +68,18 @@ public class LocationController implements Controller {
         });
 
         patch("/api/locations/:location", (request, response) -> {
-            return "";
+            return ""; // TODO
+        });
+
+        delete("/api/locations/:location", (request, response) -> {
+            response.type("application/json");
+
+            String locationParam = request.params().get(":location");
+            UUID locationUuid = UUID.fromString(locationParam);
+
+            store.deleteLocation(locationUuid);
+
+            return "DELETE";
         });
     }
 }

@@ -86,7 +86,6 @@ public class ActivityController implements Controller {
 
             Activity activity = store.getActivity(activityPayload.getUuid());
 
-            // TODO Update in store
             if (activityPayload.getName() != null) {
                 activity.setName(activityPayload.getName());
             }
@@ -110,6 +109,8 @@ public class ActivityController implements Controller {
             if (activityPayload.getDescription() != null) {
                 activity.setDescription(activityPayload.getDescription());
             }
+
+            store.updateActivity(activity);
 
             return objectMapper.writeValueAsString(activity);
         });

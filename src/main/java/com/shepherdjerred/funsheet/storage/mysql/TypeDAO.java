@@ -70,15 +70,13 @@ public class TypeDAO implements DAO<Type> {
                 .run();
     }
 
-    public void updateName() {
-
-    }
-
-    public void removeTag() {
-
-    }
-
-    public void addTag() {
-
+    // TODO
+    @Override
+    public void update(Type type) {
+        Query query = fluentJdbc.query();
+        query.update("UPDATE type SET name = ? WHERE type_uuid = ?")
+                .params(type.getName(),
+                        String.valueOf(type.getUuid()))
+                .run();
     }
 }
