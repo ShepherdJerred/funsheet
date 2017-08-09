@@ -25,8 +25,8 @@
                             </router-link>
                         </td>
                         <td>
-                            <template v-for="tag in type.tags">
-                                {{ tag.name }},
+                            <template v-for="(tag, index) in type.tags">
+                                <router-link :to="{ name: 'Tag Details', params: { 'uuid': tag.uuid } }">{{ tag.name }}</router-link><template v-if="index < type.tags.length - 1"><span>, </span></template>
                             </template>
                         </td>
                     </tr>
