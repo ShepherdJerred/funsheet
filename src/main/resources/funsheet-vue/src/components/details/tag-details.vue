@@ -18,13 +18,18 @@
                                 <h3 class="title">All types tagged {{ tag.name }}</h3>
                                 <ul>
                                     <template v-for="type in typesWithTag">
-                                        <li>{{ type.name }}</li>
+                                        <li>
+                                            <router-link :to="{ name: 'Type Details', params: { 'uuid': type.uuid } }">
+                                                {{ type.name }}
+                                            </router-link>
+                                        </li>
                                     </template>
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="card controls">
+                    </div>
+                    <div class="column">
+                        <div class="card">
                             <footer class="card-footer">
                                 <a class="card-footer-item">
                                     <router-link :to="{ name: 'Edit Tag', params: { 'uuid': tag.uuid } }">
@@ -87,7 +92,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .controls {
-        margin-top: 20px;
-    }
+    
 </style>

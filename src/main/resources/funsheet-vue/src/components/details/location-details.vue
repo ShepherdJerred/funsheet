@@ -15,10 +15,15 @@
                     <div class="column">
                         <div class="card">
                             <div class="card-content">
-                                <h3 class="title">Everything to do in {{ location.name }}</h3>
+                                <h3 class="title">Activities in {{ location.name }}</h3>
                                 <ul>
                                     <template v-for="activity in activitiesAtLocation">
-                                        <li>{{ activity.name }}</li>
+                                        <li>
+                                            <router-link
+                                                    :to="{ name: 'Activity Details', params: { 'uuid': activity.uuid } }">
+                                                {{ activity.name }}
+                                            </router-link>
+                                        </li>
                                     </template>
                                 </ul>
                             </div>

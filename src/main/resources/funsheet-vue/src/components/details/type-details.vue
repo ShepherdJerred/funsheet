@@ -18,12 +18,18 @@
                                 <h3 class="title">All activities of type {{ type.name }}</h3>
                                 <ul>
                                     <template v-for="activity in activitiesWithType">
-                                        <li>{{ activity.name }}</li>
+                                        <li>
+                                            <router-link
+                                                    :to="{ name: 'Activity Details', params: { 'uuid': activity.uuid } }">
+                                                {{ activity.name }}
+                                            </router-link>
+                                        </li>
                                     </template>
                                 </ul>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="column">
                         <div class="card controls">
                             <footer class="card-footer">
                                 <a class="card-footer-item">
@@ -85,7 +91,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .controls {
-        margin-top: 20px;
-    }
+
 </style>
