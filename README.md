@@ -27,6 +27,9 @@ The frontend is written in Vue. It uses the following libraries/resources
 ## Deploying
 Funsheet was made to be deployed on Heroku. All that is needed is the JawsDB addon, the rest will be taken care of automatically. It can also run off of any other MySQL database by editing the hikari.properties file.
 
+## Development
+To avoid the pain of running a MySQL server while working on the front-end, there is also an InMemoryStore class which can be used. To use it, call setupInMemoryStorage rather than setupMysqlStorage in the main function. To add mock data to either store, call the createMockData method.
+
 ## Reflection
 This application is the first REST API I've written, and the first 'real' web application I've made. The code is very messy, and there is plenty to be improved upon. I created this application as a way to keep track of things to do with friends while at college; we were originally using a Google Sheets document, and I decieded to make something better. The bulk of it was written over the course of about a month, doing little pieces at a time.
 
