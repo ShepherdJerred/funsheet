@@ -4,6 +4,8 @@ import router from './router';
 import store from './store';
 import Buefy from 'buefy';
 
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 import WebFontLoader from 'webfontloader';
 
 import 'font-awesome/css/font-awesome.css';
@@ -16,6 +18,10 @@ WebFontLoader.load({
     families: ['Cabin', 'Lobster']
   }
 });
+
+Raven.config('https://5613a4599d7147a69662a029d90f3d56@sentry.io/202388')
+  .addPlugin(RavenVue, Vue)
+  .install();
 
 Vue.use(VueAnalytics, {
   id: 'UA-104313543-1',

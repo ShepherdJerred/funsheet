@@ -1,18 +1,19 @@
 package com.shepherdjerred.funsheet;
 
-import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.objects.Location;
-import com.shepherdjerred.funsheet.objects.Tag;
-import com.shepherdjerred.funsheet.objects.Type;
 import com.shepherdjerred.funsheet.controller.ActivityController;
 import com.shepherdjerred.funsheet.controller.LocationController;
 import com.shepherdjerred.funsheet.controller.TagController;
 import com.shepherdjerred.funsheet.controller.TypeController;
+import com.shepherdjerred.funsheet.objects.Activity;
+import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.objects.Tag;
+import com.shepherdjerred.funsheet.objects.Type;
 import com.shepherdjerred.funsheet.storage.InMemoryStore;
 import com.shepherdjerred.funsheet.storage.Store;
 import com.shepherdjerred.funsheet.storage.mysql.Database;
 import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
 import com.zaxxer.hikari.HikariConfig;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,6 +23,7 @@ import java.util.UUID;
 import static spark.Spark.port;
 import static spark.Spark.staticFileLocation;
 
+@Log4j2
 public class Main {
 
     private static Store store;
@@ -29,6 +31,8 @@ public class Main {
     public static void main(String args[]) {
         setupMysqlStorage();
         setupRoutes();
+        log.warn("Testings");
+        log.error("Another test");
     }
 
     private static void createMockData() {
