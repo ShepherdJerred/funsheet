@@ -15,7 +15,7 @@ public class UserController implements Controller {
     public void setupRoutes() {
         get("/api/login", (request, response) -> {
             response.type("application/json");
-            log.error("Login");
+
             return "Login";
         });
 
