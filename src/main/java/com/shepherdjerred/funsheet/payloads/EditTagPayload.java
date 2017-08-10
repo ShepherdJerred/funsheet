@@ -16,7 +16,6 @@ public class EditTagPayload implements Payload {
 
     @Override
     public boolean isValid() {
-        // Check name
         return true;
     }
 }

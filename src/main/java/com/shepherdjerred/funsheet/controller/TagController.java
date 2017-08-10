@@ -41,7 +41,7 @@ public class TagController implements Controller {
                 return objectMapper.writeValueAsString(tag.get());
             } else {
                 response.status(404);
-                return "Not found";
+                return null;
             }
         });
 
@@ -52,7 +52,12 @@ public class TagController implements Controller {
 
             if (!tagPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
+            }
+
+            if (store.isTagNameTaken(tagPayload.getName())) {
+                response.status(400);
+                return null;
             }
 
             Tag tag = new Tag(
@@ -72,7 +77,7 @@ public class TagController implements Controller {
 
             if (!tagPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
             }
 
             Optional<Tag> tagOptional = store.getTag(tagPayload.getUuid());
@@ -80,6 +85,10 @@ public class TagController implements Controller {
             if (tagOptional.isPresent()) {
                 Tag tag = tagOptional.get();
                 if (tagPayload.getName() != null) {
+                    if (store.isTagNameTaken(tagPayload.getName()) && !tag.getName().equals(tagPayload.getName())) {
+                        response.status(400);
+                        return null;
+                    }
                     tag.setName(tagPayload.getName());
                 }
 
@@ -87,8 +96,8 @@ public class TagController implements Controller {
 
                 return objectMapper.writeValueAsString(tag);
             } else {
-                // TODO throw exception
-                return "";
+                response.status(400);
+                return null;
             }
 
         });
@@ -101,7 +110,7 @@ public class TagController implements Controller {
 
             store.deleteTag(tagUuid);
 
-            return "DELETE";
+            return null;
         });
     }
 }

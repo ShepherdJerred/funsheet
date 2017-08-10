@@ -30,6 +30,13 @@ public class TypeDAO implements DAO<Type> {
         };
     }
 
+    public Optional<Type> select(String name) {
+        Query query = fluentJdbc.query();
+        return query.select("SELECT * FROM type WHERE type_name = ?")
+                .params(name)
+                .firstResult(typeMapper);
+    }
+
     @Override
     public Optional<Type> select(UUID uuid) {
         Query query = fluentJdbc.query();

@@ -59,6 +59,11 @@ public class MysqlStore implements Store {
     }
 
     @Override
+    public boolean isActivityNameTaken(String name) {
+        return activityDAO.select(name).isPresent();
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tagDAO.insert(tag);
     }
@@ -82,6 +87,11 @@ public class MysqlStore implements Store {
     @Override
     public void updateTag(Tag tag) {
         tagDAO.update(tag);
+    }
+
+    @Override
+    public boolean isTagNameTaken(String name) {
+        return tagDAO.select(name).isPresent();
     }
 
     public Collection<Tag> getTagsOfType(UUID typeUuid) {
@@ -115,6 +125,11 @@ public class MysqlStore implements Store {
     }
 
     @Override
+    public boolean isTypeNameTaken(String name) {
+        return typeDAO.select(name).isPresent();
+    }
+
+    @Override
     public void addLocation(Location location) {
         locationDAO.insert(location);
     }
@@ -138,6 +153,11 @@ public class MysqlStore implements Store {
     @Override
     public void updateLocation(Location location) {
         locationDAO.update(location);
+    }
+
+    @Override
+    public boolean isLocationNameTaken(String name) {
+        return locationDAO.select(name).isPresent();
     }
 
 }

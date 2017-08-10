@@ -43,7 +43,7 @@ public class ActivityController implements Controller {
                 return objectMapper.writeValueAsString(activity.get());
             } else {
                 response.status(404);
-                return "Not found";
+                return null;
             }
         });
 
@@ -54,23 +54,30 @@ public class ActivityController implements Controller {
 
             if (!activityPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
+            }
+
+            if (store.isActivityNameTaken(activityPayload.getName())) {
+                response.status(400);
+                return null;
             }
 
             Optional<Type> typeOptional = store.getType(activityPayload.getType());
-            Type type = null;
+            Type type;
             if (typeOptional.isPresent()) {
                 type = typeOptional.get();
             } else {
-                // TODO throw exception
+                response.status(400);
+                return null;
             }
 
             Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
-            Location location = null;
+            Location location;
             if (locationOptional.isPresent()) {
                 location = locationOptional.get();
             } else {
-                // TODO throw exception
+                response.status(400);
+                return null;
             }
 
             Activity activity = new Activity(
@@ -95,7 +102,7 @@ public class ActivityController implements Controller {
 
             if (!activityPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
             }
 
             Optional<Activity> activityOptional = store.getActivity(activityPayload.getUuid());
@@ -104,6 +111,10 @@ public class ActivityController implements Controller {
                 Activity activity = activityOptional.get();
 
                 if (activityPayload.getName() != null) {
+                    if (store.isActivityNameTaken(activityPayload.getName()) && !activity.getName().equals(activityPayload.getName())) {
+                        response.status(400);
+                        return null;
+                    }
                     activity.setName(activityPayload.getName());
                 }
 
@@ -112,7 +123,8 @@ public class ActivityController implements Controller {
                     if (typeOptional.isPresent()) {
                         activity.setType(typeOptional.get());
                     } else {
-                        // TODO throw exception
+                        response.status(400);
+                        return null;
                     }
                 }
 
@@ -125,10 +137,9 @@ public class ActivityController implements Controller {
                     if (locationOptional.isPresent()) {
                         activity.setLocation(locationOptional.get());
                     } else {
-                        // TODO throw exception
+                        response.status(400);
+                        return null;
                     }
-
-
                 }
 
                 if (activityPayload.getCost() != null) {
@@ -143,8 +154,8 @@ public class ActivityController implements Controller {
 
                 return objectMapper.writeValueAsString(activity);
             } else {
-                // TODO throw exception
-                return "";
+                response.status(400);
+                return null;
             }
         });
 
@@ -156,7 +167,7 @@ public class ActivityController implements Controller {
 
             store.deleteActivity(activityUuid);
 
-            return "DELETE";
+            return null;
         });
     }
 

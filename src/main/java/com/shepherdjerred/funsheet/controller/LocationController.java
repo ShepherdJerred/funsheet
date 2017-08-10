@@ -42,7 +42,7 @@ public class LocationController implements Controller {
                 return objectMapper.writeValueAsString(location.get());
             } else {
                 response.status(404);
-                return "Not found";
+                return null;
             }
         });
 
@@ -55,7 +55,12 @@ public class LocationController implements Controller {
 
             if (!locationPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
+            }
+
+            if (store.isLocationNameTaken(locationPayload.getName())) {
+                response.status(400);
+                return null;
             }
 
             Location location = new Location(
@@ -76,7 +81,7 @@ public class LocationController implements Controller {
 
             if (!locationPayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
             }
 
             Optional<Location> locationOptional = store.getLocation(locationPayload.getUuid());
@@ -85,6 +90,10 @@ public class LocationController implements Controller {
                 Location location = locationOptional.get();
 
                 if (locationPayload.getName() != null) {
+                    if (store.isLocationNameTaken(locationPayload.getName())&& !location.getName().equals(locationPayload.getName())) {
+                        response.status(400);
+                        return null;
+                    }
                     location.setName(locationPayload.getName());
                 }
 
@@ -96,8 +105,8 @@ public class LocationController implements Controller {
 
                 return objectMapper.writeValueAsString(location);
             } else {
-                // TODO throw exception
-                return "";
+                response.status(400);
+                return null;
             }
         });
 
@@ -109,7 +118,7 @@ public class LocationController implements Controller {
 
             store.deleteLocation(locationUuid);
 
-            return "DELETE";
+            return null;
         });
     }
 }

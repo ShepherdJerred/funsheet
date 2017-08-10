@@ -31,11 +31,6 @@ public class EditActivityPayload implements Payload {
 
     @Override
     public boolean isValid() {
-        // Check activity exists
-        // Check if name is unique
-        // Check types exist
-        // Check location exists
-
         if (rating != null) {
             if (rating < 1 || rating > 5) {
                 return false;

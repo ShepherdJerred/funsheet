@@ -47,6 +47,16 @@ public class InMemoryStore implements Store {
     }
 
     @Override
+    public boolean isActivityNameTaken(String name) {
+        for (Activity activity : activities.values()) {
+            if (activity.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tags.put(tag.getUuid(), tag);
     }
@@ -69,6 +79,16 @@ public class InMemoryStore implements Store {
     @Override
     public void updateTag(Tag tag) {
         // Nothing needs to be done
+    }
+
+    @Override
+    public boolean isTagNameTaken(String name) {
+        for (Tag tag : tags.values()) {
+            if (tag.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -97,6 +117,16 @@ public class InMemoryStore implements Store {
     }
 
     @Override
+    public boolean isTypeNameTaken(String name) {
+        for (Type type : types.values()) {
+            if (type.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void addLocation(Location location) {
         locations.put(location.getUuid(), location);
     }
@@ -119,6 +149,16 @@ public class InMemoryStore implements Store {
     @Override
     public void updateLocation(Location location) {
         // Nothing needs to be done
+    }
+
+    @Override
+    public boolean isLocationNameTaken(String name) {
+        for (Location location : locations.values()) {
+            if (location.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

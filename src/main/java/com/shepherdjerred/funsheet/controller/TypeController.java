@@ -45,7 +45,7 @@ public class TypeController implements Controller {
                 return objectMapper.writeValueAsString(type.get());
             } else {
                 response.status(404);
-                return "Not found";
+                return null;
             }
         });
 
@@ -56,19 +56,25 @@ public class TypeController implements Controller {
 
             if (!typePayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
+            }
+
+            if (store.isTypeNameTaken(typePayload.getName())) {
+                response.status(400);
+                return null;
             }
 
             List<Tag> tags = new ArrayList<>();
 
-            typePayload.getTags().forEach(tagUuid -> {
-                Optional<Tag> tagOptional = store.getTag(tagUuid);
+            for (UUID tag : typePayload.getTags()) {
+                Optional<Tag> tagOptional = store.getTag(tag);
                 if (tagOptional.isPresent()) {
                     tags.add(tagOptional.get());
                 } else {
-                    // TODO tag doesn't exist, throw exception?
+                    response.status(400);
+                    return null;
                 }
-            });
+            }
 
             Type type = new Type(
                     typePayload.getName(),
@@ -88,7 +94,7 @@ public class TypeController implements Controller {
 
             if (!typePayload.isValid()) {
                 response.status(400);
-                return "Invalid payload";
+                return null;
             }
 
             Optional<Type> typeOptional = store.getType(typePayload.getUuid());
@@ -97,19 +103,24 @@ public class TypeController implements Controller {
                 Type type = typeOptional.get();
 
                 if (typePayload.getName() != null) {
+                    if (store.isTypeNameTaken(typePayload.getName())&& !type.getName().equals(typePayload.getName())) {
+                        response.status(400);
+                        return null;
+                    }
                     type.setName(typePayload.getName());
                 }
 
                 if (typePayload.getTags() != null) {
                     List<Tag> tags = new ArrayList<>();
-                    typePayload.getTags().forEach(tagUuid -> {
-                        Optional<Tag> tagOptional = store.getTag(tagUuid);
+                    for (UUID tag : typePayload.getTags()) {
+                        Optional<Tag> tagOptional = store.getTag(tag);
                         if (tagOptional.isPresent()) {
                             tags.add(tagOptional.get());
                         } else {
-                            // TODO tag doesn't exist, throw exception?
+                            response.status(400);
+                            return null;
                         }
-                    });
+                    }
                     type.setTags(tags);
                 }
 
@@ -117,8 +128,8 @@ public class TypeController implements Controller {
 
                 return objectMapper.writeValueAsString(type);
             } else {
-                // TODO throw exception
-                return "";
+                response.status(400);
+                return null;
             }
         });
 
@@ -130,7 +141,7 @@ public class TypeController implements Controller {
 
             store.deleteType(typeUuid);
 
-            return "DELETE";
+            return null;
         });
 
     }

@@ -16,23 +16,27 @@ public interface Store {
     Collection<Activity> getActivities();
     void deleteActivity(UUID uuid);
     void updateActivity(Activity activity);
+    boolean isActivityNameTaken(String string);
 
     void addTag(Tag tag);
     Optional<Tag> getTag(UUID uuid);
     Collection<Tag> getTags();
     void deleteTag(UUID uuid);
     void updateTag(Tag tag);
+    boolean isTagNameTaken(String string);
 
     void addType(Type type);
     Optional<Type> getType(UUID uuid);
     Collection<Type> getTypes();
     void deleteType(UUID uuid);
     void updateType(Type type);
+    boolean isTypeNameTaken(String string);
 
     void addLocation(Location location);
     Optional<Location> getLocation(UUID uuid);
     Collection<Location> getLocations();
     void deleteLocation(UUID uuid);
     void updateLocation(Location location);
+    boolean isLocationNameTaken(String string);
 
 }

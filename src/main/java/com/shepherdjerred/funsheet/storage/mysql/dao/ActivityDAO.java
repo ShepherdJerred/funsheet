@@ -48,6 +48,13 @@ public class ActivityDAO implements DAO<Activity> {
         };
     }
 
+    public Optional<Activity> select(String name) {
+        Query query = fluentJdbc.query();
+        return query.select("SELECT * FROM activity WHERE activity_name = ?")
+                .params(name)
+                .firstResult(activityMapper);
+    }
+
     @Override
     public Optional<Activity> select(UUID uuid) {
         Query query = fluentJdbc.query();
