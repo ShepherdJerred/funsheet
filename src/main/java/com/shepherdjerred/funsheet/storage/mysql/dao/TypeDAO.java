@@ -12,14 +12,15 @@ import java.util.*;
 
 public class TypeDAO implements DAO<Type> {
 
+    private final MysqlStore store;
     private final FluentJdbc fluentJdbc;
     private static Mapper<Type> typeMapper;
 
-
     public TypeDAO(MysqlStore store) {
+        this.store = store;
         fluentJdbc = new FluentJdbcBuilder().connectionProvider(store.getDatabase().getDataSource()).build();
 
-        // TODO It would be better to use a join instead
+        // TODO It's inefficient to run another query to load tags. Might be better to use a join when selecting
         typeMapper = rs -> {
             List<Tag> tags = new ArrayList<>(store.getTagsOfType(UUID.fromString(rs.getString("type_uuid"))));
 
@@ -53,12 +54,15 @@ public class TypeDAO implements DAO<Type> {
                         type.getName())
                 .run();
 
-        type.getTags().forEach(tag -> {
-            query.update("INSERT INTO type_tags VALUES (?, ?)")
-                    .params(String.valueOf(type.getUuid()),
-                            String.valueOf(tag.getUuid()))
-                    .run();
-        });
+        insertTypeTags(type);
+    }
+
+    public void insertTypeTags(Type type) {
+        Query query = fluentJdbc.query();
+        type.getTags().forEach(tag -> query.update("INSERT INTO type_tags VALUES (?, ?)")
+                .params(String.valueOf(type.getUuid()),
+                        String.valueOf(tag.getUuid()))
+                .run());
     }
 
     @Override
@@ -76,8 +80,12 @@ public class TypeDAO implements DAO<Type> {
                 .params(type.getName(),
                         String.valueOf(type.getUuid()))
                 .run();
-        // TODO update type_tags table
-        // First we should delete any tag relationships not in the list
-        // Then we should add any tags relationships not in the database
+
+        // TODO Only update the changed tags, rather than removing/readding
+        query.update("DELETE FROM type_tags WHERE type_uuid = ?")
+                .params(type.getUuid())
+                .run();
+
+        insertTypeTags(type);
     }
 }

@@ -24,7 +24,6 @@ public class ActivityDAO implements DAO<Activity> {
         fluentJdbc = new FluentJdbcBuilder().connectionProvider(store.getDatabase().getDataSource()).build();
 
         activityMapper = rs -> {
-            // TODO clean up this code
             Type type = null;
             Location location = null;
 

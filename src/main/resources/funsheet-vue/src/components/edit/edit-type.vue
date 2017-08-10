@@ -108,7 +108,11 @@
     },
     created: function () {
       this.name = this.type.name;
-      this.tags = this.type.tags; // TODO this should be the tag uuid, not the tag object
+      let tagUuids = [];
+      this.type.tags.forEach(function (tag) {
+        tagUuids.push(tag.uuid);
+      });
+      this.tags = tagUuids;
     }
   };
 </script>
