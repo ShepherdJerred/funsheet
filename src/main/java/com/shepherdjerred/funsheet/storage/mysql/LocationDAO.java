@@ -62,8 +62,9 @@ public class LocationDAO implements DAO<Location> {
     @Override
     public void update(Location location) {
         Query query = fluentJdbc.query();
-        query.update("UPDATE location SET name = ? WHERE location_uuid = ?")
+        query.update("UPDATE location SET name = ?, placeId = ? WHERE location_uuid = ?")
                 .params(location.getName(),
+                        location.getPlaceId(),
                         String.valueOf(location.getUuid()))
                 .run();
     }

@@ -78,5 +78,6 @@ public class TypeDAO implements DAO<Type> {
                 .params(type.getName(),
                         String.valueOf(type.getUuid()))
                 .run();
+        // TODO update type_tags table
     }
 }

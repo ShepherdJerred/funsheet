@@ -3,6 +3,7 @@ package com.shepherdjerred.funsheet.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.payloads.EditTypePayload;
 import com.shepherdjerred.funsheet.payloads.NewTypePayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
@@ -73,7 +74,30 @@ public class TypeController implements Controller {
         });
 
         patch("/api/types/:type", (request, response) -> {
-            return ""; // TODO
+            response.type("application/json");
+
+            EditTypePayload typePayload = objectMapper.readValue(request.body(), EditTypePayload.class);
+
+            if (!typePayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
+            Type type = store.getType(typePayload.getUuid());
+
+            if (typePayload.getName() != null) {
+                type.setName(typePayload.getName());
+            }
+
+            if (typePayload.getTags() != null) {
+                List<Tag> tags = new ArrayList<>();
+                typePayload.getTags().forEach(tagUuid -> tags.add(store.getTag(tagUuid)));
+                type.setTags(tags);
+            }
+
+            store.updateType(type);
+
+            return objectMapper.writeValueAsString(type);
         });
 
         delete("/api/types/:type", (request, response) -> {

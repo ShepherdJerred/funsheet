@@ -2,6 +2,7 @@ package com.shepherdjerred.funsheet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.payloads.EditLocationPayload;
 import com.shepherdjerred.funsheet.payloads.NewLocationPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
@@ -68,7 +69,28 @@ public class LocationController implements Controller {
         });
 
         patch("/api/locations/:location", (request, response) -> {
-            return ""; // TODO
+            response.type("application/json");
+
+            EditLocationPayload locationPayload = objectMapper.readValue(request.body(), EditLocationPayload.class);
+
+            if (!locationPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
+            Location location = store.getLocation(locationPayload.getUuid());
+
+            if (locationPayload.getName() != null) {
+                location.setName(locationPayload.getName());
+            }
+
+            if (locationPayload.getPlaceId() != null) {
+                location.setPlaceId(locationPayload.getPlaceId());
+            }
+
+            store.updateLocation(location);
+
+            return objectMapper.writeValueAsString(location);
         });
 
         delete("/api/locations/:location", (request, response) -> {

@@ -2,6 +2,7 @@ package com.shepherdjerred.funsheet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Tag;
+import com.shepherdjerred.funsheet.payloads.EditTagPayload;
 import com.shepherdjerred.funsheet.payloads.NewTagPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
@@ -64,7 +65,24 @@ public class TagController implements Controller {
         });
 
         patch("/api/tags/:tag", (request, response) -> {
-            return ""; // TODO
+            response.type("application/json");
+
+            EditTagPayload tagPayload = objectMapper.readValue(request.body(), EditTagPayload.class);
+
+            if (!tagPayload.isValid()) {
+                response.status(400);
+                return "Invalid payload";
+            }
+
+            Tag tag = store.getTag(tagPayload.getUuid());
+
+            if (tagPayload.getName() != null) {
+                tag.setName(tagPayload.getName());
+            }
+
+            store.updateTag(tag);
+
+            return objectMapper.writeValueAsString(tag);
         });
 
         delete("/api/tags/:tag", (request, response) -> {
