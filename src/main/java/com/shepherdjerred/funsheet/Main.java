@@ -1,9 +1,6 @@
 package com.shepherdjerred.funsheet;
 
-import com.shepherdjerred.funsheet.controller.ActivityController;
-import com.shepherdjerred.funsheet.controller.LocationController;
-import com.shepherdjerred.funsheet.controller.TagController;
-import com.shepherdjerred.funsheet.controller.TypeController;
+import com.shepherdjerred.funsheet.controller.*;
 import com.shepherdjerred.funsheet.objects.Activity;
 import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.objects.Tag;
@@ -31,8 +28,6 @@ public class Main {
     public static void main(String args[]) {
         setupMysqlStorage();
         setupRoutes();
-        log.warn("Testings");
-        log.error("Another test");
     }
 
     private static void createMockData() {
@@ -135,6 +130,8 @@ public class Main {
         new TypeController(store).setupRoutes();
         new TagController(store).setupRoutes();
         new LocationController(store).setupRoutes();
+
+        new UserController().setupRoutes();
     }
 
     private static int getPort() {
