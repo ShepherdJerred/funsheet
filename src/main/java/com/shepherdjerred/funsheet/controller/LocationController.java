@@ -7,6 +7,7 @@ import com.shepherdjerred.funsheet.payloads.NewLocationPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static spark.Spark.*;
@@ -35,13 +36,13 @@ public class LocationController implements Controller {
 
             String locationParam = request.params().get(":location");
             UUID locationUuid = UUID.fromString(locationParam);
-            Location location = store.getLocation(locationUuid);
+            Optional<Location> location = store.getLocation(locationUuid);
 
-            if (location == null) {
+            if (location.isPresent()) {
+                return objectMapper.writeValueAsString(location.get());
+            } else {
                 response.status(404);
                 return "Not found";
-            } else {
-                return objectMapper.writeValueAsString(location);
             }
         });
 
@@ -78,19 +79,26 @@ public class LocationController implements Controller {
                 return "Invalid payload";
             }
 
-            Location location = store.getLocation(locationPayload.getUuid());
+            Optional<Location> locationOptional = store.getLocation(locationPayload.getUuid());
 
-            if (locationPayload.getName() != null) {
-                location.setName(locationPayload.getName());
+            if (locationOptional.isPresent()) {
+                Location location = locationOptional.get();
+
+                if (locationPayload.getName() != null) {
+                    location.setName(locationPayload.getName());
+                }
+
+                if (locationPayload.getPlaceId() != null) {
+                    location.setPlaceId(locationPayload.getPlaceId());
+                }
+
+                store.updateLocation(location);
+
+                return objectMapper.writeValueAsString(location);
+            } else {
+                // TODO throw exception
+                return "";
             }
-
-            if (locationPayload.getPlaceId() != null) {
-                location.setPlaceId(locationPayload.getPlaceId());
-            }
-
-            store.updateLocation(location);
-
-            return objectMapper.writeValueAsString(location);
         });
 
         delete("/api/locations/:location", (request, response) -> {

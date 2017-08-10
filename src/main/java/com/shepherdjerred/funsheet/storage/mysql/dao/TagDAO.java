@@ -1,6 +1,7 @@
-package com.shepherdjerred.funsheet.storage.mysql;
+package com.shepherdjerred.funsheet.storage.mysql.dao;
 
 import com.shepherdjerred.funsheet.objects.Tag;
+import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.query.Mapper;
@@ -15,9 +16,9 @@ public class TagDAO implements DAO<Tag> {
     private final FluentJdbc fluentJdbc;
     private static Mapper<Tag> tagMapper;
 
-    public TagDAO(Database database) {
-        fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
-        // TODO don't create with every object (should be static?)
+    public TagDAO(MysqlStore store) {
+        fluentJdbc = new FluentJdbcBuilder().connectionProvider(store.getDatabase().getDataSource()).build();
+
         tagMapper = rs -> new Tag(
                 rs.getString("name"),
                 UUID.fromString(rs.getString("tag_uuid"))
@@ -63,7 +64,6 @@ public class TagDAO implements DAO<Tag> {
                 .run();
     }
 
-    // TODO
     @Override
     public void update(Tag tag) {
         Query query = fluentJdbc.query();

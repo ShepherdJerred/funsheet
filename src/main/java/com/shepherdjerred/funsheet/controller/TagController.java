@@ -7,6 +7,7 @@ import com.shepherdjerred.funsheet.payloads.NewTagPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static spark.Spark.*;
@@ -34,13 +35,13 @@ public class TagController implements Controller {
 
             String tagParam = request.params().get(":tag");
             UUID tagUuid = UUID.fromString(tagParam);
-            Tag tag = store.getTag(tagUuid);
+            Optional<Tag> tag = store.getTag(tagUuid);
 
-            if (tag == null) {
+            if (tag.isPresent()) {
+                return objectMapper.writeValueAsString(tag.get());
+            } else {
                 response.status(404);
                 return "Not found";
-            } else {
-                return objectMapper.writeValueAsString(tag);
             }
         });
 
@@ -74,15 +75,22 @@ public class TagController implements Controller {
                 return "Invalid payload";
             }
 
-            Tag tag = store.getTag(tagPayload.getUuid());
+            Optional<Tag> tagOptional = store.getTag(tagPayload.getUuid());
 
-            if (tagPayload.getName() != null) {
-                tag.setName(tagPayload.getName());
+            if (tagOptional.isPresent()) {
+                Tag tag = tagOptional.get();
+                if (tagPayload.getName() != null) {
+                    tag.setName(tagPayload.getName());
+                }
+
+                store.updateTag(tag);
+
+                return objectMapper.writeValueAsString(tag);
+            } else {
+                // TODO throw exception
+                return "";
             }
 
-            store.updateTag(tag);
-
-            return objectMapper.writeValueAsString(tag);
         });
 
         delete("/api/tags/:tag", (request, response) -> {

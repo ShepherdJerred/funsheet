@@ -9,6 +9,7 @@ import com.shepherdjerred.funsheet.payloads.NewActivityPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static spark.Spark.*;
@@ -36,13 +37,13 @@ public class ActivityController implements Controller {
 
             String activityParam = request.params().get(":activity");
             UUID activityUuid = UUID.fromString(activityParam);
-            Activity activity = store.getActivity(activityUuid);
+            Optional<Activity> activity = store.getActivity(activityUuid);
 
-            if (activity == null) {
+            if (activity.isPresent()) {
+                return objectMapper.writeValueAsString(activity.get());
+            } else {
                 response.status(404);
                 return "Not found";
-            } else {
-                return objectMapper.writeValueAsString(activity);
             }
         });
 
@@ -56,8 +57,21 @@ public class ActivityController implements Controller {
                 return "Invalid payload";
             }
 
-            Type type = activityPayload.getType() == null ? null : store.getType(activityPayload.getType());
-            Location location = activityPayload.getLocation() == null ? null : store.getLocation(activityPayload.getLocation());
+            Optional<Type> typeOptional = store.getType(activityPayload.getType());
+            Type type = null;
+            if (typeOptional.isPresent()) {
+                type = typeOptional.get();
+            } else {
+                // TODO throw exception
+            }
+
+            Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
+            Location location = null;
+            if (locationOptional.isPresent()) {
+                location = locationOptional.get();
+            } else {
+                // TODO throw exception
+            }
 
             Activity activity = new Activity(
                     activityPayload.getName(),
@@ -84,35 +98,54 @@ public class ActivityController implements Controller {
                 return "Invalid payload";
             }
 
-            Activity activity = store.getActivity(activityPayload.getUuid());
+            Optional<Activity> activityOptional = store.getActivity(activityPayload.getUuid());
 
-            if (activityPayload.getName() != null) {
-                activity.setName(activityPayload.getName());
+            if (activityOptional.isPresent()) {
+                Activity activity = activityOptional.get();
+
+                if (activityPayload.getName() != null) {
+                    activity.setName(activityPayload.getName());
+                }
+
+                if (activityPayload.getType() != null) {
+                    Optional<Type> typeOptional = store.getType(activityPayload.getType());
+                    if (typeOptional.isPresent()) {
+                        activity.setType(typeOptional.get());
+                    } else {
+                        // TODO throw exception
+                    }
+                }
+
+                if (activityPayload.getRating() != null) {
+                    activity.setRating(activityPayload.getRating());
+                }
+
+                if (activityPayload.getLocation() != null) {
+                    Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
+                    if (locationOptional.isPresent()) {
+                        activity.setLocation(locationOptional.get());
+                    } else {
+                        // TODO throw exception
+                    }
+
+
+                }
+
+                if (activityPayload.getCost() != null) {
+                    activity.setCost(activityPayload.getCost());
+                }
+
+                if (activityPayload.getDescription() != null) {
+                    activity.setDescription(activityPayload.getDescription());
+                }
+
+                store.updateActivity(activity);
+
+                return objectMapper.writeValueAsString(activity);
+            } else {
+                // TODO throw exception
+                return "";
             }
-
-            if (activityPayload.getType() != null) {
-                activity.setType(store.getType(activityPayload.getType()));
-            }
-
-            if (activityPayload.getRating() != null) {
-                activity.setRating(activityPayload.getRating());
-            }
-
-            if (activityPayload.getLocation() != null) {
-                activity.setLocation(store.getLocation(activityPayload.getLocation()));
-            }
-
-            if (activityPayload.getCost() != null) {
-                activity.setCost(activityPayload.getCost());
-            }
-
-            if (activityPayload.getDescription() != null) {
-                activity.setDescription(activityPayload.getDescription());
-            }
-
-            store.updateActivity(activity);
-
-            return objectMapper.writeValueAsString(activity);
         });
 
         delete("/api/activities/:activity", (request, response) -> {

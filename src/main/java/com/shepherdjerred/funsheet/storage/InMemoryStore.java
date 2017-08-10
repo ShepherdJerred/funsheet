@@ -27,8 +27,8 @@ public class InMemoryStore implements Store {
     }
 
     @Override
-    public Activity getActivity(UUID uuid) {
-        return activities.get(uuid);
+    public Optional<Activity> getActivity(UUID uuid) {
+        return Optional.of(activities.getOrDefault(uuid, null));
     }
 
     @Override
@@ -52,8 +52,8 @@ public class InMemoryStore implements Store {
     }
 
     @Override
-    public Tag getTag(UUID uuid) {
-        return tags.get(uuid);
+    public Optional<Tag> getTag(UUID uuid) {
+        return Optional.of(tags.getOrDefault(uuid, null));
     }
 
     @Override
@@ -77,8 +77,8 @@ public class InMemoryStore implements Store {
     }
 
     @Override
-    public Type getType(UUID uuid) {
-        return types.get(uuid);
+    public Optional<Type> getType(UUID uuid) {
+        return Optional.of(types.getOrDefault(uuid, null));
     }
 
     @Override
@@ -102,8 +102,8 @@ public class InMemoryStore implements Store {
     }
 
     @Override
-    public Location getLocation(UUID uuid) {
-        return locations.get(uuid);
+    public Optional<Location> getLocation(UUID uuid) {
+        return Optional.of(locations.getOrDefault(uuid, null));
     }
 
     @Override

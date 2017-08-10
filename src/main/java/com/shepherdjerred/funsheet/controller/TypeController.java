@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static spark.Spark.*;
@@ -38,13 +39,13 @@ public class TypeController implements Controller {
 
             String typeParam = request.params().get(":type");
             UUID typeUuid = UUID.fromString(typeParam);
-            Type type = store.getType(typeUuid);
+            Optional<Type> type = store.getType(typeUuid);
 
-            if (type == null) {
+            if (type.isPresent()) {
+                return objectMapper.writeValueAsString(type.get());
+            } else {
                 response.status(404);
                 return "Not found";
-            } else {
-                return objectMapper.writeValueAsString(type);
             }
         });
 
@@ -60,7 +61,14 @@ public class TypeController implements Controller {
 
             List<Tag> tags = new ArrayList<>();
 
-            typePayload.getTags().forEach(tagUuid -> tags.add(store.getTag(tagUuid)));
+            typePayload.getTags().forEach(tagUuid -> {
+                Optional<Tag> tagOptional = store.getTag(tagUuid);
+                if (tagOptional.isPresent()) {
+                    tags.add(tagOptional.get());
+                } else {
+                    // TODO tag doesn't exist, throw exception?
+                }
+            });
 
             Type type = new Type(
                     typePayload.getName(),
@@ -83,21 +91,35 @@ public class TypeController implements Controller {
                 return "Invalid payload";
             }
 
-            Type type = store.getType(typePayload.getUuid());
+            Optional<Type> typeOptional = store.getType(typePayload.getUuid());
 
-            if (typePayload.getName() != null) {
-                type.setName(typePayload.getName());
+            if (typeOptional.isPresent()) {
+                Type type = typeOptional.get();
+
+                if (typePayload.getName() != null) {
+                    type.setName(typePayload.getName());
+                }
+
+                if (typePayload.getTags() != null) {
+                    List<Tag> tags = new ArrayList<>();
+                    typePayload.getTags().forEach(tagUuid -> {
+                        Optional<Tag> tagOptional = store.getTag(tagUuid);
+                        if (tagOptional.isPresent()) {
+                            tags.add(tagOptional.get());
+                        } else {
+                            // TODO tag doesn't exist, throw exception?
+                        }
+                    });
+                    type.setTags(tags);
+                }
+
+                store.updateType(type);
+
+                return objectMapper.writeValueAsString(type);
+            } else {
+                // TODO throw exception
+                return "";
             }
-
-            if (typePayload.getTags() != null) {
-                List<Tag> tags = new ArrayList<>();
-                typePayload.getTags().forEach(tagUuid -> tags.add(store.getTag(tagUuid)));
-                type.setTags(tags);
-            }
-
-            store.updateType(type);
-
-            return objectMapper.writeValueAsString(type);
         });
 
         delete("/api/types/:type", (request, response) -> {

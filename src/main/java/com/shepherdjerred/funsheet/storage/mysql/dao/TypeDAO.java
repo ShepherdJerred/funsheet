@@ -1,7 +1,8 @@
-package com.shepherdjerred.funsheet.storage.mysql;
+package com.shepherdjerred.funsheet.storage.mysql.dao;
 
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.query.Mapper;
@@ -11,17 +12,15 @@ import java.util.*;
 
 public class TypeDAO implements DAO<Type> {
 
-    private final MysqlStore store;
     private final FluentJdbc fluentJdbc;
     private static Mapper<Type> typeMapper;
 
 
-    public TypeDAO(Database database, MysqlStore store) {
-        fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
-        this.store = store;
-        // TODO don't create with every object (should be static?)
+    public TypeDAO(MysqlStore store) {
+        fluentJdbc = new FluentJdbcBuilder().connectionProvider(store.getDatabase().getDataSource()).build();
+
+        // TODO It would be better to use a join instead
         typeMapper = rs -> {
-            // TODO Use a join instead
             List<Tag> tags = new ArrayList<>(store.getTagsOfType(UUID.fromString(rs.getString("type_uuid"))));
 
             return new Type(rs.getString("name"),
@@ -70,7 +69,6 @@ public class TypeDAO implements DAO<Type> {
                 .run();
     }
 
-    // TODO
     @Override
     public void update(Type type) {
         Query query = fluentJdbc.query();
@@ -79,5 +77,7 @@ public class TypeDAO implements DAO<Type> {
                         String.valueOf(type.getUuid()))
                 .run();
         // TODO update type_tags table
+        // First we should delete any tag relationships not in the list
+        // Then we should add any tags relationships not in the database
     }
 }

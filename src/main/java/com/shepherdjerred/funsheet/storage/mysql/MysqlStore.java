@@ -5,12 +5,19 @@ import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
 import com.shepherdjerred.funsheet.storage.Store;
+import com.shepherdjerred.funsheet.storage.mysql.dao.ActivityDAO;
+import com.shepherdjerred.funsheet.storage.mysql.dao.LocationDAO;
+import com.shepherdjerred.funsheet.storage.mysql.dao.TagDAO;
+import com.shepherdjerred.funsheet.storage.mysql.dao.TypeDAO;
+import lombok.Getter;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 public class MysqlStore implements Store {
 
+    @Getter
     private final Database database;
     private final ActivityDAO activityDAO;
     private final LocationDAO locationDAO;
@@ -19,10 +26,10 @@ public class MysqlStore implements Store {
 
     public MysqlStore(Database database) {
         this.database = database;
-        activityDAO = new ActivityDAO(database, this);
-        locationDAO = new LocationDAO(database);
-        typeDAO = new TypeDAO(database, this);
-        tagDAO = new TagDAO(database);
+        activityDAO = new ActivityDAO(this);
+        locationDAO = new LocationDAO(this);
+        typeDAO = new TypeDAO(this);
+        tagDAO = new TagDAO(this);
     }
 
     @Override
@@ -31,8 +38,8 @@ public class MysqlStore implements Store {
     }
 
     @Override
-    public Activity getActivity(UUID uuid) {
-        return activityDAO.select(uuid).orElse(null); // TODO Return something other than null
+    public Optional<Activity> getActivity(UUID uuid) {
+        return activityDAO.select(uuid);
     }
 
     @Override
@@ -42,7 +49,8 @@ public class MysqlStore implements Store {
 
     @Override
     public void deleteActivity(UUID uuid) {
-        activityDAO.drop(getActivity(uuid));
+        Optional<Activity> activity = getActivity(uuid);
+        activity.ifPresent(activityDAO::drop);
     }
 
     @Override
@@ -56,8 +64,8 @@ public class MysqlStore implements Store {
     }
 
     @Override
-    public Tag getTag(UUID uuid) {
-        return tagDAO.select(uuid).orElse(null); // TODO Return something other than null
+    public Optional<Tag> getTag(UUID uuid) {
+        return tagDAO.select(uuid);
     }
 
     @Override
@@ -67,7 +75,8 @@ public class MysqlStore implements Store {
 
     @Override
     public void deleteTag(UUID uuid) {
-        tagDAO.drop(getTag(uuid));
+        Optional<Tag> tag = getTag(uuid);
+        tag.ifPresent(tagDAO::drop);
     }
 
     @Override
@@ -85,8 +94,8 @@ public class MysqlStore implements Store {
     }
 
     @Override
-    public Type getType(UUID uuid) {
-        return typeDAO.select(uuid).orElse(null); // TODO Return something other than null
+    public Optional<Type> getType(UUID uuid) {
+        return typeDAO.select(uuid);
     }
 
     @Override
@@ -96,7 +105,8 @@ public class MysqlStore implements Store {
 
     @Override
     public void deleteType(UUID uuid) {
-        typeDAO.drop(getType(uuid));
+        Optional<Type> type = getType(uuid);
+        type.ifPresent(typeDAO::drop);
     }
 
     @Override
@@ -110,8 +120,8 @@ public class MysqlStore implements Store {
     }
 
     @Override
-    public Location getLocation(UUID uuid) {
-        return locationDAO.select(uuid).orElse(null); // TODO Return something other than null
+    public Optional<Location> getLocation(UUID uuid) {
+        return locationDAO.select(uuid);
     }
 
     @Override
@@ -121,7 +131,8 @@ public class MysqlStore implements Store {
 
     @Override
     public void deleteLocation(UUID uuid) {
-        locationDAO.drop(getLocation(uuid));
+        Optional<Location> location = getLocation(uuid);
+        location.ifPresent(locationDAO::drop);
     }
 
     @Override

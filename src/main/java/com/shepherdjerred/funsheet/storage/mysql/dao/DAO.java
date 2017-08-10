@@ -1,4 +1,4 @@
-package com.shepherdjerred.funsheet.storage.mysql;
+package com.shepherdjerred.funsheet.storage.mysql.dao;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -1,6 +1,9 @@
-package com.shepherdjerred.funsheet.storage.mysql;
+package com.shepherdjerred.funsheet.storage.mysql.dao;
 
 import com.shepherdjerred.funsheet.objects.Activity;
+import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
 import lombok.extern.log4j.Log4j2;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
@@ -14,26 +17,32 @@ import java.util.UUID;
 @Log4j2
 public class ActivityDAO implements DAO<Activity> {
 
-    private final MysqlStore store;
     private final FluentJdbc fluentJdbc;
     private final Mapper<Activity> activityMapper;
 
-    public ActivityDAO(Database database, MysqlStore store) {
-        fluentJdbc = new FluentJdbcBuilder().connectionProvider(database.getDataSource()).build();
-        this.store = store;
-        // TODO don't create with every object (should be static?)
+    public ActivityDAO(MysqlStore store) {
+        fluentJdbc = new FluentJdbcBuilder().connectionProvider(store.getDatabase().getDataSource()).build();
+
         activityMapper = rs -> {
+            // TODO clean up this code
+            Type type = null;
+            Location location = null;
 
-            UUID type = rs.getString("type_uuid") == null ? null : UUID.fromString(rs.getString("type_uuid"));
+            String typeUuidString = rs.getString("type_uuid");
+            String locationUuidString = rs.getString("location_uuid");
 
-
-            UUID location = rs.getString("location_uuid") == null ? null : UUID.fromString(rs.getString("location_uuid"));
+            if (typeUuidString != null) {
+                type = store.getType(UUID.fromString(typeUuidString)).get();
+            }
+            if (locationUuidString != null) {
+                location = store.getLocation(UUID.fromString(locationUuidString)).get();
+            }
 
             return new Activity(rs.getString("name"),
                     UUID.fromString(rs.getString("activity_uuid")),
-                    store.getType(type),
+                    type,
                     rs.getInt("rating"),
-                    store.getLocation(location),
+                    location,
                     rs.getInt("cost"),
                     rs.getString("description")
             );
