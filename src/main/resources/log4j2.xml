@@ -7,11 +7,9 @@
         <Sentry name="Sentry"/>
     </Appenders>
     <Loggers>
-        <Root level="warn">
-            <appender-ref ref="Sentry"/>
-        </Root>
         <Root level="debug">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="Sentry" level="WARN"/>
         </Root>
     </Loggers>
 </Configuration>
