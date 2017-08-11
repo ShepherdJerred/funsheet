@@ -60,7 +60,9 @@
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/locations/' + this.location.uuid).then(response => {
+        this.$http.delete('/api/locations/' + this.location.uuid, {
+          'jwt': localStorage.getItem('jwt')
+        }).then(response => {
           this.$store.dispatch('getLocations');
           this.$router.push({name: 'Home'});
         }, response => {

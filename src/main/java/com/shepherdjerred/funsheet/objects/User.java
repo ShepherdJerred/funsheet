@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.UUID;
 
@@ -18,10 +19,15 @@ public class User {
     private String username;
     @Getter
     @Setter
-    private String password;
+    private String hashedPassword;
 
-    public User(UUID uuid) {
+    public User(UUID uuid, String username, String hashedPassword) {
         this.uuid = uuid;
+        this.username = username;
+        this.hashedPassword = hashedPassword;
     }
 
+    public boolean authenticate(String password) {
+        return BCrypt.checkpw(password, hashedPassword);
+    }
 }

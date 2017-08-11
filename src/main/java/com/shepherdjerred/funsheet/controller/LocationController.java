@@ -1,7 +1,12 @@
 package com.shepherdjerred.funsheet.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Location;
+import com.shepherdjerred.funsheet.objects.User;
 import com.shepherdjerred.funsheet.payloads.EditLocationPayload;
 import com.shepherdjerred.funsheet.payloads.NewLocationPayload;
 import com.shepherdjerred.funsheet.storage.Store;
@@ -42,7 +47,7 @@ public class LocationController implements Controller {
                 return objectMapper.writeValueAsString(location.get());
             } else {
                 response.status(404);
-                return null;
+                return "";
             }
         });
 
@@ -53,14 +58,34 @@ public class LocationController implements Controller {
 
             NewLocationPayload locationPayload = objectMapper.readValue(request.body(), NewLocationPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(locationPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!locationPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             if (store.isLocationNameTaken(locationPayload.getName())) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Location location = new Location(
@@ -79,9 +104,29 @@ public class LocationController implements Controller {
 
             EditLocationPayload locationPayload = objectMapper.readValue(request.body(), EditLocationPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(locationPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!locationPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Location> locationOptional = store.getLocation(locationPayload.getUuid());
@@ -92,7 +137,7 @@ public class LocationController implements Controller {
                 if (locationPayload.getName() != null) {
                     if (store.isLocationNameTaken(locationPayload.getName())&& !location.getName().equals(locationPayload.getName())) {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                     location.setName(locationPayload.getName());
                 }
@@ -106,19 +151,21 @@ public class LocationController implements Controller {
                 return objectMapper.writeValueAsString(location);
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
         });
 
         delete("/api/locations/:location", (request, response) -> {
             response.type("application/json");
 
+            // TODO auth
+
             String locationParam = request.params().get(":location");
             UUID locationUuid = UUID.fromString(locationParam);
 
             store.deleteLocation(locationUuid);
 
-            return null;
+            return "";
         });
     }
 }

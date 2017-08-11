@@ -3,7 +3,7 @@ package com.shepherdjerred.funsheet.payloads;
 import lombok.Getter;
 import lombok.Setter;
 
-public class LoginPayload implements Payload {
+public class RegisterPayload implements Payload {
 
     @Getter
     @Setter
@@ -11,6 +11,7 @@ public class LoginPayload implements Payload {
     @Getter
     @Setter
     private String password;
+
 
     @Override
     public boolean isValid() {

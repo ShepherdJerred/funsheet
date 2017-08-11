@@ -149,7 +149,8 @@
           'type': this.type,
           'cost': this.cost,
           'description': this.description,
-          'location': this.location
+          'location': this.location,
+          'jwt': localStorage.getItem('jwt')
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getActivities');

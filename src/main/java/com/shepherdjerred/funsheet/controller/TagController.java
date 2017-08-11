@@ -1,7 +1,12 @@
 package com.shepherdjerred.funsheet.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Tag;
+import com.shepherdjerred.funsheet.objects.User;
 import com.shepherdjerred.funsheet.payloads.EditTagPayload;
 import com.shepherdjerred.funsheet.payloads.NewTagPayload;
 import com.shepherdjerred.funsheet.storage.Store;
@@ -41,7 +46,7 @@ public class TagController implements Controller {
                 return objectMapper.writeValueAsString(tag.get());
             } else {
                 response.status(404);
-                return null;
+                return "";
             }
         });
 
@@ -50,14 +55,34 @@ public class TagController implements Controller {
 
             NewTagPayload tagPayload = objectMapper.readValue(request.body(), NewTagPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(tagPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!tagPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             if (store.isTagNameTaken(tagPayload.getName())) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Tag tag = new Tag(
@@ -75,9 +100,29 @@ public class TagController implements Controller {
 
             EditTagPayload tagPayload = objectMapper.readValue(request.body(), EditTagPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(tagPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!tagPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Tag> tagOptional = store.getTag(tagPayload.getUuid());
@@ -87,7 +132,7 @@ public class TagController implements Controller {
                 if (tagPayload.getName() != null) {
                     if (store.isTagNameTaken(tagPayload.getName()) && !tag.getName().equals(tagPayload.getName())) {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                     tag.setName(tagPayload.getName());
                 }
@@ -97,7 +142,7 @@ public class TagController implements Controller {
                 return objectMapper.writeValueAsString(tag);
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
 
         });
@@ -105,12 +150,14 @@ public class TagController implements Controller {
         delete("/api/tags/:tag", (request, response) -> {
             response.type("application/json");
 
+            // TODO auth
+
             String tagParam = request.params().get(":tag");
             UUID tagUuid = UUID.fromString(tagParam);
 
             store.deleteTag(tagUuid);
 
-            return null;
+            return "";
         });
     }
 }

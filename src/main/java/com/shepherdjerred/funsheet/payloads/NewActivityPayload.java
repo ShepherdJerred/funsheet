@@ -29,6 +29,9 @@ public class NewActivityPayload implements Payload {
     @Getter
     @Setter
     private String description;
+    @Getter
+    @Setter
+    private String jwt;
 
     @Override
     public boolean isValid() {

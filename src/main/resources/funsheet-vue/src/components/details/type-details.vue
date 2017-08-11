@@ -45,20 +45,22 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card controls">
-                            <footer class="card-footer">
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Edit Type', params: { 'uuid': type.uuid } }">
-                                        Edit
-                                    </router-link>
-                                </a>
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Delete Type', params: { 'uuid': type.uuid } }">
-                                        Delete
-                                    </router-link>
-                                </a>
-                            </footer>
-                        </div>
+                        <template v-if="isLoggedIn">
+                            <div class="card controls">
+                                <footer class="card-footer">
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Edit Type', params: { 'uuid': type.uuid } }">
+                                            Edit
+                                        </router-link>
+                                    </a>
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Delete Type', params: { 'uuid': type.uuid } }">
+                                            Delete
+                                        </router-link>
+                                    </a>
+                                </footer>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -100,6 +102,9 @@
       },
       types: function () {
         return this.$store.state.Types.types;
+      },
+      isLoggedIn: function () {
+        return localStorage.getItem('jwt') !== null;
       }
     }
   };

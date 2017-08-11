@@ -131,7 +131,7 @@ public class Main {
         new TagController(store).setupRoutes();
         new LocationController(store).setupRoutes();
 
-        new UserController().setupRoutes();
+        new UserController(store).setupRoutes();
     }
 
     private static int getPort() {

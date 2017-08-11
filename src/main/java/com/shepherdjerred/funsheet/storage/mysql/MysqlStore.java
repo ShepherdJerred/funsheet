@@ -1,14 +1,8 @@
 package com.shepherdjerred.funsheet.storage.mysql;
 
-import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.objects.Location;
-import com.shepherdjerred.funsheet.objects.Tag;
-import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.objects.*;
 import com.shepherdjerred.funsheet.storage.Store;
-import com.shepherdjerred.funsheet.storage.mysql.dao.ActivityDAO;
-import com.shepherdjerred.funsheet.storage.mysql.dao.LocationDAO;
-import com.shepherdjerred.funsheet.storage.mysql.dao.TagDAO;
-import com.shepherdjerred.funsheet.storage.mysql.dao.TypeDAO;
+import com.shepherdjerred.funsheet.storage.mysql.dao.*;
 import lombok.Getter;
 
 import java.util.Collection;
@@ -19,6 +13,7 @@ public class MysqlStore implements Store {
 
     @Getter
     private final Database database;
+    private final UserDAO userDAO;
     private final ActivityDAO activityDAO;
     private final LocationDAO locationDAO;
     private final TypeDAO typeDAO;
@@ -26,10 +21,36 @@ public class MysqlStore implements Store {
 
     public MysqlStore(Database database) {
         this.database = database;
+        userDAO = new UserDAO(this);
         activityDAO = new ActivityDAO(this);
         locationDAO = new LocationDAO(this);
         typeDAO = new TypeDAO(this);
         tagDAO = new TagDAO(this);
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDAO.insert(user);
+    }
+
+    @Override
+    public Optional<User> getUser(UUID uuid) {
+        return userDAO.select(uuid);
+    }
+
+    @Override
+    public boolean isUsernameTaken(String username) {
+        return userDAO.select(username).isPresent();
+    }
+
+    @Override
+    public UUID getUserUuid(String name) {
+        Optional<User> user = userDAO.select(name);
+        if (user.isPresent()) {
+            return user.get().getUuid();
+        } else {
+            return null;
+        }
     }
 
     @Override

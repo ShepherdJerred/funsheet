@@ -1,9 +1,14 @@
 package com.shepherdjerred.funsheet.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Activity;
 import com.shepherdjerred.funsheet.objects.Location;
 import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.objects.User;
 import com.shepherdjerred.funsheet.payloads.EditActivityPayload;
 import com.shepherdjerred.funsheet.payloads.NewActivityPayload;
 import com.shepherdjerred.funsheet.storage.Store;
@@ -43,7 +48,7 @@ public class ActivityController implements Controller {
                 return objectMapper.writeValueAsString(activity.get());
             } else {
                 response.status(404);
-                return null;
+                return "";
             }
         });
 
@@ -52,14 +57,34 @@ public class ActivityController implements Controller {
 
             NewActivityPayload activityPayload = objectMapper.readValue(request.body(), NewActivityPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(activityPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!activityPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             if (store.isActivityNameTaken(activityPayload.getName())) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Type> typeOptional = store.getType(activityPayload.getType());
@@ -68,7 +93,7 @@ public class ActivityController implements Controller {
                 type = typeOptional.get();
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
@@ -77,7 +102,7 @@ public class ActivityController implements Controller {
                 location = locationOptional.get();
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Activity activity = new Activity(
@@ -100,9 +125,29 @@ public class ActivityController implements Controller {
 
             EditActivityPayload activityPayload = objectMapper.readValue(request.body(), EditActivityPayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(activityPayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!activityPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Activity> activityOptional = store.getActivity(activityPayload.getUuid());
@@ -113,7 +158,7 @@ public class ActivityController implements Controller {
                 if (activityPayload.getName() != null) {
                     if (store.isActivityNameTaken(activityPayload.getName()) && !activity.getName().equals(activityPayload.getName())) {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                     activity.setName(activityPayload.getName());
                 }
@@ -124,7 +169,7 @@ public class ActivityController implements Controller {
                         activity.setType(typeOptional.get());
                     } else {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                 }
 
@@ -138,7 +183,7 @@ public class ActivityController implements Controller {
                         activity.setLocation(locationOptional.get());
                     } else {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                 }
 
@@ -155,19 +200,21 @@ public class ActivityController implements Controller {
                 return objectMapper.writeValueAsString(activity);
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
         });
 
         delete("/api/activities/:activity", (request, response) -> {
             response.type("application/json");
 
+            // TODO auth
+
             String activityParam = request.params().get(":activity");
             UUID activityUuid = UUID.fromString(activityParam);
 
             store.deleteActivity(activityUuid);
 
-            return null;
+            return "";
         });
     }
 

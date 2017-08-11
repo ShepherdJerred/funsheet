@@ -1,8 +1,13 @@
 package com.shepherdjerred.funsheet.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.objects.User;
 import com.shepherdjerred.funsheet.payloads.EditTypePayload;
 import com.shepherdjerred.funsheet.payloads.NewTypePayload;
 import com.shepherdjerred.funsheet.storage.Store;
@@ -45,7 +50,7 @@ public class TypeController implements Controller {
                 return objectMapper.writeValueAsString(type.get());
             } else {
                 response.status(404);
-                return null;
+                return "";
             }
         });
 
@@ -54,14 +59,34 @@ public class TypeController implements Controller {
 
             NewTypePayload typePayload = objectMapper.readValue(request.body(), NewTypePayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(typePayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!typePayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             if (store.isTypeNameTaken(typePayload.getName())) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             List<Tag> tags = new ArrayList<>();
@@ -72,7 +97,7 @@ public class TypeController implements Controller {
                     tags.add(tagOptional.get());
                 } else {
                     response.status(400);
-                    return null;
+                    return "";
                 }
             }
 
@@ -92,9 +117,29 @@ public class TypeController implements Controller {
 
             EditTypePayload typePayload = objectMapper.readValue(request.body(), EditTypePayload.class);
 
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("http://funsheet.herokuapp.com")
+                    .build();
+            DecodedJWT jwt = verifier.verify(typePayload.getJwt());
+
+            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
+            Optional<User> userToAuthTo = store.getUser(userUuid);
+
+            if (!userToAuthTo.isPresent()) {
+                response.status(401);
+                return "";
+            }
+
+            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
+                response.status(401);
+                return "";
+            }
+
             if (!typePayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
             }
 
             Optional<Type> typeOptional = store.getType(typePayload.getUuid());
@@ -105,7 +150,7 @@ public class TypeController implements Controller {
                 if (typePayload.getName() != null) {
                     if (store.isTypeNameTaken(typePayload.getName())&& !type.getName().equals(typePayload.getName())) {
                         response.status(400);
-                        return null;
+                        return "";
                     }
                     type.setName(typePayload.getName());
                 }
@@ -118,7 +163,7 @@ public class TypeController implements Controller {
                             tags.add(tagOptional.get());
                         } else {
                             response.status(400);
-                            return null;
+                            return "";
                         }
                     }
                     type.setTags(tags);
@@ -129,19 +174,21 @@ public class TypeController implements Controller {
                 return objectMapper.writeValueAsString(type);
             } else {
                 response.status(400);
-                return null;
+                return "";
             }
         });
 
         delete("/api/types/:type", (request, response) -> {
             response.type("application/json");
 
+            // TODO auth
+
             String typeParam = request.params().get(":type");
             UUID typeUuid = UUID.fromString(typeParam);
 
             store.deleteType(typeUuid);
 
-            return null;
+            return "";
         });
 
     }

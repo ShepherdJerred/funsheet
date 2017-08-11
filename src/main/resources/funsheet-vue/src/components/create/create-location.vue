@@ -54,7 +54,8 @@
       onSubmit: function () {
         this.$http.post('/api/locations', {
           'name': this.name,
-          'placeId': this.placeId
+          'placeId': this.placeId,
+          'jwt': localStorage.getItem('jwt')
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getLocations');

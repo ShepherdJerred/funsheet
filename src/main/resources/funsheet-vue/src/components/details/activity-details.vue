@@ -44,20 +44,23 @@
                             </footer>
                         </div>
 
-                        <div class="card controls">
-                            <footer class="card-footer">
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Edit Activity', params: { 'uuid': activity.uuid } }">
-                                        Edit
-                                    </router-link>
-                                </a>
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Delete Activity', params: { 'uuid': activity.uuid } }">
-                                        Delete
-                                    </router-link>
-                                </a>
-                            </footer>
-                        </div>
+                        <template v-if="isLoggedIn">
+                            <div class="card controls">
+                                <footer class="card-footer">
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Edit Activity', params: { 'uuid': activity.uuid } }">
+                                            Edit
+                                        </router-link>
+                                    </a>
+                                    <a class="card-footer-item">
+                                        <router-link
+                                                :to="{ name: 'Delete Activity', params: { 'uuid': activity.uuid } }">
+                                            Delete
+                                        </router-link>
+                                    </a>
+                                </footer>
+                            </div>
+                        </template>
                     </div>
                     <template v-if="activity.location">
                         <div class="column">
@@ -101,6 +104,9 @@
       },
       activities: function () {
         return this.$store.state.Activities.activities;
+      },
+      isLoggedIn: function () {
+        return localStorage.getItem('jwt') !== null;
       }
     }
   };

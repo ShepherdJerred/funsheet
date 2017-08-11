@@ -1,16 +1,37 @@
 <template>
     <div>
         <div class="column is-one-third-desktop is-offset-one-third-desktop">
-            <form method="post"
-                  action="/login/callback">
+            <div class="tabs is-fullwidth">
+                <ul>
+                    <li>
+                        <router-link :to="{ name: 'Login' }">
+                            <span class="icon"><i class="fa fa-user"></i></span>
+                            <span>Login</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{ name: 'Register' }">
+                            <span class="icon"><i class="fa fa-check"></i></span>
+                            <span>Register</span>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="title">Login</h1>
+            <template v-if="loginError">
+                <div class="notification is-danger">
+                    Incorrect username or password
+                </div>
+            </template>
+            <form v-on:submit.prevent="onSubmit">
                 <div class="field">
                     <label class="label">
                         Username
                         <span class="control">
-                        <input type="text"
-                               name="username"
+                        <input name="username"
                                class="input"
-                               required>
+                               required
+                               v-model="username">
                     </span>
                     </label>
                 </div>
@@ -21,11 +42,12 @@
                         <input type="password"
                                name="password"
                                class="input"
-                               required>
+                               required
+                               v-model="password">
                     </span>
                     </label>
                 </div>
-                <button class="button">Login</button>
+                <button class="button is-primary">Login</button>
             </form>
         </div>
     </div>
@@ -33,6 +55,32 @@
 
 <script>
   export default {
-    name: 'User-Login'
+    name: 'User-Login',
+    data: function () {
+      return {
+        username: '',
+        password: '',
+        loginError: false
+      };
+    },
+    methods: {
+      onSubmit: function () {
+        this.$http.post('/api/user/login', {
+          'username': this.username,
+          'password': this.password
+        }).then(response => {
+          console.log(response.body);
+          localStorage.setItem('jwt', response.body.jsonWebToken);
+          localStorage.setItem('username', response.body.username);
+          // TODO Find a better way to do this
+          // Reload the page to update the navbar
+          location.reload();
+          this.$router.push({name: 'Home'});
+        }, response => {
+          console.log(response.body);
+          this.loginError = true;
+        });
+      }
+    }
   };
 </script>

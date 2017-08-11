@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column is-two-thirds-desktop is-offset-2">
+            <div class="column is-two-thirds-desktop is-offset-2-desktop">
                 <div class="columns">
                     <div class="column">
                         <div class="card">
@@ -29,20 +29,22 @@
                         </div>
                     </div>
                     <div class="column">
-                        <div class="card">
-                            <footer class="card-footer">
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Edit Tag', params: { 'uuid': tag.uuid } }">
-                                        Edit
-                                    </router-link>
-                                </a>
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Delete Tag', params: { 'uuid': tag.uuid } }">
-                                        Delete
-                                    </router-link>
-                                </a>
-                            </footer>
-                        </div>
+                        <template v-if="isLoggedIn">
+                            <div class="card">
+                                <footer class="card-footer">
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Edit Tag', params: { 'uuid': tag.uuid } }">
+                                            Edit
+                                        </router-link>
+                                    </a>
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Delete Tag', params: { 'uuid': tag.uuid } }">
+                                            Delete
+                                        </router-link>
+                                    </a>
+                                </footer>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -86,6 +88,9 @@
       },
       tags: function () {
         return this.$store.state.Tags.tags;
+      },
+      isLoggedIn: function () {
+        return localStorage.getItem('jwt') !== null;
       }
     }
   };

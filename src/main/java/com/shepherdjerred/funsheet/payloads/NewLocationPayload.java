@@ -15,6 +15,9 @@ public class NewLocationPayload implements Payload {
     @Getter
     @Setter
     private String placeId;
+    @Getter
+    @Setter
+    private String jwt;
 
     @Override
     public boolean isValid() {

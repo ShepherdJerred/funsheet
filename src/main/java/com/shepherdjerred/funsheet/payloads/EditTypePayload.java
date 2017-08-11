@@ -17,6 +17,9 @@ public class EditTypePayload implements Payload {
     @Getter
     @Setter
     private List<UUID> tags;
+    @Getter
+    @Setter
+    private String jwt;
 
     @Override
     public boolean isValid() {

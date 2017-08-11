@@ -93,7 +93,8 @@
         this.$http.patch('/api/types/' + this.uuid, {
           'uuid': this.uuid,
           'name': this.name,
-          'tags': this.tags
+          'tags': this.tags,
+          'jwt': localStorage.getItem('jwt')
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getTypes');

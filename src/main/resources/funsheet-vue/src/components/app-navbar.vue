@@ -15,32 +15,37 @@
 
             <div id="navbar" class="navbar-menu" v-bind:class="{ 'is-active': isActive }">
                 <div class="navbar-start">
-                    <router-link class="navbar-item" :to="{ name: 'Home' }" active-class="is-active" v-on:click="toggleActive()">
+                    <router-link class="navbar-item" :to="{ name: 'Home' }" active-class="is-active"
+                                 v-on:click="toggleActive()">
                         Home
                     </router-link>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Create
-                        </a>
-                        <div class="navbar-dropdown">
-                            <router-link class="navbar-item" :to="{ name: 'Create Activity' }" active-class="is-active"
-                                         v-on:click.native="toggleActive()">
-                                Activity
-                            </router-link>
-                            <router-link class="navbar-item" :to="{ name: 'Create Location' }" active-class="is-active"
-                                         v-on:click.native="toggleActive()">
-                                Location
-                            </router-link>
-                            <router-link class="navbar-item" :to="{ name: 'Create Type' }" active-class="is-active"
-                                         v-on:click.native="toggleActive()">
-                                Type
-                            </router-link>
-                            <router-link class="navbar-item" :to="{ name: 'Create Tag' }" active-class="is-active"
-                                         v-on:click.native="toggleActive()">
-                                Tag
-                            </router-link>
+                    <template v-if="isLoggedIn">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Create
+                            </a>
+                            <div class="navbar-dropdown">
+                                <router-link class="navbar-item" :to="{ name: 'Create Activity' }"
+                                             active-class="is-active"
+                                             v-on:click.native="toggleActive()">
+                                    Activity
+                                </router-link>
+                                <router-link class="navbar-item" :to="{ name: 'Create Location' }"
+                                             active-class="is-active"
+                                             v-on:click.native="toggleActive()">
+                                    Location
+                                </router-link>
+                                <router-link class="navbar-item" :to="{ name: 'Create Type' }" active-class="is-active"
+                                             v-on:click.native="toggleActive()">
+                                    Type
+                                </router-link>
+                                <router-link class="navbar-item" :to="{ name: 'Create Tag' }" active-class="is-active"
+                                             v-on:click.native="toggleActive()">
+                                    Tag
+                                </router-link>
+                            </div>
                         </div>
-                    </div>
+                    </template>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
                             View all
@@ -66,22 +71,34 @@
                     </div>
                 </div>
 
-                <!--<div class="navbar-end">-->
-                <!--<div class="navbar-item">-->
-                <!--<div class="field is-grouped">-->
-                <!--<p class="control">-->
-                <!--<router-link class="button"-->
-                <!--to="/login"
-                 v-on:click="toggleActive()">-->
-                <!--<span class="icon">-->
-                <!--<i class="fa fa-user"></i>-->
-                <!--</span>-->
-                <!--<span>Sign in</span>-->
-                <!--</router-link>-->
-                <!--</p>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <template v-if="!isLoggedIn">
+                                    <router-link class="button"
+                                                 :to="{name:'Login'}"
+                                                 v-on:click="toggleActive()">
+                                    <span class="icon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                        <span>Login</span>
+                                    </router-link>
+                                </template>
+                                <template v-else>
+                                    <router-link class="button"
+                                                 :to="{name:'Account'}"
+                                                 v-on:click="toggleActive()">
+                                    <span class="icon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                        <span>{{ username }}</span>
+                                    </router-link>
+                                </template>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
     </div>
@@ -94,6 +111,14 @@
       return {
         isActive: false
       };
+    },
+    computed: {
+      username: function () {
+        return localStorage.getItem('username');
+      },
+      isLoggedIn: function () {
+        return localStorage.getItem('jwt') !== null;
+      }
     },
     methods: {
       toggleActive: function () {

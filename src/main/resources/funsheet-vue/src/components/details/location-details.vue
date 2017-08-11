@@ -29,20 +29,23 @@
                             </div>
                         </div>
 
-                        <div class="card controls">
-                            <footer class="card-footer">
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Edit Location', params: { 'uuid': location.uuid } }">
-                                        Edit
-                                    </router-link>
-                                </a>
-                                <a class="card-footer-item">
-                                    <router-link :to="{ name: 'Delete Location', params: { 'uuid': location.uuid } }">
-                                        Delete
-                                    </router-link>
-                                </a>
-                            </footer>
-                        </div>
+                        <template v-if="isLoggedIn">
+                            <div class="card controls">
+                                <footer class="card-footer">
+                                    <a class="card-footer-item">
+                                        <router-link :to="{ name: 'Edit Location', params: { 'uuid': location.uuid } }">
+                                            Edit
+                                        </router-link>
+                                    </a>
+                                    <a class="card-footer-item">
+                                        <router-link
+                                                :to="{ name: 'Delete Location', params: { 'uuid': location.uuid } }">
+                                            Delete
+                                        </router-link>
+                                    </a>
+                                </footer>
+                            </div>
+                        </template>
                     </div>
                     <div class="column">
                         <place-view :location="location"></place-view>
@@ -91,6 +94,9 @@
       },
       locations: function () {
         return this.$store.state.Locations.locations;
+      },
+      isLoggedIn: function () {
+        return localStorage.getItem('jwt') !== null;
       }
     }
   };

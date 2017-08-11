@@ -67,7 +67,8 @@
       onSubmit: function () {
         this.$http.patch('/api/tags/' + this.uuid, {
           'uuid': this.uuid,
-          'name': this.name
+          'name': this.name,
+          'jwt': localStorage.getItem('jwt')
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getTags');

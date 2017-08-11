@@ -60,7 +60,9 @@
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/tags/' + this.tag.uuid).then(response => {
+        this.$http.delete('/api/tags/' + this.tag.uuid, {
+          'jwt': localStorage.getItem('jwt')
+        }).then(response => {
           this.$store.dispatch('getTags');
           this.$router.push({name: 'Home'});
         }, response => {

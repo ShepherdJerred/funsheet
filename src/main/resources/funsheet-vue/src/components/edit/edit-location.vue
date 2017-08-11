@@ -82,7 +82,8 @@
         this.$http.patch('/api/locations/' + this.uuid, {
           'uuid': this.uuid,
           'name': this.name,
-          'placeId': this.placeId
+          'placeId': this.placeId,
+          'jwt': localStorage.getItem('jwt')
         }).then(response => {
           console.log(response.body);
           this.$store.dispatch('getLocations');

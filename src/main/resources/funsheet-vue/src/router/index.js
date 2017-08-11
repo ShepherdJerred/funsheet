@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import Home from '../components/app-home.vue';
 import Login from '../components/user-login.vue';
 import Register from '../components/user-register.vue';
+import Account from '../components/user-account.vue';
 
 import Error404 from '../components/error-404.vue';
 
@@ -34,6 +35,7 @@ import DeleteTag from '../components/delete/delete-tag.vue';
 
 Vue.use(Router);
 
+// TODO Add route guards for auth
 export default new Router({
   routes: [
     {
@@ -50,6 +52,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
     },
     {
       path: '/activity/create',

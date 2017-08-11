@@ -1,24 +1,54 @@
 package com.shepherdjerred.funsheet.storage;
 
-import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.objects.Location;
-import com.shepherdjerred.funsheet.objects.Tag;
-import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.objects.*;
+import lombok.ToString;
 
 import java.util.*;
 
+@ToString
 public class InMemoryStore implements Store {
 
+    private Map<UUID, User> users;
     private Map<UUID, Tag> tags;
     private Map<UUID, Type> types;
     private Map<UUID, Location> locations;
     private Map<UUID, Activity> activities;
 
     public InMemoryStore() {
+        users = new HashMap<>();
         tags = new HashMap<>();
         types = new HashMap<>();
         locations = new HashMap<>();
         activities = new HashMap<>();
+    }
+
+    @Override
+    public void addUser(User user) {
+        users.put(user.getUuid(), user);
+    }
+
+    public Optional<User> getUser(UUID uuid) {
+        return Optional.ofNullable(users.get(uuid));
+    }
+
+    @Override
+    public boolean isUsernameTaken(String username) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public UUID getUserUuid(String username) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username)) {
+                return user.getUuid();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -28,7 +58,7 @@ public class InMemoryStore implements Store {
 
     @Override
     public Optional<Activity> getActivity(UUID uuid) {
-        return Optional.of(activities.getOrDefault(uuid, null));
+        return Optional.ofNullable(activities.get(uuid));
     }
 
     @Override
@@ -63,7 +93,7 @@ public class InMemoryStore implements Store {
 
     @Override
     public Optional<Tag> getTag(UUID uuid) {
-        return Optional.of(tags.getOrDefault(uuid, null));
+        return Optional.ofNullable(tags.get(uuid));
     }
 
     @Override
@@ -98,7 +128,7 @@ public class InMemoryStore implements Store {
 
     @Override
     public Optional<Type> getType(UUID uuid) {
-        return Optional.of(types.getOrDefault(uuid, null));
+        return Optional.ofNullable(types.get(uuid));
     }
 
     @Override
@@ -133,7 +163,7 @@ public class InMemoryStore implements Store {
 
     @Override
     public Optional<Location> getLocation(UUID uuid) {
-        return Optional.of(locations.getOrDefault(uuid, null));
+        return Optional.ofNullable(locations.get(uuid));
     }
 
     @Override

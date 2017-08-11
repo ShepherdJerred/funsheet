@@ -12,6 +12,9 @@ public class NewTagPayload implements Payload {
     @Getter
     @Setter
     private String name;
+    @Getter
+    @Setter
+    private String jwt;
 
     @Override
     public boolean isValid() {

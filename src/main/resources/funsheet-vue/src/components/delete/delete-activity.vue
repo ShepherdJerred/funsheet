@@ -60,7 +60,9 @@
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/activities/' + this.activity.uuid).then(response => {
+        this.$http.delete('/api/activities/' + this.activity.uuid, {
+          'jwt': localStorage.getItem('jwt')
+        }).then(response => {
           this.$store.dispatch('getActivities');
           this.$router.push({name: 'Home'});
         }, response => {

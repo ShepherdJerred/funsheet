@@ -61,7 +61,9 @@
     },
     methods: {
       onSubmit: function () {
-        this.$http.delete('/api/types/' + this.type.uuid).then(response => {
+        this.$http.delete('/api/types/' + this.type.uuid, {
+          'jwt': localStorage.getItem('jwt')
+        }).then(response => {
           this.$store.dispatch('getTypes');
           this.$router.push({name: 'Home'});
         }, response => {
