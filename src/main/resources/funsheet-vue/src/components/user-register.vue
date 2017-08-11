@@ -64,6 +64,20 @@
                         <span class="tag is-danger">Your password doesn't match!</span>
                     </template>
                 </div>
+                <div class="field">
+                    <label class="label">
+                        Referrer
+                        <span class="control">
+                        <input class="input"
+                               required
+                               v-model="referrer"
+                               placeholder="d04a6c25-2810-43e4-b9d7-13c157458bfa">
+                    </span>
+                    </label>
+                    <p class="help">
+                        You need the UUID of another user to create a new account
+                    </p>
+                </div>
                 <button class="button is-primary">Create Account</button>
             </form>
         </div>
@@ -77,7 +91,8 @@
       return {
         username: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        referrer: ''
       };
     },
     methods: {
@@ -87,7 +102,8 @@
         }
         this.$http.post('/api/user/register', {
           'username': this.username,
-          'password': this.password
+          'password': this.password,
+          'referrer': this.referrer
         }).then(response => {
           console.log(response.body);
           localStorage.setItem('jwt', response.body.jsonWebToken);

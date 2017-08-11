@@ -11,6 +11,9 @@ public class RegisterPayload implements Payload {
     @Getter
     @Setter
     private String password;
+    @Getter
+    @Setter
+    private String referrer;
 
 
     @Override
@@ -19,6 +22,9 @@ public class RegisterPayload implements Payload {
             return false;
         }
         if (password.equals(username)) {
+            return false;
+        }
+        if (referrer.matches("/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/")) {
             return false;
         }
         return true;

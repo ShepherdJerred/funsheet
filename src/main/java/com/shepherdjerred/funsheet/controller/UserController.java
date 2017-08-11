@@ -72,7 +72,17 @@ public class UserController implements Controller {
 
             if (!registerPayload.isValid()) {
                 response.status(400);
-                return null;
+                return "";
+            }
+
+            String registerKey = new ProcessBuilder().environment().get("REGISTER_KEY");
+
+            if (!store.getUser(UUID.fromString(registerPayload.getReferrer())).isPresent()) {
+                response.status(400);
+                return "";
+            } else if (!registerPayload.getReferrer().equals(registerKey)) {
+                response.status(400);
+                return "";
             }
 
             User user = new User(
