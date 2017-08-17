@@ -50,7 +50,7 @@ public class ActivityDAO implements DAO<Activity> {
 
     public Optional<Activity> select(String name) {
         Query query = fluentJdbc.query();
-        return query.select("SELECT * FROM activity WHERE activity_name = ?")
+        return query.select("SELECT * FROM activity WHERE name = ?")
                 .params(name)
                 .firstResult(activityMapper);
     }

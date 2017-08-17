@@ -32,7 +32,7 @@ public class TypeDAO implements DAO<Type> {
 
     public Optional<Type> select(String name) {
         Query query = fluentJdbc.query();
-        return query.select("SELECT * FROM type WHERE type_name = ?")
+        return query.select("SELECT * FROM type WHERE name = ?")
                 .params(name)
                 .firstResult(typeMapper);
     }

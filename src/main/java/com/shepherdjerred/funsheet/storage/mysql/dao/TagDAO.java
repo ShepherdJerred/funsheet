@@ -27,7 +27,7 @@ public class TagDAO implements DAO<Tag> {
 
     public Optional<Tag> select(String name) {
         Query query = fluentJdbc.query();
-        return query.select("SELECT * FROM tag WHERE tag_name = ?")
+        return query.select("SELECT * FROM tag WHERE name = ?")
                 .params(name)
                 .firstResult(tagMapper);
     }

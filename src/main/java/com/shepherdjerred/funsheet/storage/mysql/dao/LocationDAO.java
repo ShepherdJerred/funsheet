@@ -28,7 +28,7 @@ public class LocationDAO implements DAO<Location> {
 
     public Optional<Location> select(String name) {
         Query query = fluentJdbc.query();
-        return query.select("SELECT * FROM location WHERE location_name = ?")
+        return query.select("SELECT * FROM location WHERE name = ?")
                 .params(name)
                 .firstResult(locationMapper);
     }
