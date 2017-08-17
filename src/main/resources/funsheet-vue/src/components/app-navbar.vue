@@ -131,6 +131,14 @@
 <style lang="scss" scoped>
     @import '../scss/global';
 
+    @media screen and (max-width: 1007px) {
+        .navbar {
+            position: fixed;
+            z-index: 100;
+            width: 100%;
+        }
+    }
+
     .navbar-brand {
         font-family: $font-brand;
     }

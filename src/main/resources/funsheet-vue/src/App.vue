@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <navbar></navbar>
-        <router-view></router-view>
+        <div class="content">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -28,5 +30,11 @@
     #app {
         background: $neutral-light;
         min-height: 100vh;
+    }
+
+    @media screen and (max-width: 1007px) {
+        .content {
+            padding-top: 52px;
+        }
     }
 </style>
