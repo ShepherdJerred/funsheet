@@ -29,7 +29,24 @@
                         </div>
                     </div>
                     <div class="column">
-                        <template v-if="isLoggedIn">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3 class="title">All activities tagged {{ tag.name }}</h3>
+                                <ul>
+                                    <template v-for="activity in activitiesWithTag">
+                                        <li>
+                                            <router-link
+                                                    :to="{ name: 'Activity Details', params: { 'uuid': activity.uuid } }">
+                                                {{ activity.name }}
+                                            </router-link>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <template v-if="isLoggedIn">
+                        <div class="column">
                             <div class="card">
                                 <footer class="card-footer">
                                     <a class="card-footer-item">
@@ -44,8 +61,8 @@
                                     </a>
                                 </footer>
                             </div>
-                        </template>
-                    </div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </template>
@@ -75,10 +92,20 @@
       }
     },
     computed: {
+      activitiesWithTag: function () {
+        return Helper.objectToArray(this.activities).filter(activity => {
+          if (activity.type) {
+            return activity.type.tags.find(tag => tag.uuid === this.uuid);
+          }
+        });
+      },
       typesWithTag: function () {
         return Helper.objectToArray(this.types).filter(type => {
           return Helper.objectToArray(type.tags).find(tag => tag.uuid === this.uuid);
         });
+      },
+      activities: function () {
+        return this.$store.state.Activities.activities;
       },
       types: function () {
         return this.$store.state.Types.types;
