@@ -10,26 +10,30 @@
             </div>
         </div>
         <div class="column is-half-desktop is-offset-one-quarter-desktop">
-            <table class="table is-fullwidth">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Place ID</th>
-                </tr>
-                </thead>
-                <tbody>
-                <template v-for="location in locations">
+            <div class="tableContainer">
+                <table class="table is-fullwidth">
+                    <thead>
                     <tr>
-                        <td>
-                            <router-link :to="{ name: 'Location Details', params: { 'uuid': location.uuid } }">{{ location.name }}</router-link>
-                        </td>
-                        <td>
-                            {{ location.placeId }}
-                        </td>
+                        <th>Name</th>
+                        <th>Place ID</th>
                     </tr>
-                </template>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <template v-for="location in locations">
+                        <tr>
+                            <td>
+                                <router-link :to="{ name: 'Location Details', params: { 'uuid': location.uuid } }">
+                                    {{ location.name }}
+                                </router-link>
+                            </td>
+                            <td>
+                                {{ location.placeId }}
+                            </td>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -46,5 +50,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .tableContainer {
+        overflow: auto;
+    }
 </style>
