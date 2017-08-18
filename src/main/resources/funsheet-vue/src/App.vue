@@ -15,11 +15,16 @@
     components: {
       Navbar
     },
+    methods: {
+      updateData: function () {
+        this.$store.dispatch('getActivities');
+        this.$store.dispatch('getLocations');
+        this.$store.dispatch('getTypes');
+        this.$store.dispatch('getTags');
+      }
+    },
     created: function () {
-      this.$store.dispatch('getActivities');
-      this.$store.dispatch('getLocations');
-      this.$store.dispatch('getTypes');
-      this.$store.dispatch('getTags');
+      this.updateData();
     }
   };
 </script>

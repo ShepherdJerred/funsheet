@@ -1,18 +1,17 @@
 package com.shepherdjerred.funsheet.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shepherdjerred.funsheet.JWTHelper;
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.objects.Type;
-import com.shepherdjerred.funsheet.objects.User;
-import com.shepherdjerred.funsheet.payloads.EditTypePayload;
-import com.shepherdjerred.funsheet.payloads.NewTypePayload;
+import com.shepherdjerred.funsheet.controller.payloads.type.EditTypePayload;
+import com.shepherdjerred.funsheet.controller.payloads.type.NewTypePayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,23 +58,13 @@ public class TypeController implements Controller {
 
             NewTypePayload typePayload = objectMapper.readValue(request.body(), NewTypePayload.class);
 
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("http://funsheet.herokuapp.com")
-                    .build();
-            DecodedJWT jwt = verifier.verify(typePayload.getJwt());
-
-            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
-            Optional<User> userToAuthTo = store.getUser(userUuid);
-
-            if (!userToAuthTo.isPresent()) {
+            try {
+                DecodedJWT jwt = JWTHelper.decodeJwt(typePayload.getJwt());
+            } catch (JWTVerificationException e) {
                 response.status(401);
                 return "";
-            }
-
-            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
-                response.status(401);
+            } catch (UnsupportedEncodingException e) {
+                response.status(500);
                 return "";
             }
 
@@ -117,23 +106,13 @@ public class TypeController implements Controller {
 
             EditTypePayload typePayload = objectMapper.readValue(request.body(), EditTypePayload.class);
 
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("http://funsheet.herokuapp.com")
-                    .build();
-            DecodedJWT jwt = verifier.verify(typePayload.getJwt());
-
-            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
-            Optional<User> userToAuthTo = store.getUser(userUuid);
-
-            if (!userToAuthTo.isPresent()) {
+            try {
+                DecodedJWT jwt = JWTHelper.decodeJwt(typePayload.getJwt());
+            } catch (JWTVerificationException e) {
                 response.status(401);
                 return "";
-            }
-
-            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
-                response.status(401);
+            } catch (UnsupportedEncodingException e) {
+                response.status(500);
                 return "";
             }
 

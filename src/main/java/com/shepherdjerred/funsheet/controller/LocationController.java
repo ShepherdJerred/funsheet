@@ -1,17 +1,16 @@
 package com.shepherdjerred.funsheet.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shepherdjerred.funsheet.JWTHelper;
 import com.shepherdjerred.funsheet.objects.Location;
-import com.shepherdjerred.funsheet.objects.User;
-import com.shepherdjerred.funsheet.payloads.EditLocationPayload;
-import com.shepherdjerred.funsheet.payloads.NewLocationPayload;
+import com.shepherdjerred.funsheet.controller.payloads.location.EditLocationPayload;
+import com.shepherdjerred.funsheet.controller.payloads.location.NewLocationPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,23 +57,13 @@ public class LocationController implements Controller {
 
             NewLocationPayload locationPayload = objectMapper.readValue(request.body(), NewLocationPayload.class);
 
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("http://funsheet.herokuapp.com")
-                    .build();
-            DecodedJWT jwt = verifier.verify(locationPayload.getJwt());
-
-            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
-            Optional<User> userToAuthTo = store.getUser(userUuid);
-
-            if (!userToAuthTo.isPresent()) {
+            try {
+                DecodedJWT jwt = JWTHelper.decodeJwt(locationPayload.getJwt());
+            } catch (JWTVerificationException e) {
                 response.status(401);
                 return "";
-            }
-
-            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
-                response.status(401);
+            } catch (UnsupportedEncodingException e) {
+                response.status(500);
                 return "";
             }
 
@@ -104,23 +93,13 @@ public class LocationController implements Controller {
 
             EditLocationPayload locationPayload = objectMapper.readValue(request.body(), EditLocationPayload.class);
 
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Algorithm algorithm = Algorithm.HMAC256(processBuilder.environment().get("JWT_SECRET"));
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("http://funsheet.herokuapp.com")
-                    .build();
-            DecodedJWT jwt = verifier.verify(locationPayload.getJwt());
-
-            UUID userUuid = store.getUserUuid(jwt.getClaim("username").asString());
-            Optional<User> userToAuthTo = store.getUser(userUuid);
-
-            if (!userToAuthTo.isPresent()) {
+            try {
+                DecodedJWT jwt = JWTHelper.decodeJwt(locationPayload.getJwt());
+            } catch (JWTVerificationException e) {
                 response.status(401);
                 return "";
-            }
-
-            if (!userToAuthTo.get().authenticate(jwt.getClaim("password").asString())) {
-                response.status(401);
+            } catch (UnsupportedEncodingException e) {
+                response.status(500);
                 return "";
             }
 

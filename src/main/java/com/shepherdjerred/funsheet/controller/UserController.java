@@ -5,9 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shepherdjerred.funsheet.objects.User;
-import com.shepherdjerred.funsheet.payloads.LoginPayload;
-import com.shepherdjerred.funsheet.payloads.PostLoginPayload;
-import com.shepherdjerred.funsheet.payloads.RegisterPayload;
+import com.shepherdjerred.funsheet.controller.payloads.LoginPayload;
+import com.shepherdjerred.funsheet.controller.payloads.PostLoginPayload;
+import com.shepherdjerred.funsheet.controller.payloads.RegisterPayload;
 import com.shepherdjerred.funsheet.storage.Store;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -49,9 +49,9 @@ public class UserController implements Controller {
                         String token = JWT.create()
                                 .withIssuer("http://funsheet.herokuapp.com")
                                 .withClaim("username", loginPayload.getUsername())
-                                .withClaim("password", loginPayload.getPassword())
+                                .withClaim("uuid", String.valueOf(userUuid))
                                 .sign(algorithm);
-                        return objectMapper.writeValueAsString(new PostLoginPayload(token, loginPayload.getUsername()));
+                        return objectMapper.writeValueAsString(new PostLoginPayload(token));
                     } catch (UnsupportedEncodingException | JWTCreationException exception) {
                         response.status(500);
                         return objectMapper.writeValueAsString(exception.getMessage());
@@ -96,9 +96,9 @@ public class UserController implements Controller {
                 String token = JWT.create()
                         .withIssuer("http://funsheet.herokuapp.com")
                         .withClaim("username", registerPayload.getUsername())
-                        .withClaim("password", registerPayload.getPassword())
+                        .withClaim("uuid", String.valueOf(user.getUuid()))
                         .sign(algorithm);
-                return objectMapper.writeValueAsString(new PostLoginPayload(token, registerPayload.getUsername()));
+                return objectMapper.writeValueAsString(new PostLoginPayload(token));
             } catch (UnsupportedEncodingException | JWTCreationException exception) {
                 response.status(500);
                 return objectMapper.writeValueAsString(exception.getMessage());

@@ -1,10 +1,7 @@
 package com.shepherdjerred.funsheet;
 
 import com.shepherdjerred.funsheet.controller.*;
-import com.shepherdjerred.funsheet.objects.Activity;
-import com.shepherdjerred.funsheet.objects.Location;
-import com.shepherdjerred.funsheet.objects.Tag;
-import com.shepherdjerred.funsheet.objects.Type;
+import com.shepherdjerred.funsheet.objects.*;
 import com.shepherdjerred.funsheet.storage.InMemoryStore;
 import com.shepherdjerred.funsheet.storage.Store;
 import com.shepherdjerred.funsheet.storage.mysql.Database;

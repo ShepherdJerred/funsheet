@@ -16,11 +16,13 @@
 </template>
 
 <script>
+  import jwt from 'jwt-decode';
+
   export default {
     name: 'User-Account',
     computed: {
       username: function () {
-        return localStorage.getItem('username');
+        return jwt(localStorage.getItem('jwt')).username;
       }
     },
     methods: {

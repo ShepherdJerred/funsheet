@@ -1,4 +1,4 @@
-package com.shepherdjerred.funsheet.payloads;
+package com.shepherdjerred.funsheet.controller.payloads;
 
 import lombok.Getter;
 import lombok.Setter;
