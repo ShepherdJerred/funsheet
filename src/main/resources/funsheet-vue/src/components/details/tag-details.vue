@@ -81,7 +81,7 @@
 </template>
 
 <script>
-  import Helper from '../../helpers';
+  import Helpers from '../../helpers';
 
   export default {
     name: 'Tag-Details',
@@ -93,15 +93,15 @@
     },
     computed: {
       activitiesWithTag: function () {
-        return Helper.objectToArray(this.activities).filter(activity => {
+        return Helpers.objectToArray(this.activities).filter(activity => {
           if (activity.type) {
             return activity.type.tags.find(tag => tag.uuid === this.uuid);
           }
         });
       },
       typesWithTag: function () {
-        return Helper.objectToArray(this.types).filter(type => {
-          return Helper.objectToArray(type.tags).find(tag => tag.uuid === this.uuid);
+        return Helpers.objectToArray(this.types).filter(type => {
+          return Helpers.objectToArray(type.tags).find(tag => tag.uuid === this.uuid);
         });
       },
       activities: function () {
@@ -117,7 +117,7 @@
         return this.$store.state.Tags.tags;
       },
       isLoggedIn: function () {
-        return localStorage.getItem('jwt') !== null;
+        return this.$store.state.User.username !== '';
       }
     }
   };

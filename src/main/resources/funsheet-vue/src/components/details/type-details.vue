@@ -80,7 +80,7 @@
 </template>
 
 <script>
-  import Helper from '../../helpers';
+  import Helpers from '../../helpers';
 
   export default {
     name: 'Type-Details',
@@ -92,7 +92,7 @@
     },
     computed: {
       activitiesWithType: function () {
-        return Helper.objectToArray(this.activities).filter(activity => activity.type && activity.type.uuid === this.uuid);
+        return Helpers.objectToArray(this.activities).filter(activity => activity.type && activity.type.uuid === this.uuid);
       },
       activities: function () {
         return this.$store.state.Activities.activities;
@@ -104,7 +104,7 @@
         return this.$store.state.Types.types;
       },
       isLoggedIn: function () {
-        return localStorage.getItem('jwt') !== null;
+        return this.$store.state.User.username !== '';
       }
     }
   };

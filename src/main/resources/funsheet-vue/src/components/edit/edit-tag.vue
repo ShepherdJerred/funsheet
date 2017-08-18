@@ -19,6 +19,11 @@
                         <input class="input" v-model="name" required>
                     </span>
                         </label>
+                        <template v-if="isNameTaken()">
+                            <div class="notification is-danger">
+                                An activity called {{ name }} already exists
+                            </div>
+                        </template>
                     </div>
                     <span>
                 <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
@@ -42,6 +47,8 @@
 </template>
 
 <script>
+  import Helpers from '../../helpers';
+
   export default {
     name: 'Edit-Tag',
     props: {
@@ -75,6 +82,12 @@
           this.$router.push({name: 'Tag Details', params: {'uuid': this.uuid}});
         }, response => {
           console.log(response.body);
+        });
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allActivities).some(function (activity) {
+          return activity.name === self.name;
         });
       }
     },

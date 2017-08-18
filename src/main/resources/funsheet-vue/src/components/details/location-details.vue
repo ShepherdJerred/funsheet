@@ -69,7 +69,7 @@
 
 <script>
   import PlaceView from '../place-map.vue';
-  import Helper from '../../helpers';
+  import Helpers from '../../helpers';
 
   export default {
     name: 'Location-Details',
@@ -84,7 +84,7 @@
     },
     computed: {
       activitiesAtLocation: function () {
-        return Helper.objectToArray(this.activities).filter(activity => activity.location && activity.location.uuid === this.uuid);
+        return Helpers.objectToArray(this.activities).filter(activity => activity.location && activity.location.uuid === this.uuid);
       },
       activities: function () {
         return this.$store.state.Activities.activities;
@@ -96,7 +96,7 @@
         return this.$store.state.Locations.locations;
       },
       isLoggedIn: function () {
-        return localStorage.getItem('jwt') !== null;
+        return this.$store.state.User.username !== '';
       }
     }
   };

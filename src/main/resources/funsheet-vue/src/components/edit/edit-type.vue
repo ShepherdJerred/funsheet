@@ -19,6 +19,11 @@
                         <input class="input" v-model="name" required>
                     </span>
                         </label>
+                        <template v-if="isNameTaken()">
+                            <div class="notification is-danger">
+                                An activity called {{ name }} already exists
+                            </div>
+                        </template>
                     </div>
                     <template v-if="allTags.length > 0">
                         <div class="field" v-on:click.capture="getTags">
@@ -61,7 +66,7 @@
 </template>
 
 <script>
-  import Helper from '../../helpers';
+  import Helpers from '../../helpers';
 
   export default {
     name: 'Edit-Type',
@@ -79,7 +84,7 @@
     },
     computed: {
       allTags: function () {
-        return Helper.objectToArray(this.$store.state.Tags.tags);
+        return Helpers.objectToArray(this.$store.state.Tags.tags);
       },
       type: function () {
         return this.types[this.uuid];
@@ -105,6 +110,12 @@
       },
       getTags: function () {
         this.$store.dispatch('getTags');
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allActivities).some(function (activity) {
+          return activity.name === self.name;
+        });
       }
     },
     created: function () {

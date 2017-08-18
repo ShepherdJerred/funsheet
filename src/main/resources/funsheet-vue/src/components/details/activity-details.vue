@@ -106,7 +106,7 @@
         return this.$store.state.Activities.activities;
       },
       isLoggedIn: function () {
-        return localStorage.getItem('jwt') !== null;
+        return this.$store.state.User.username !== '';
       }
     }
   };
