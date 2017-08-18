@@ -76,22 +76,26 @@ public class ActivityController implements Controller {
                 return "";
             }
 
-            Optional<Type> typeOptional = store.getType(activityPayload.getType());
-            Type type;
-            if (typeOptional.isPresent()) {
-                type = typeOptional.get();
-            } else {
-                response.status(400);
-                return "";
+            Type type = null;
+            if (activityPayload.getType() != null) {
+                Optional<Type> typeOptional = store.getType(activityPayload.getType());
+                if (typeOptional.isPresent()) {
+                    type = typeOptional.get();
+                } else {
+                    response.status(400);
+                    return "";
+                }
             }
 
-            Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
-            Location location;
-            if (locationOptional.isPresent()) {
-                location = locationOptional.get();
-            } else {
-                response.status(400);
-                return "";
+            Location location = null;
+            if (activityPayload.getLocation() != null) {
+                Optional<Location> locationOptional = store.getLocation(activityPayload.getLocation());
+                if (locationOptional.isPresent()) {
+                    location = locationOptional.get();
+                } else {
+                    response.status(400);
+                    return "";
+                }
             }
 
             Activity activity = new Activity(

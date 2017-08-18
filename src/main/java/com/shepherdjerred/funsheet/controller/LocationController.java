@@ -53,8 +53,6 @@ public class LocationController implements Controller {
         post("/api/locations", (request, response) -> {
             response.type("application/json");
 
-            log.info(request.body());
-
             NewLocationPayload locationPayload = objectMapper.readValue(request.body(), NewLocationPayload.class);
 
             try {

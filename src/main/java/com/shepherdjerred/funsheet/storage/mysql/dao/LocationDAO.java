@@ -62,7 +62,7 @@ public class LocationDAO implements DAO<Location> {
     public void drop(Location location) {
         Query query = fluentJdbc.query();
         query.update("DELETE FROM location WHERE location_uuid = ?")
-                .params(location.getUuid())
+                .params(String.valueOf(location.getUuid()))
                 .run();
     }
 

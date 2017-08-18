@@ -76,7 +76,7 @@ public class TypeDAO implements DAO<Type> {
     public void drop(Type type) {
         Query query = fluentJdbc.query();
         query.update("DELETE FROM type WHERE types_uuid = ?")
-                .params(type.getUuid())
+                .params(String.valueOf(type.getUuid()))
                 .run();
     }
 

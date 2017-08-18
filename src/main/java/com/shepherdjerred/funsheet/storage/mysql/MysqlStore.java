@@ -4,11 +4,13 @@ import com.shepherdjerred.funsheet.objects.*;
 import com.shepherdjerred.funsheet.storage.Store;
 import com.shepherdjerred.funsheet.storage.mysql.dao.*;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+@Log4j2
 public class MysqlStore implements Store {
 
     @Getter

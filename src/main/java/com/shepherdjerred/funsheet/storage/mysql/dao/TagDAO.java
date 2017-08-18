@@ -2,6 +2,7 @@ package com.shepherdjerred.funsheet.storage.mysql.dao;
 
 import com.shepherdjerred.funsheet.objects.Tag;
 import com.shepherdjerred.funsheet.storage.mysql.MysqlStore;
+import lombok.extern.log4j.Log4j2;
 import org.codejargon.fluentjdbc.api.FluentJdbc;
 import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.query.Mapper;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+@Log4j2
 public class TagDAO implements DAO<Tag> {
 
     private final FluentJdbc fluentJdbc;
@@ -67,7 +69,7 @@ public class TagDAO implements DAO<Tag> {
     public void drop(Tag tag) {
         Query query = fluentJdbc.query();
         query.update("DELETE FROM tag WHERE tag_uuid = ?")
-                .params(tag.getUuid())
+                .params(String.valueOf(tag.getUuid()))
                 .run();
     }
 
