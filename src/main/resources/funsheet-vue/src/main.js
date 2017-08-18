@@ -19,18 +19,19 @@ WebFontLoader.load({
   }
 });
 
-Raven.config('https://5613a4599d7147a69662a029d90f3d56@sentry.io/202388')
-  .addPlugin(RavenVue, Vue)
-  .install();
-
-Vue.use(VueAnalytics, {
-  id: 'UA-104313543-1',
-  router
-});
+if (process.env.NODE_ENV === 'production') {
+  Raven.config('https://5613a4599d7147a69662a029d90f3d56@sentry.io/202388')
+    .addPlugin(RavenVue, Vue)
+    .install();
+  Vue.use(VueAnalytics, {
+    id: 'UA-104313543-1',
+    router
+  });
+} else {
+  Vue.config.productionTip = true;
+}
 
 Vue.use(Buefy);
-
-Vue.config.productionTip = !(process.env.NODE_ENV === 'production');
 
 /* eslint-disable no-new */
 new Vue({

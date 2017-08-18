@@ -18,6 +18,11 @@
                     <input class="input" v-model="name" required>
                 </span>
                     </label>
+                    <template v-if="isNameTaken()">
+                        <div class="notification is-danger">
+                            A type called {{ name }} already exists
+                        </div>
+                    </template>
                 </div>
                 <template v-if="allTags.length > 0">
                     <div class="field" v-on:click.capture="getTags">
@@ -48,7 +53,7 @@
 </template>
 
 <script>
-  import Helper from '../../helpers';
+  import Helpers from '../../helpers';
 
   export default {
     name: 'Create-Type',
@@ -60,11 +65,17 @@
     },
     computed: {
       allTags: function () {
-        return Helper.objectToArray(this.$store.state.Tags.tags);
+        return Helpers.objectToArray(this.$store.state.Tags.tags);
+      },
+      allTypes: function () {
+        return this.$store.state.Types.types;
       }
     },
     methods: {
       onSubmit: function () {
+        if (this.isNameTaken()) {
+          return;
+        }
         this.$http.post('/api/types', {
           'name': this.name,
           'tags': this.tags,
@@ -79,6 +90,12 @@
       },
       getTags: function () {
         this.$store.dispatch('getTags');
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allTypes).some(function (type) {
+          return type.name === self.name;
+        });
       }
     }
   };

@@ -18,6 +18,11 @@
                         <input class="input" v-model="name" required>
                     </span>
                     </label>
+                    <template v-if="isNameTaken()">
+                        <div class="notification is-danger">
+                            An activity called {{ name }} already exists
+                        </div>
+                    </template>
                 </div>
                 <div class="field">
                     <label class="label">
@@ -93,6 +98,8 @@
 </template>
 
 <script>
+  import Helpers from '../../helpers';
+
   export default {
     name: 'Create-Activity',
     data: function () {
@@ -111,10 +118,16 @@
       },
       allTypes: function () {
         return this.$store.state.Types.types;
+      },
+      allActivities: function () {
+        return this.$store.state.Activities.activities;
       }
     },
     methods: {
       onSubmit: function () {
+        if (this.isNameTaken()) {
+          return;
+        }
         this.$http.post('/api/activities', {
           'name': this.name,
           'rating': this.rating,
@@ -136,6 +149,12 @@
       },
       getTypes: function () {
         this.$store.dispatch('getTypes');
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allActivities).some(function (activity) {
+          return activity.name === self.name;
+        });
       }
     }
   };

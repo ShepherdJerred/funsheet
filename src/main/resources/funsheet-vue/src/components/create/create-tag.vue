@@ -18,6 +18,11 @@
                     <input class="input" v-model="name" required>
                 </span>
                     </label>
+                    <template v-if="isNameTaken()">
+                        <div class="notification is-danger">
+                            A tag called {{ name }} already exists
+                        </div>
+                    </template>
                 </div>
                 <span>
                     <button class="button is-danger" type="button" v-on:click="$router.go(-1)">Cancel</button>
@@ -29,6 +34,8 @@
 </template>
 
 <script>
+  import Helpers from '../../helpers';
+
   export default {
     name: 'Create-Tag',
     data: function () {
@@ -36,8 +43,16 @@
         name: ''
       };
     },
+    computed: {
+      allTags: function () {
+        return this.$store.state.Tags.tags;
+      }
+    },
     methods: {
       onSubmit: function () {
+        if (this.isNameTaken()) {
+          return;
+        }
         this.$http.post('/api/tags', {
           'name': this.name,
           'jwt': localStorage.getItem('jwt')
@@ -47,6 +62,12 @@
           this.$router.push({name: 'Tag Details', params: {'uuid': response.body.uuid}});
         }, response => {
           console.log(response.body);
+        });
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allTags).some(function (tag) {
+          return tag.name === self.name;
         });
       }
     }

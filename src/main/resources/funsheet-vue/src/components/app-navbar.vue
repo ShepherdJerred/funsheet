@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar">
             <div class="navbar-brand">
-                <router-link :to="{ name: 'Home' }" class="navbar-item">
+                <router-link :to="{ name: 'Home' }" class="navbar-item" v-on:click.native="toggleActive()">
                     Funsheet
                 </router-link>
                 <div class="navbar-burger burger" v-bind:class="{ 'is-active': isActive }" data-target="navbar"
@@ -16,7 +16,7 @@
             <div id="navbar" class="navbar-menu" v-bind:class="{ 'is-active': isActive }">
                 <div class="navbar-start">
                     <router-link class="navbar-item" :to="{ name: 'Home' }" active-class="is-active"
-                                 v-on:click="toggleActive()">
+                                 v-on:click.native="toggleActive()">
                         Home
                     </router-link>
                     <template v-if="isLoggedIn">

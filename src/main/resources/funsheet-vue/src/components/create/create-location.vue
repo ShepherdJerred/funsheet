@@ -18,6 +18,11 @@
                     <input class="input" v-model="name" required>
                 </span>
                     </label>
+                    <template v-if="isNameTaken()">
+                        <div class="notification is-danger">
+                            A location called {{ name }} already exists
+                        </div>
+                    </template>
                 </div>
                 <div class="field">
                     <label class="label">
@@ -42,6 +47,8 @@
 </template>
 
 <script>
+  import Helpers from '../../helpers';
+
   export default {
     name: 'Create-Location',
     data: function () {
@@ -50,8 +57,16 @@
         placeId: ''
       };
     },
+    computed: {
+      allLocations: function () {
+        return this.$store.state.Locations.locations;
+      }
+    },
     methods: {
       onSubmit: function () {
+        if (this.isNameTaken()) {
+          return;
+        }
         this.$http.post('/api/locations', {
           'name': this.name,
           'placeId': this.placeId,
@@ -62,6 +77,12 @@
           this.$router.push({name: 'Location Details', params: {'uuid': response.body.uuid}});
         }, response => {
           console.log(response.body);
+        });
+      },
+      isNameTaken: function () {
+        let self = this;
+        return Helpers.objectToArray(this.allLocations).some(function (location) {
+          return location.name === self.name;
         });
       }
     }
