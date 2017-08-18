@@ -16,21 +16,17 @@
 </template>
 
 <script>
-  import jwt from 'jwt-decode';
-
   export default {
     name: 'User-Account',
     computed: {
       username: function () {
-        return jwt(localStorage.getItem('jwt')).username;
+        return this.$store.state.User.username;
       }
     },
     methods: {
       onClick: function () {
         localStorage.removeItem('jwt');
-        // TODO Find a better way to do this
-        // Reload the page to update the navbar
-        location.reload();
+        this.$store.dispatch('updateUser');
         this.$router.push({name: 'Home'});
       }
     }

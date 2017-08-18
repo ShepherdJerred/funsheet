@@ -6,6 +6,7 @@ import Activities from './modules/activities';
 import Locations from './modules/locations';
 import Types from './modules/types';
 import Tags from './modules/tags';
+import User from './modules/user';
 
 Vue.use(Vuex);
 Vue.use(VueResource);
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     Activities,
     Locations,
     Types,
-    Tags
+    Tags,
+    User
   },
   strict: process.env.NODE_ENV !== 'production'
 });

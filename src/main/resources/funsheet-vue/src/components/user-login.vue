@@ -71,10 +71,7 @@
         }).then(response => {
           console.log(response.body);
           localStorage.setItem('jwt', response.body.jsonWebToken);
-          localStorage.setItem('username', response.body.username);
-          // TODO Find a better way to do this
-          // Reload the page to update the navbar
-          location.reload();
+          this.$store.dispatch('updateUser');
           this.$router.push({name: 'Home'});
         }, response => {
           console.log(response.body);

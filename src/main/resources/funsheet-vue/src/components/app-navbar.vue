@@ -105,8 +105,6 @@
 </template>
 
 <script>
-  import jwt from 'jwt-decode';
-
   export default {
     name: 'Navbar',
     data: function () {
@@ -116,10 +114,10 @@
     },
     computed: {
       username: function () {
-        return jwt(localStorage.getItem('jwt')).username;
+        return this.$store.state.User.username;
       },
       isLoggedIn: function () {
-        return localStorage.getItem('jwt') !== null;
+        return this.$store.state.User.username !== '';
       }
     },
     methods: {

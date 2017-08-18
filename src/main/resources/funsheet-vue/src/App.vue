@@ -21,6 +21,7 @@
         this.$store.dispatch('getLocations');
         this.$store.dispatch('getTypes');
         this.$store.dispatch('getTags');
+        this.$store.dispatch('updateUser');
       }
     },
     created: function () {
