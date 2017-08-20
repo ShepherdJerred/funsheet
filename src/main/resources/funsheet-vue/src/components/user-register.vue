@@ -5,13 +5,17 @@
                 <ul>
                     <li>
                         <router-link :to="{ name: 'Login' }">
-                            <span class="icon"><i class="fa fa-user"></i></span>
+                            <span class="icon">
+                                <i class="fa fa-user"></i>
+                            </span>
                             <span>Login</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link :to="{ name: 'Register' }">
-                            <span class="icon"><i class="fa fa-check"></i></span>
+                            <span class="icon">
+                                <i class="fa fa-check"></i>
+                            </span>
                             <span>Register</span>
                         </router-link>
                     </li>
@@ -54,11 +58,11 @@
                     <label class="label">
                         Confirm Password
                         <span class="control">
-                        <input type="password"
-                               class="input"
-                               required
-                               v-model="confirmPassword">
-                    </span>
+                             <input type="password"
+                                    class="input"
+                                    required
+                                    v-model="confirmPassword">
+                        </span>
                     </label>
                     <template v-if="password !== confirmPassword && confirmPassword.length > 0">
                         <span class="tag is-danger">Your password doesn't match!</span>

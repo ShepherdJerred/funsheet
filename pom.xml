@@ -104,7 +104,7 @@
                     <workingDirectory>src/main/resources/funsheet-vue</workingDirectory>
                     <nodeVersion>v7.10.0</nodeVersion>
                     <environmentVariables>
-                        <NODE_ENV>development</NODE_ENV>
+                        <NODE_ENV>production</NODE_ENV>
                     </environmentVariables>
                 </configuration>
                 <executions>

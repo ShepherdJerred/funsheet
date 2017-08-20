@@ -16,7 +16,7 @@
             <div id="navbar" class="navbar-menu" v-bind:class="{ 'is-active': isActive }">
                 <div class="navbar-start">
                     <router-link class="navbar-item" :to="{ name: 'Home' }" active-class="is-active"
-                                 v-on:click.native="toggleActive()">
+                                 v-on:click.native="toggleActive()" exact>
                         Home
                     </router-link>
                     <template v-if="isLoggedIn">
