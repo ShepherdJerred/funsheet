@@ -97,10 +97,10 @@ public class Main {
 
     private static HikariConfig getHikariConfig() {
         ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("JAWSDB_URL") != null) {
+        if (processBuilder.environment().get("DATABASE_URL") != null) {
             HikariConfig hikariConfig = new HikariConfig();
             try {
-                URI jdbUri = new URI(processBuilder.environment().get("JAWSDB_URL"));
+                URI jdbUri = new URI(processBuilder.environment().get("DATABASE_URL"));
                 String jdbcUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + String.valueOf(jdbUri.getPort()) + jdbUri.getPath();
 
                 hikariConfig.setJdbcUrl(jdbcUrl);
