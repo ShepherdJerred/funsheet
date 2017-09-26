@@ -28,7 +28,7 @@
       },
       computed: {
         src: function () {
-          return 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAJcDrabKQn0LAtf-w9X-GD81H7k3C-cC4' +
+          return 'https://www.google.com/maps/embed/v1/place?key=AIzaSyC7jbGr5go1IZesidGWwA3CR8NwDLSsEX8' +
             '&q=place_id:' + this.location.placeId;
         }
       }
